@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import axios from "axios";
+import { Link } from 'react-router-dom';
+import { RxCross2 } from 'react-icons/rx';
 
 export default function Signup() {
     const formSchema = yup.object({
@@ -46,26 +48,42 @@ export default function Signup() {
               }
     // const onSubmit = (data) => console.log(data);
     return (
-      <div className="App">
-        <h1>회원가입</h1>
-        <form onSubmit={handleSubmit(registerRes)}>
-          <input name="email" placeholder="이메일" {...register('email')} />
-          {errors.email && <p>{errors.email.message}</p>}
+      <div className="flex flex-col justify-center items-center p-4">
+        <div className='flex bg-fixed my-2'>
+          <h1 className='font-bold text-lg'>이메일로 회원가입</h1>
+          <Link to='/login'><RxCross2 className='text-zinc-400 mt-1.5 ml-2'/></Link>
+        </div>
+        <form onSubmit={handleSubmit(registerRes)}
+          className='w-screen flex flex-col item-center m-4 p-4'>
+          <p className='font-bold mt-3'>이메일</p>
+          <input 
+            name="email" 
+            placeholder="email@haejwo.com" 
+            {...register('email')} 
+            className='p-2 m-1 border-solid border border-zinc-400 rounded-md'/>
+          {errors.email && <p className='text-yellow-500 ml-2'>{errors.email.message}</p>}
+          <p className='font-bold mt-3'>비밀번호</p>
           <input
             type="password"
             name="password1"
-            placeholder="비밀번호"
+            placeholder="8자리 이상 영문자, 숫자 포함"
             {...register('password1')}
+            className='p-2 m-1 border-solid border border-zinc-400 rounded-md'
           />
-          {errors.password1 && <p>{errors.password1.message}</p>}
+          {errors.password1 && <p className='text-yellow-500 ml-2'>{errors.password1.message}</p>}
           <input
             type="password"
             name="password2"
             placeholder="비밀번호 확인"
             {...register('password2')}
+            className='p-2 m-1 border-solid border border-zinc-400 rounded-md'
           />
-          {errors.password2 && <p>{errors.password2.message}</p>}
-          <input type="submit" disabled={errors && !watch() }/>
+          {errors.password2 && <p className='text-yellow-500 ml-2'>{errors.password2.message}</p>}
+          <input 
+            type="submit" 
+            disabled={errors && !watch()} 
+            value="회원가입하기"
+            className='p-2 m-1 mt-7 bg-yellow-500 text-white text-semibold rounded-md'/>
         </form>
       </div>
     );
