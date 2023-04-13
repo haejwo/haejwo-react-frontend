@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-// import axios from "axios";
+import axios from "axios";
 
 export default function Signup() {
     const formSchema = yup.object({
@@ -34,20 +34,21 @@ export default function Signup() {
       resolver: yupResolver(formSchema),
     });
 
-    // let backURL = process.env.REACT_APP_BACK_BASE_URL;
-    // const registerRes = async () => {
-    //   const res = await axios({
-    //                   method: "post",
-    //                   url: `${backURL}accounts/signup/`,
-    //                   data: { "email": formSchema.email, "password1": formSchema.password1, "password2": formSchema.password2 }
-    //               });
-    //           console.log(res)
-    //           }
-    const onSubmit = (data) => console.log(data);
+    let backURL = process.env.REACT_APP_BACK_BASE_URL;
+    const registerRes = async (data) => {
+      const res = await axios({
+                      method: "post",
+                      url: `${backURL}accounts/signup/`,
+                      data: data
+                  });
+              console.log(res)
+              .then()
+              }
+    // const onSubmit = (data) => console.log(data);
     return (
       <div className="App">
         <h1>회원가입</h1>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(registerRes)}>
           <input name="email" placeholder="이메일" {...register('email')} />
           {errors.email && <p>{errors.email.message}</p>}
           <input
@@ -64,7 +65,7 @@ export default function Signup() {
             {...register('password2')}
           />
           {errors.password2 && <p>{errors.password2.message}</p>}
-          <input type="submit" disabled={errors || watch()} />
+          <input type="submit" disabled={errors && !watch() }/>
         </form>
       </div>
     );

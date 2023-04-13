@@ -10,6 +10,7 @@ import Signup from './pages/Accounts/Signup';
 import User from './pages/Accounts/User';
 import Profile from './pages/Accounts/Profile';
 import Home from './pages/Home/Home';
+import Review from './pages/Review';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const router = createBrowserRouter([
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
       {path: '/signup', element: <Signup/>},
       {path: '/user', element: <User/>},
       {path: '/profile', element: <Profile/>},
+      {path: '/review', element: <Review/>},
     ],
   },
 ]);
