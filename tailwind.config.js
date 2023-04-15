@@ -2,8 +2,10 @@
 module.exports = {
   content: ["./src/**/*.{jsx,js}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'kakao': '#FAE100',
+    },
   },
   plugins: [],
-}
-
+}}

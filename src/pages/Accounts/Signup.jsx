@@ -44,7 +44,9 @@ export default function Signup() {
                       data: data
                   });
               console.log(res)
+              // 성공하면 로그인 페이지로
               .then()
+              // 실패하면 에러메시지
               }
     // const onSubmit = (data) => console.log(data);
     return (
