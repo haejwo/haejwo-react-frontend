@@ -5,7 +5,10 @@ module.exports = {
     extend: {
       colors: {
         'kakao': '#FAE100',
-    },
+      },
+      fontFamily: {
+        logo: ['GangwonEduPowerExtraBoldA', "sans-serif"], 
+      },
   },
   plugins: [],
 }}
