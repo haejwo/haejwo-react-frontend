@@ -43,7 +43,7 @@ export default function Login() {
             placeholder="email@haejwo.com" 
             {...register('email')} 
             className='p-2 m-1 border-solid border border-zinc-400 rounded-md'/>
-          {errors.email && <p className='text-yellow-500 ml-2'>{errors.email.message}</p>}
+          {errors.email && <p className='text-brand ml-2'>{errors.email.message}</p>}
           <p className='font-bold mt-3'>비밀번호</p>
           <input
             type="password"
@@ -52,12 +52,12 @@ export default function Login() {
             {...register('password')}
             className='p-2 m-1 border-solid border border-zinc-400 rounded-md'
           />
-          {errors.password1 && <p className='text-yellow-500 ml-2'>{errors.password1.message}</p>}
+          {errors.password1 && <p className='text-brand ml-2'>{errors.password1.message}</p>}
           <input 
             type="submit" 
             disabled={errors && !getValues()} 
             value="로그인하기"
-            className='p-2 m-1 mt-7 bg-yellow-500 text-white text-semibold rounded-md'/>
+            className='p-2 m-1 mt-7 bg-brand text-white text-semibold rounded-md'/>
         </form>
         <h2 className="font-bold text-lg my-3">간편로그인</h2>
         <div className="w-screen flex flex-col items-center p-4">

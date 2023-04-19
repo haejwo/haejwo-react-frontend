@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       colors: {
         'kakao': '#FAE100',
+        'brand' : '#FFD400',
       },
       fontFamily: {
         logo: ['GangwonEduPowerExtraBoldA', "sans-serif"], 

@@ -63,7 +63,7 @@ export default function Signup() {
             placeholder="email@haejwo.com" 
             {...register('email')} 
             className='p-2 m-1 border-solid border border-zinc-400 rounded-md'/>
-          {errors.email && <p className='text-yellow-500 ml-2'>{errors.email.message}</p>}
+          {errors.email && <p className='text-brand ml-2'>{errors.email.message}</p>}
           <p className='font-bold mt-3'>비밀번호</p>
           <input
             type="password"
@@ -72,7 +72,7 @@ export default function Signup() {
             {...register('password1')}
             className='p-2 m-1 border-solid border border-zinc-400 rounded-md'
           />
-          {errors.password1 && <p className='text-yellow-500 ml-2'>{errors.password1.message}</p>}
+          {errors.password1 && <p className='text-brand ml-2'>{errors.password1.message}</p>}
           <input
             type="password"
             name="password2"
@@ -80,12 +80,12 @@ export default function Signup() {
             {...register('password2')}
             className='p-2 m-1 border-solid border border-zinc-400 rounded-md'
           />
-          {errors.password2 && <p className='text-yellow-500 ml-2'>{errors.password2.message}</p>}
+          {errors.password2 && <p className='text-brand ml-2'>{errors.password2.message}</p>}
           <input 
             type="submit" 
             disabled={errors && !watch()} 
             value="회원가입하기"
-            className='p-2 m-1 mt-7 bg-yellow-500 text-white text-semibold rounded-md'/>
+            className='p-2 m-1 mt-7 bg-brand text-white text-semibold rounded-md'/>
         </form>
       </div>
     );
