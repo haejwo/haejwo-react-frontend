@@ -64,6 +64,10 @@ export default function Login() {
           <button className="w-full p-2 bg-kakao flex rounded my-2 justify-center items-center"><RiKakaoTalkFill className='text-2xl mx-1'/>카카오톡으로 로그인</button>
           <button className="w-full p-2 flex rounded my-2 border boreder-zinc-400 justify-center items-center"><FcGoogle className='text-2xl mx-1'/>구글로 로그인</button>
         </div>
+        <h2 className="mt-7 font-bold text-lg">회원이 아니신가요?</h2>
+        <Link to='/signup' className="w-screen p-4">
+          <button className="w-full p-2 flex rounded my-2 border boreder-zinc-400 justify-center items-center font-bold">이메일로 회원가입</button>
+        </Link>
       </div> 
     );
 }
