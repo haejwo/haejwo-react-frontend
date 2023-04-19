@@ -12,25 +12,21 @@ export default function Navbar() {
     }
         
     return (
-        <nav className='flex justify-evenly border-t border-gray-300 p-2 bottom-0'>
-            <Link to='/' className='flex flex-col items-center'>
-                <button onClick={() => handleToggle('tabHome')} id='tabHome'>
-                  <div className='text-2xl'>{tabMenu === 'tabHome' ? <AiFillHome/> : <AiOutlineHome/>}</div>
-                  <div>Home</div>
-                </button>
-            </Link>
-            <Link to='/login' className='flex flex-col items-center'>
-                <button onClick={() => handleToggle('tabList')} id='tabList'>
-                  <div className='text-2xl'>{tabMenu === 'tabList' ? <HiClipboardList/> : <HiOutlineClipboardList/>}</div>
-                  <div>Lists</div>
-                </button>
-            </Link>
-            <Link to='/profile' className='flex flex-col items-center'>
-                <button onClick={() => handleToggle('tabMore')} id='tabMore'>
-                  <div className='text-2xl'>{tabMenu === 'tabMore' ? <TfiMoreAlt/> : <TfiMore/>}</div>
-                  <div>More</div>
-                </button>
-            </Link>
+        <nav className='w-screen fixed bottom-0'>
+            <div className='flex justify-around border-t border-gray-300 p-3'>
+                <Link to='/' className='flex flex-col items-center' onClick={() => handleToggle('tabHome')}>
+                    <div className='text-2xl'>{tabMenu === 'tabHome' ? <AiFillHome/> : <AiOutlineHome/>}</div>
+                    <div>Home</div>
+                </Link>
+                <Link to='/login' className='flex flex-col items-center' onClick={() => handleToggle('tabList')}>   
+                    <div className='text-2xl'>{tabMenu === 'tabList' ? <HiClipboardList/> : <HiOutlineClipboardList/>}</div>
+                    <div>Lists</div>
+                </Link>
+                <Link to='/profile' className='flex flex-col items-center' onClick={() => handleToggle('tabMore')}>
+                      <div className='text-2xl'>{tabMenu === 'tabMore' ? <TfiMoreAlt/> : <TfiMore/>}</div>
+                      <div>More</div>
+                </Link>
+            </div>
         </nav>
     );
 }
