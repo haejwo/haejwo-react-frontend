@@ -12,6 +12,7 @@ import Profile from './pages/Accounts/Profile';
 import Home from './pages/Home/Home';
 import Review from './pages/Review';
 import MoveSelect from './pages/Move/MoveSelect';
+import Less20 from './pages/Move/Less20';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const router = createBrowserRouter([
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
       {path: '/profile', element: <Profile/>},
       {path: '/move', element: <MoveSelect/>},
       {path: '/review', element: <Review/>},
+      {path: '/less20', element: <Less20/>},
     ],
   },
 ]);

@@ -12,8 +12,8 @@ export default function Navbar() {
     }
         
     return (
-        <nav className='w-screen fixed bottom-0'>
-            <div className='flex justify-around border-t border-gray-300 p-3'>
+        <nav className='w-screen sticky bottom-0'>
+            <div className='flex justify-around border-t border-gray-300 bg-white p-3'>
                 <Link to='/' className='flex flex-col items-center' onClick={() => handleToggle('tabHome')}>
                     <div className='text-2xl'>{tabMenu === 'tabHome' ? <AiFillHome/> : <AiOutlineHome/>}</div>
                     <div>Home</div>
