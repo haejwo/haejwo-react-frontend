@@ -53,7 +53,7 @@ export default function MoveSelect() {
                 {selectMove === 'less20' ? 
                     <Link to='/less20'><button className='w-full py-2 border border-brand bg-brand rounded-md text-white font-bold'>20평대 미만 이사하기</button></Link>
                 : selectMove === 'more20' ?
-                    <button className='w-full py-2 border border-brand bg-brand rounded-md text-white font-bold'>20평대 이상 이사하기</button>
+                    <Link to='/more20'><button className='w-full py-2 border border-brand bg-brand rounded-md text-white font-bold'>20평대 이상 이사하기</button></Link>
                 : ''
                 }
             </div>
