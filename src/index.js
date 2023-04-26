@@ -18,6 +18,7 @@ import DatePicker from './pages/Move/DatePicker';
 
 import { Provider } from 'react-redux';
 import store from "./app/store";
+import Address from './pages/Move/Address';
 // import { createStore } from 'redux';
 // import rootReducer from './reducers';
 
@@ -40,6 +41,7 @@ const router = createBrowserRouter([
       {path: '/less20', element: <Less20/>},
       {path: '/more20', element: <More20/>},
       {path: '/datepick', element: <DatePicker/>},
+      {path: '/address', element: <Address/>},
     ],
   },
 ]);

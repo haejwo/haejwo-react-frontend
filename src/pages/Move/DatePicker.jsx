@@ -54,7 +54,7 @@ export default function DatePicker() {
                     </div>
             </div>
             <div onClick={() => alert('이사 날짜 : ' + moment(value).format("YYYY년 MM월 DD일") + '\n' + '이사 시간 : ' + moment(timePick, 'hh:mm A').format('A hh시 mm분 ').replace("AM", "오전").replace("PM", "오후"))}>
-                <Link to='/'><button className={!value || !timePick ? 'my-4 w-screen py-2 font-semibold border border-zinc-200 text-zinc-500' : 
+                <Link to='/address'><button className={!value || !timePick ? 'my-4 w-screen py-2 font-semibold border border-zinc-200 text-zinc-500' : 
             'my-4 w-screen py-2 font-semibold text-brand border py-2 border-yellow-200 bg-yellow-100'} 
                 disabled={!value || !timePick}>다음</button></Link>
                 { value && timePick ? '' : <p className='mb-2 text-red-400 text-center'>날짜와 시간을 선택해주세요!</p> }

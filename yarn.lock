@@ -6826,6 +6826,7 @@ __metadata:
     react: ^18.2.0
     react-calendar: ^4.2.1
     react-clock: ^4.2.0
+    react-daum-postcode: ^3.1.1
     react-dom: ^18.2.0
     react-hook-form: ^7.43.9
     react-icons: ^4.8.0
@@ -10844,6 +10845,15 @@ __metadata:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
   checksum: 82897d1393594c63fb0ae9d408e4ce4fab6e96b5287483a8cf07a94de74f7e1a8d2eb04852cef0aa867207fac41a8d94f7c9f4a8f4af8503b1ead0ec9e2bd739
+  languageName: node
+  linkType: hard
+
+"react-daum-postcode@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "react-daum-postcode@npm:3.1.1"
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: a7097f7b57d4d4f7e5e96215c041986b6f2e1daa3fd413e7dae9877c726fe0991e3f4fbff44091e77ac461cf7bd8204db99534702cd7d8f1e52c002d144d1ae8
   languageName: node
   linkType: hard
 
