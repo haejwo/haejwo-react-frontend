@@ -16,6 +16,13 @@ import Less20 from './pages/Move/Less20';
 import More20 from './pages/Move/More20';
 import DatePicker from './pages/Move/DatePicker';
 
+import { Provider } from 'react-redux';
+import store from "./app/store";
+// import { createStore } from 'redux';
+// import rootReducer from './reducers';
+
+// const store = createStore(rootReducer);
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const router = createBrowserRouter([
   {
@@ -39,7 +46,9 @@ const router = createBrowserRouter([
 
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <Provider store={store}>
+      <RouterProvider router={router}/>
+    </Provider>
   </React.StrictMode>
 );
 
