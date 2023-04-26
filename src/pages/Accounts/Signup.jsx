@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import axios from "axios";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { RxCross2 } from 'react-icons/rx';
 
 export default function Signup() {
@@ -35,7 +35,8 @@ export default function Signup() {
       mode: 'onChange',
       resolver: yupResolver(formSchema),
     });
-
+    
+    const navigate = useNavigate()
     let backURL = process.env.REACT_APP_BACK_BASE_URL;
     const registerRes = async (data) => {
       const res = await axios({
@@ -44,11 +45,11 @@ export default function Signup() {
                       data: data
                   });
               console.log(res)
-              // 성공하면 로그인 페이지로
-              .then()
-              // 실패하면 에러메시지
-              }
+      // 성공하면 로그인 페이지로 실패하면 에러메시지
+      res.data ? navigate('/login') : alert('error')
+    }
     // const onSubmit = (data) => console.log(data);
+    
     return (
       <div className="flex flex-col justify-center items-center p-4">
         <div className='flex bg-fixed my-2'>

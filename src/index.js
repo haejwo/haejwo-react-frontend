@@ -14,6 +14,7 @@ import Review from './pages/Review';
 import MoveSelect from './pages/Move/MoveSelect';
 import Less20 from './pages/Move/Less20';
 import More20 from './pages/Move/More20';
+import DatePicker from './pages/Move/DatePicker';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const router = createBrowserRouter([
@@ -31,6 +32,7 @@ const router = createBrowserRouter([
       {path: '/review', element: <Review/>},
       {path: '/less20', element: <Less20/>},
       {path: '/more20', element: <More20/>},
+      {path: '/datepick', element: <DatePicker/>},
     ],
   },
 ]);

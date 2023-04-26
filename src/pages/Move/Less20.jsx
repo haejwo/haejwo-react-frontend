@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { AiOutlineCheck } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 
 export default function Less20() {
     const [moveChoice, setMoveChoice] = useState('normal');
@@ -121,9 +122,9 @@ export default function Less20() {
                 <input type="checkbox" name="" id="check" value={checked} onChange={handleChange} />
                 <label htmlFor="check" className='text-lg font-bold'> 필수 체크 사항을 확인했습니다.</label>
             </div>
-            <button className={!checked ? 'my-4 w-screen py-2 font-semibold border border-zinc-200 text-zinc-500' : 
+            <Link to='/datepick'><button className={!checked ? 'my-4 w-screen py-2 font-semibold border border-zinc-200 text-zinc-500' : 
             'my-4 w-screen py-2 font-semibold text-brand border py-2 border-yellow-200 bg-yellow-100'} 
-                disabled={!checked}>다음</button>
+                disabled={!checked}>다음</button></Link>
             { checked ? '' : <p className='mb-2 text-red-400'>필수 체크 사항을 확인해주세요!</p> }
         </div>
     );
