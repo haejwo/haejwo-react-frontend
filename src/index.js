@@ -20,6 +20,7 @@ import { Provider } from 'react-redux';
 import store from "./app/store";
 import Address from './pages/Move/Address';
 import KakaoCallback from './pages/Accounts/KakaoCallback';
+import GoogleCallback from './pages/Accounts/GoogleCallback';
 // import { createStore } from 'redux';
 // import rootReducer from './reducers';
 
@@ -29,21 +30,22 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App/>,
-    errorElement: <NotFound/>,
+    element: <App />,
+    errorElement: <NotFound />,
     children: [
-      {index: true, element: <Home/>},
-      {path: '/login', element: <Login/>},
-      {path: '/signup', element: <Signup/>},
-      {path: '/user', element: <User/>},
-      {path: '/profile', element: <Profile/>},
-      {path: '/move', element: <MoveSelect/>},
-      {path: '/review', element: <Review/>},
-      {path: '/less20', element: <Less20/>},
-      {path: '/more20', element: <More20/>},
-      {path: '/datepick', element: <DatePicker/>},
-      {path: '/address', element: <Address/>},
-      {path: '/oauth/callback/kakao/', element: <KakaoCallback/>},
+      { index: true, element: <Home /> },
+      { path: '/login', element: <Login /> },
+      { path: '/signup', element: <Signup /> },
+      { path: '/user', element: <User /> },
+      { path: '/profile', element: <Profile /> },
+      { path: '/move', element: <MoveSelect /> },
+      { path: '/review', element: <Review /> },
+      { path: '/less20', element: <Less20 /> },
+      { path: '/more20', element: <More20 /> },
+      { path: '/datepick', element: <DatePicker /> },
+      { path: '/address', element: <Address /> },
+      { path: '/oauth/callback/kakao/', element: <KakaoCallback /> },
+      { path: '/oauth/callback/google/', element: <GoogleCallback /> },
     ],
   },
 ]);
@@ -51,7 +53,7 @@ const router = createBrowserRouter([
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router}/>
+      <RouterProvider router={router} />
     </Provider>
   </React.StrictMode>
 );

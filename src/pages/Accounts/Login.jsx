@@ -58,14 +58,14 @@ export default function Login() {
       console.log('로그인실패');
     }
   }
- // kakao login
+  // kakao login
   let baseURL = process.env.REACT_APP_FRONT_BASE_URL;
   const KAKAO_REST_API_KEY = process.env.REACT_APP_KAKAO_KEY;
   const KAKAO_CALLBACK_URI = baseURL + 'oauth/callback/kakao/';
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_REST_API_KEY}&redirect_uri=${KAKAO_CALLBACK_URI}&response_type=code`;
- // google login
+  // google login
   const SOCIAL_AUTH_GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
-  const GOOGLE_CALLBACK_URI = backURL + 'accounts/google/login/callback/'
+  const GOOGLE_CALLBACK_URI = baseURL + 'oauth/callback/google/'
   const scope = "https://www.googleapis.com/auth/userinfo.email"
   const GOOGLE_AUTH_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${SOCIAL_AUTH_GOOGLE_CLIENT_ID}&response_type=code&redirect_uri=${GOOGLE_CALLBACK_URI}&scope=${scope}`
 
