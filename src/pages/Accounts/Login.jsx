@@ -40,19 +40,30 @@ export default function Login() {
       const res = await axios({
                       method: "post",
                       url: `${backURL}accounts/login/`,
-                      data: data
+                      data: data,
+                      // withCredentials: true,
                   });
               console.log(res)
       
               if (res.data) {
-                dispatch(loginUser(res.data.access));
+                dispatch(loginUser(res.data.access_token));
                 navigate('/');
-                console.log('로그인성공');
+                const pros = await axios.get(`${backURL}accounts/profile/`, {
+                  headers: {
+                    'Authorization' : `Bearer ${res.data.access_token}`
+                  }
+                });
+                console.log(pros.data); // 받아온 유저 정보 출력
               } else {
                 console.log('로그인실패');
               }
     }
-
+    
+    let baseURL = process.env.REACT_APP_FRONT_BASE_URL;
+    const KAKAO_REST_API_KEY = process.env.REACT_APP_KAKAO_KEY;
+    const KAKAO_CALLBACK_URI = baseURL + '/oauth/callback/kakao/';
+    const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_REST_API_KEY}&redirect_uri=${KAKAO_CALLBACK_URI}&response_type=code`;
+    
     return (
       <div className="flex flex-col justify-center items-center p-4">
         <div className='flex bg-fixed my-2'>
@@ -85,7 +96,7 @@ export default function Login() {
         </form>
         <h2 className="font-bold text-lg my-3">간편로그인</h2>
         <div className="w-screen flex flex-col items-center p-4">
-          <button className="w-full p-2 bg-kakao flex rounded my-2 justify-center items-center"><RiKakaoTalkFill className='text-2xl mx-1'/>카카오톡으로 로그인</button>
+          <a href={KAKAO_AUTH_URL}><button className="w-full p-2 bg-kakao flex rounded my-2 justify-center items-center"><RiKakaoTalkFill className='text-2xl mx-1'/>카카오톡으로 로그인</button></a>
           <button className="w-full p-2 flex rounded my-2 border boreder-zinc-400 justify-center items-center"><FcGoogle className='text-2xl mx-1'/>구글로 로그인</button>
         </div>
         <h2 className="mt-7 font-bold text-lg">회원이 아니신가요?</h2>

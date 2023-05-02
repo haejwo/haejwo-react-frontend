@@ -19,6 +19,7 @@ import DatePicker from './pages/Move/DatePicker';
 import { Provider } from 'react-redux';
 import store from "./app/store";
 import Address from './pages/Move/Address';
+import KakaoCallback from './pages/Accounts/KakaoCallback';
 // import { createStore } from 'redux';
 // import rootReducer from './reducers';
 
@@ -42,6 +43,7 @@ const router = createBrowserRouter([
       {path: '/more20', element: <More20/>},
       {path: '/datepick', element: <DatePicker/>},
       {path: '/address', element: <Address/>},
+      {path: '/oauth/callback/kakao/', element: <KakaoCallback/>},
     ],
   },
 ]);
