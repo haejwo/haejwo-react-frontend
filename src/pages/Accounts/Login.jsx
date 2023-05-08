@@ -4,7 +4,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import axios from "axios";
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useCookies } from 'react-cookie';
 import { loginUser } from './actions';
 import { RxCross2 } from 'react-icons/rx';
 import { RiKakaoTalkFill } from 'react-icons/ri';
@@ -34,6 +35,9 @@ export default function Login() {
 
   const navigate = useNavigate()
   const dispatch = useDispatch();
+  const [cookies, setCookie] = useCookies(['token']);
+  const userInfo = useSelector(state => state.token);
+
 
   let backURL = process.env.REACT_APP_BACK_BASE_URL;
   const loginRes = async (data) => {
@@ -43,17 +47,20 @@ export default function Login() {
       data: data,
       // withCredentials: true,
     });
-    console.log(res)
+    console.log(res.data.user);
+    setCookie('token', res.data.access_token);
 
     if (res.data) {
       dispatch(loginUser(res.data.access_token));
-      navigate('/');
-      const pros = await axios.get(`${backURL}accounts/profile/`, {
-        headers: {
-          'Authorization': `Bearer ${res.data.access_token}`
-        }
-      });
-      console.log(pros.data); // 받아온 유저 정보 출력
+      console.log(userInfo);
+      navigate('/profile');
+    
+      // const pros = await axios.get(`${backURL}accounts/profile/`, {
+      //   headers: {
+      //     'Authorization': `Bearer ${res.data.access_token}`
+      //   }
+      // });
+      // console.log(pros.data); // 받아온 유저 정보 출력
     } else {
       console.log('로그인실패');
     }

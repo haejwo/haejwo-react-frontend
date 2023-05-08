@@ -15,7 +15,7 @@ import MoveSelect from './pages/Move/MoveSelect';
 import Less20 from './pages/Move/Less20';
 import More20 from './pages/Move/More20';
 import DatePicker from './pages/Move/DatePicker';
-
+import { CookiesProvider } from 'react-cookie';
 import { Provider } from 'react-redux';
 import store from "./app/store";
 import Address from './pages/Move/Address';
@@ -52,9 +52,11 @@ const router = createBrowserRouter([
 
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <RouterProvider router={router} />
-    </Provider>
+    <CookiesProvider>
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
+    </CookiesProvider>
   </React.StrictMode>
 );
 
