@@ -2,8 +2,11 @@ import React from 'react';
 import { FaTruck } from 'react-icons/fa';
 import { GiFlowerPot, GiHandTruck } from 'react-icons/gi';
 import { Link } from 'react-router-dom';
+import Carousel from '../../components/Carousel/Carousel';
 
 export default function Home() {
+    const slides = ['광고 1번 자리입니다. 광고 1번 자리입니다.', '광고 2번 자리입니다. 광고 2번 자리입니다.', '광고 3번 자리입니다. 광고 3번 자리입니다.'];
+
     return (
         <main className='flex flex-col items-center'>
             <div className='w-screen p-3 bg-zinc-100'>
@@ -40,8 +43,8 @@ export default function Home() {
                     <div>리뷰카드</div>
                 </div>
             </div>
-            <div>
-                캐러셀광고
+            <div className='w-screen p-3'>
+                <Carousel slides={slides} intervalTime={3000}/>
             </div>
             <div className='w-screen p-3'>
                 <div className='flex flex-col items-start'>
