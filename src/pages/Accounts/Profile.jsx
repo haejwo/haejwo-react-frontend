@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+
 
 export default function Profile() {
     
@@ -9,24 +11,27 @@ export default function Profile() {
         const [userEmail, setUserEmail] = useState(null);
         const navigate = useNavigate();
         const backURL = process.env.REACT_APP_BACK_BASE_URL;
+        const userInfo = useSelector(state => state.user);
+        console.log(userInfo);    
+    
 
-        const authCheck = async () => { // 페이지에 들어올때 쿠키로 사용자 체크
-            const token = cookies.token; // 쿠키에서 id 를 꺼내기
-            try {
-                const res = await axios.get(`${backURL}accounts/profile/`, {
-                  headers: {
-                    'Authorization': `Bearer ${token}`
-                  } 
-                });
-                console.log(res);
-                if (res.data) {
-                    setUserEmail(res.data);
-                  } else {
-                    logOut();
-                  }
-                } catch (error) {
-                  console.log('');
-                }
+        // const authCheck = async () => { // 페이지에 들어올때 쿠키로 사용자 체크
+        //     const token = cookies.token; // 쿠키에서 id 를 꺼내기
+        //     try {
+        //         const res = await axios.get(`${backURL}accounts/profile/`, {
+        //           headers: {
+        //             'Authorization': `Bearer ${token}`
+        //           } 
+        //         });
+        //         console.log(res);
+        //         if (res.data) {
+        //             setUserEmail(res.data);
+        //           } else {
+        //             logOut();
+        //           }
+        //         } catch (error) {
+        //           console.log('');
+        //         }
               
             
             // const res = await axios({
@@ -56,11 +61,11 @@ export default function Profile() {
                 // .catch(() => {
                 //     logOut(); // 에러 발생시 실행
                 // });
-        };
+        // };
     
-        useEffect(() => {
-            authCheck(); // 로그인 체크 함수
-        }, [])
+        // useEffect(() => {
+        //     authCheck(); // 로그인 체크 함수
+        // }, [])
 
         const logOut = () => {
             removeCookie('token'); // 쿠키를 삭제
@@ -69,7 +74,7 @@ export default function Profile() {
 
     return (
         <div>
-            {userEmail && <h1>{userEmail}</h1>} 
+            {userInfo && <h1>{userInfo.username}</h1>} 
 			<button onClick={logOut}>로그아웃</button>
         </div>
     );

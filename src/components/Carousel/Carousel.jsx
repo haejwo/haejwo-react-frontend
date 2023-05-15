@@ -14,7 +14,7 @@ export default function Carousel({ slides, intervalTime }) {
     }, [slides.length, intervalTime]);
 
     return (
-        <div className='w-screen h-10 flex'>
+        <div className='w-100 h-10 flex'>
             {slides.map((slide, idx) => (
                 <div key={idx} className={`w-100 h-100 ease-in-out ${idx === currentSlide ? 'translate-x-0' : 'hidden'}`}>
                     {slide}

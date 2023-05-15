@@ -31,13 +31,10 @@ export default function Login() {
     mode: 'onChange',
     resolver: yupResolver(formSchema),
   });
-  // const onSubmit = (data) => console.log(data);
 
   const navigate = useNavigate()
   const dispatch = useDispatch();
   const [cookies, setCookie] = useCookies(['token']);
-  const userInfo = useSelector(state => state.token);
-
 
   let backURL = process.env.REACT_APP_BACK_BASE_URL;
   const loginRes = async (data) => {
@@ -45,22 +42,17 @@ export default function Login() {
       method: "post",
       url: `${backURL}accounts/login/`,
       data: data,
-      // withCredentials: true,
     });
     console.log(res.data.user);
     setCookie('token', res.data.access_token);
-
-    if (res.data) {
-      dispatch(loginUser(res.data.access_token));
-      console.log(userInfo);
-      navigate('/profile');
+    const user = {id: res.data.user.id, email: res.data.user.email, username: res.data.user.customer.username};
+    dispatch(loginUser(user));
     
-      // const pros = await axios.get(`${backURL}accounts/profile/`, {
-      //   headers: {
-      //     'Authorization': `Bearer ${res.data.access_token}`
-      //   }
-      // });
-      // console.log(pros.data); // 받아온 유저 정보 출력
+    if (res.data) {
+      navigate('/');
+      if (res.data.user.customer === null) {
+        navigate('/user');
+      }
     } else {
       console.log('로그인실패');
     }
@@ -70,6 +62,7 @@ export default function Login() {
   const KAKAO_REST_API_KEY = process.env.REACT_APP_KAKAO_KEY;
   const KAKAO_CALLBACK_URI = baseURL + 'oauth/callback/kakao/';
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_REST_API_KEY}&redirect_uri=${KAKAO_CALLBACK_URI}&response_type=code`;
+
   // google login
   const SOCIAL_AUTH_GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
   const GOOGLE_CALLBACK_URI = baseURL + 'oauth/callback/google/'
