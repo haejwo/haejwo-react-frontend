@@ -6,6 +6,9 @@ const initialState = {
     id: null,
     email: null,
     username: null,
+    bankName: null,
+    accountNumber: null,
+    role: null,
   },
 };
 
@@ -25,6 +28,30 @@ function userReducer(state = initialState, action) {
           username: action.payload,
         },
       };
+    case 'SAVE_BANKNAME':
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          bankName: action.payload,
+        },
+      };
+    case 'SAVE_ACCOUNTNUMBER':
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          accountNumber: action.payload,
+        },
+      };
+    case 'SAVE_ROLE':
+        return {
+          ...state,
+          user: {
+            ...state.user,
+            role: action.payload,
+          },
+        };  
     default:
       return state;
   }

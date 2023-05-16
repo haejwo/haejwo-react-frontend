@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import axios from "axios";
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import { loginUser } from './actions';
 import { RxCross2 } from 'react-icons/rx';
@@ -43,20 +43,23 @@ export default function Login() {
       url: `${backURL}accounts/login/`,
       data: data,
     });
-    console.log(res.data.user);
     setCookie('token', res.data.access_token);
-    const user = {id: res.data.user.id, email: res.data.user.email, username: res.data.user.customer.username};
-    dispatch(loginUser(user));
     
-    if (res.data) {
+    if (res.data && res.data.user.customer != null) {
+      const user = {id: res.data.user.id, email: res.data.user.email, username: res.data.user.customer.username, role: res.data.user.role};
+      dispatch(loginUser(user));
       navigate('/');
-      if (res.data.user.customer === null) {
-        navigate('/user');
-      }
+    } else if (res.data && res.data.user.company != null) {
+      const user = {id: res.data.user.id, email: res.data.user.email, username: res.data.user.company.username, bankName: res.data.user.company.bank.bankName, accountNumber: res.data.user.company.bank.accountNumber, role: res.data.user.role};
+      dispatch(loginUser(user));
+      navigate('/');
+    } else if (res.data.user.customer === null || res.data.user.company === null) {
+      navigate('/user');
     } else {
       console.log('로그인실패');
     }
   }
+
   // kakao login
   let baseURL = process.env.REACT_APP_FRONT_BASE_URL;
   const KAKAO_REST_API_KEY = process.env.REACT_APP_KAKAO_KEY;

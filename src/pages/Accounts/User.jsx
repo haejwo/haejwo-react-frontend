@@ -3,12 +3,12 @@ import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { saveUsername } from './actions';
+import { saveUsername, saveBankName, saveAccountNumber, saveRole } from './actions';
 
 export default function User() {
     const [cookies, setCookie] = useCookies(['token']);
     const backURL = process.env.REACT_APP_BACK_BASE_URL;
-    const userInfo = useSelector(state => state.username);
+    const userInfo = useSelector(state => state.user);
     console.log(userInfo);    
     const [userRole, setUserRole] = useState('CU');
     const handleClick = (role) => { setUserRole(role) };
@@ -18,15 +18,12 @@ export default function User() {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const [username, setUsername] = useState('');
+    const [bankName, setBankName] = useState('');
+    const [accountNumber, setAccountNumber] = useState('');
     const handleChange = (e) => {setUsername(e.target.value);};
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     dispatch(saveUsername(username));
-    //     setUsername('');
-    // };
 
     const roleRes = async (userRole) => {
-        const token = cookies.token; // 쿠키에서 토큰 값 가져오기
+        const token = cookies.token;
         try {
             const res = await axios.put(`${backURL}accounts/user/`, 
             {"id": userInfo.id, "email": userInfo.email, "role": userRole},
@@ -35,14 +32,14 @@ export default function User() {
                 'Authorization': `Bearer ${token}`
               } 
             });
-            console.log(res);
+            dispatch(saveRole(userRole));
         } catch (error) {
         console.log('실패');
         }
     };
     
     const CURes = async (username) => {
-        const token = cookies.token; // 쿠키에서 토큰 값 가져오기
+        const token = cookies.token;
         try {
             const res = await axios.post(`${backURL}accounts/profile/`, 
             {"username": username},
@@ -51,8 +48,24 @@ export default function User() {
                 'Authorization': `Bearer ${token}`
               } 
             });
-            console.log(res);
             dispatch(saveUsername(username));
+            navigate('/profile');
+        } catch (error) {
+        console.log('실패');
+        }
+    };
+
+    const CORes = async (username, bankName, accountNumber) => {
+        const token = cookies.token;
+        try {
+            const res = await axios.post(`${backURL}accounts/profile/`, 
+            {"username": username, "bankName": bankName, "accountNumber": accountNumber},
+            {
+              headers: {
+                'Authorization': `Bearer ${token}`
+              } 
+            });
+            dispatch(saveUsername(username), saveBankName(bankName), saveAccountNumber(accountNumber));
             navigate('/profile');
         } catch (error) {
         console.log('실패');
@@ -83,11 +96,15 @@ export default function User() {
                         <input type="text" placeholder='유저명을 입력하세요' value={username} onChange={handleChange} />
                         <button onClick={() => CURes(username)}>확인</button>
                     </div> :
-                    <div> 회사
+                    <div>
+                        <input type="text" placeholder='사업자명을 입력하세요' value={username} onChange={handleChange} />
+                        <input type="text" placeholder='은행명을 입력하세요' value={bankName} onChange={(e) => {setBankName(e.target.value);}} />
+                        <input type="text" placeholder='계좌번호를 입력하세요' value={accountNumber} onChange={(e) => {setAccountNumber(e.target.value);}} />
+                        <p>하이픈(-)없이 숫자만 입력해주세요</p>
+                        <button onClick={() => CORes(username, bankName, accountNumber)}>확인</button>
                     </div>
                 }
             </div>
         </div>
     );
 }
-
