@@ -13,7 +13,7 @@ export default function GoogleCallback() {
             method: 'get',
             url: `${backURL}accounts/google/login/callback/?code=${code}`,
         })
-            .then((res) => {console.log(res.data); navigate('/profile');})
+            .then((res) => {console.log(res.data); navigate('/user');})
     }, [])
 
     return (

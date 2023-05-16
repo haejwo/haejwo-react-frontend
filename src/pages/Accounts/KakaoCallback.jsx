@@ -13,7 +13,7 @@ export default function KakaoCallback() {
             method: 'get',
             url: `${backURL}accounts/kakao/login/callback/?code=${code}`,
         })
-        .then((res) => {console.log(res.data); navigate('/profile');})
+        .then((res) => {console.log(res.data); navigate('/user');})
     }, [])
 
     return (

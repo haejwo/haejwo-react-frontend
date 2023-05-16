@@ -48,7 +48,6 @@ export default function Signup() {
       // 성공하면 로그인 페이지로 실패하면 에러메시지
       res.data ? navigate('/login') : alert('error')
     }
-    // const onSubmit = (data) => console.log(data);
     
     return (
       <div className="flex flex-col justify-center items-center p-4">
