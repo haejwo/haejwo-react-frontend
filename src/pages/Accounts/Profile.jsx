@@ -2,17 +2,22 @@ import React from 'react';
 import { useCookies } from 'react-cookie';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { loginUser } from './actions';
 import { FaUserCircle, FaTruck } from 'react-icons/fa';
 
 export default function Profile() {
     
     const [cookies, setCookie, removeCookie] = useCookies(['token']);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const userInfo = useSelector(state => state.user);
     console.log(userInfo);    
     
     const logOut = () => {
+        const user = {id: null, email: null, username: null, bankName: null, accountNumber: null, role: null};
+
         removeCookie('token');
+        dispatch(loginUser(user));
         navigate('/');
     };
 

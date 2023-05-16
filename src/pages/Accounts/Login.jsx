@@ -54,6 +54,8 @@ export default function Login() {
       dispatch(loginUser(user));
       navigate('/');
     } else if (res.data.user.customer === null || res.data.user.company === null) {
+      const user = {id: res.data.user.id, email: res.data.user.email};
+      dispatch(loginUser(user));
       navigate('/user');
     } else {
       console.log('로그인실패');
