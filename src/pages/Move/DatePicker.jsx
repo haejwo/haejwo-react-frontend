@@ -4,6 +4,8 @@ import 'react-calendar/dist/Calendar.css';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { BsCheckAll } from 'react-icons/bs';
+import { AiOutlineCalendar, AiOutlineClockCircle } from 'react-icons/ai';
+import Modal from '../../components/Modal/Modal';
 
 export default function DatePicker() {
     const [value, setValue] = useState(new Date());
@@ -18,6 +20,16 @@ export default function DatePicker() {
     const tileDisabled = ({ date }) => {
         return date < new Date();
     };
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const openModal = () => {
+      setIsModalOpen(true);
+    };
+    const closeModal = () => {
+      setIsModalOpen(false);
+    };
+    const [checked, setChecked] = useState(false);
+    const handleCheck = () => setChecked((prev) => !prev);
 
     return (
         <div className='flex flex-col items-center'>
@@ -53,12 +65,23 @@ export default function DatePicker() {
                         입니다.</p> : ''}
                     </div>
             </div>
-            <div onClick={() => alert('이사 날짜 : ' + moment(value).format("YYYY년 MM월 DD일") + '\n' + '이사 시간 : ' + moment(timePick, 'hh:mm A').format('A hh시 mm분 ').replace("AM", "오전").replace("PM", "오후"))}>
-                <Link to='/address'><button className={!value || !timePick ? 'my-4 w-screen py-2 font-semibold border border-zinc-200 text-zinc-500' : 
-            'my-4 w-screen py-2 font-semibold text-brand border py-2 border-yellow-200 bg-yellow-100'} 
-                disabled={!value || !timePick}>다음</button></Link>
-                { value && timePick ? '' : <p className='mb-2 text-red-400 text-center'>날짜와 시간을 선택해주세요!</p> }
+            <div>
+                <input type="checkbox" name="" id="check" value={checked} onChange={handleCheck} onClick={openModal} />
+                <label htmlFor="check" className='text-lg font-bold'> 정확한 날짜와 시간은 조정될 수 있습니다.</label>
+                { checked ? '' : <p className='my-2 text-center text-red-400'>필수 체크 사항을 확인해주세요!</p> }
+                <Modal isOpen={isModalOpen} onClose={closeModal}>
+                    <h1 className='font-bold text-2xl mb-4'>요청하신 날짜와 시간입니다</h1>
+                    <p className='text-lg mb-1 flex items-center'><AiOutlineCalendar className='mr-1'/>이사 날짜</p>
+                    <p className='text-xl font-bold mb-3 ml-5'>{moment(value).format("YYYY년 MM월 DD일")}</p>
+                    <p className='text-lg mb-1 flex items-center'><AiOutlineClockCircle className='mr-1'/>이사 시간</p>
+                    <p className='text-xl font-bold mb-3 ml-5'>{moment(timePick, 'hh:mm A').format('A hh시 mm분 ').replace("AM", "오전").replace("PM", "오후")}</p>
+                </Modal>
             </div>
+            <Link to='/address'><button className={!value || !timePick || !checked ? 'my-4 w-screen py-2 font-semibold border border-zinc-200 text-zinc-500' : 
+            'my-4 w-screen py-2 font-semibold text-brand border py-2 border-yellow-200 bg-yellow-100'} 
+            disabled={!value || !timePick || !checked}>다음</button></Link>
+            { value && timePick ? '' : <p className='mb-2 text-red-400 text-center'>날짜와 시간을 선택해주세요!</p> }
+            
         </div>
     );
 }

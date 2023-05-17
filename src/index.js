@@ -21,6 +21,7 @@ import store from "./app/store";
 import Address from './pages/Move/Address';
 import KakaoCallback from './pages/Accounts/KakaoCallback';
 import GoogleCallback from './pages/Accounts/GoogleCallback';
+import EditUserInfo from './pages/Accounts/EditUserInfo';
 // import { createStore } from 'redux';
 // import rootReducer from './reducers';
 
@@ -37,6 +38,7 @@ const router = createBrowserRouter([
       { path: '/login', element: <Login /> },
       { path: '/signup', element: <Signup /> },
       { path: '/user', element: <User /> },
+      { path: '/userupdate', element: <EditUserInfo /> },
       { path: '/profile', element: <Profile /> },
       { path: '/move', element: <MoveSelect /> },
       { path: '/review', element: <Review /> },
