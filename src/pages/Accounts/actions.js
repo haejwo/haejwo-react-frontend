@@ -32,3 +32,10 @@ export const saveRole = (role) => {
     payload: role,
   };
 };
+
+export const saveCategory = (category) => {
+  return {
+    type: 'SAVE_CATEGORY',
+    payload: category,
+  };
+};

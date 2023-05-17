@@ -3,7 +3,9 @@ import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { saveUsername, saveBankName, saveAccountNumber, saveRole } from './actions';
+import { saveUsername, saveBankName, saveAccountNumber, saveRole, saveCategory } from './actions';
+import { FaTruck } from 'react-icons/fa';
+import { GiFlowerPot, GiHandTruck } from 'react-icons/gi';
 
 export default function User() {
     const [cookies, setCookie] = useCookies(['token']);
@@ -19,8 +21,9 @@ export default function User() {
     const [username, setUsername] = useState('');
     const [bankName, setBankName] = useState('');
     const [accountNumber, setAccountNumber] = useState('');
-    const handleChange = (e) => {setUsername(e.target.value);};
-
+    const [category, setCategory] = useState('MOVING');
+    const handleToggle = (choice) => { setCategory(choice) };
+    const handleChange = (e) => { setUsername(e.target.value); };
     const roleRes = async (userRole) => {
         const token = cookies.token;
         try {
@@ -54,17 +57,23 @@ export default function User() {
         }
     };
 
-    const CORes = async (username, bankName, accountNumber) => {
+    const CORes = async (username, bankName, accountNumber, category) => {
         const token = cookies.token;
         try {
             const res = await axios.post(`${backURL}accounts/profile/`, 
-            {"username": username, "bankName": bankName, "accountNumber": accountNumber},
+            {
+                "username": username, "bankName": bankName, "accountNumber": accountNumber, "category": category
+            },
             {
               headers: {
                 'Authorization': `Bearer ${token}`
               } 
             });
-            dispatch(saveUsername(username), saveBankName(bankName), saveAccountNumber(accountNumber));
+            dispatch(saveUsername(username));
+            dispatch(saveBankName(bankName));
+            dispatch(saveAccountNumber(accountNumber));
+            dispatch(saveCategory(category));
+            
             navigate('/profile');
         } catch (error) {
         console.log('실패');
@@ -104,6 +113,27 @@ export default function User() {
                         disabled={username === ''}>회원등록 완료</button>
                     </div> :
                     <div className='w-full flex justify-center my-4 flex-col'>
+                        <p className='font-bold my-3 text-lg'>제공하는 운송서비스를 선택해주세요</p>
+                        <div className='flex justify-center my-4'>
+                            <button onClick={() => handleToggle('MOVING')}
+                                className={ category === 'MOVING' ? 
+                                'w-1/3 flex items-center justify-center font-semibold text-brand border py-2 border-yellow-200 bg-yellow-100' : 
+                                'w-1/3 flex items-center justify-center font-semibold text-zinc-500 py-2 border border-zinc-200' 
+                                }
+                            ><FaTruck className='mr-2'/>이사</button>
+                            <button onClick={() => handleToggle('FLOWER')}
+                                className={ category === 'FLOWER' ? 
+                                'w-1/3 flex items-center justify-center font-semibold text-brand border py-2 border-yellow-200 bg-yellow-100' : 
+                                'w-1/3 flex items-center justify-center font-semibold text-zinc-500 py-2 border border-zinc-200' 
+                                }
+                            ><GiFlowerPot className='mr-2'/>꽃</button>
+                            <button onClick={() => handleToggle('OTHER')}
+                                className={ category === 'OTHER' ? 
+                                'w-1/3 flex items-center justify-center font-semibold text-brand border py-2 border-yellow-200 bg-yellow-100' : 
+                                'w-1/3 flex items-center justify-center font-semibold text-zinc-500 py-2 border border-zinc-200' 
+                                }
+                            ><GiHandTruck className='mr-2'/>기타</button>
+                        </div>
                         <p className='font-bold my-3 text-lg'>사업자명을 입력해주세요</p>
                         <input type="text" placeholder='사업자명을 입력하세요' value={username} onChange={handleChange} 
                         className='border boreder-zinc-200 rounded-md text-md p-2 mb-2'/>
@@ -114,7 +144,7 @@ export default function User() {
                         <input type="text" placeholder='계좌번호를 입력하세요' value={accountNumber} onChange={(e) => {setAccountNumber(e.target.value);}} 
                         className='border boreder-zinc-200 rounded-md text-md p-2 mb-2'/>
                         <p className='text-zinc-400 ml-2 mb-2'>하이픈(-)없이 숫자만 입력해주세요</p>
-                        <button onClick={() => CORes(username, bankName, accountNumber)}
+                        <button onClick={() => CORes(username, bankName, accountNumber, category)}
                         className={username === '' || bankName === '' || accountNumber === '' ? 'my-4 w-full p-4 py-2 font-semibold border border-zinc-200 text-zinc-500' : 
                         'my-4 w-full p-4 py-2 font-semibold text-brand border border-yellow-200 bg-yellow-100'} 
                         disabled={username === '' || bankName === '' || accountNumber === ''}>회원등록 완료</button>
