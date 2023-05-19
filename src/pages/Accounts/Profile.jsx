@@ -31,7 +31,7 @@ export default function Profile() {
                     <span className='text-lg mt-2'>고객님</span>
                 </div> : 
                 <div className='flex items-center'>
-                    {userInfo.category === 'MOVING' ? <FaTruck className='text-2xl text-yellow-500'/> : 
+                    {userInfo.category === 'MOVE' ? <FaTruck className='text-2xl text-yellow-500'/> : 
                     userInfo.category === 'FLOWER' ? <GiFlowerPot className='text-2xl text-yellow-500'/> : <GiHandTruck className='text-2xl text-yellow-500'/>} 
                     <span className='font-bold text-2xl mx-2'>{userInfo.username}</span> 
                     <span className='text-lg mt-2'>파트너님</span>

@@ -21,7 +21,7 @@ export default function User() {
     const [username, setUsername] = useState('');
     const [bankName, setBankName] = useState('');
     const [accountNumber, setAccountNumber] = useState('');
-    const [category, setCategory] = useState('MOVING');
+    const [category, setCategory] = useState('MOVE');
     const handleToggle = (choice) => { setCategory(choice) };
     const handleChange = (e) => { setUsername(e.target.value); };
     const roleRes = async (userRole) => {
@@ -74,7 +74,7 @@ export default function User() {
             dispatch(saveAccountNumber(accountNumber));
             dispatch(saveCategory(category));
             
-            navigate('/profile');
+            navigate('/businessfileuploader');
         } catch (error) {
         console.log('실패');
         }
@@ -115,8 +115,8 @@ export default function User() {
                     <div className='w-full flex justify-center my-4 flex-col'>
                         <p className='font-bold my-3 text-lg'>제공하는 운송서비스를 선택해주세요</p>
                         <div className='flex justify-center my-4'>
-                            <button onClick={() => handleToggle('MOVING')}
-                                className={ category === 'MOVING' ? 
+                            <button onClick={() => handleToggle('MOVE')}
+                                className={ category === 'MOVE' ? 
                                 'w-1/3 flex items-center justify-center font-semibold text-brand border py-2 border-yellow-200 bg-yellow-100' : 
                                 'w-1/3 flex items-center justify-center font-semibold text-zinc-500 py-2 border border-zinc-200' 
                                 }
@@ -147,7 +147,7 @@ export default function User() {
                         <button onClick={() => CORes(username, bankName, accountNumber, category)}
                         className={username === '' || bankName === '' || accountNumber === '' ? 'my-4 w-full p-4 py-2 font-semibold border border-zinc-200 text-zinc-500' : 
                         'my-4 w-full p-4 py-2 font-semibold text-brand border border-yellow-200 bg-yellow-100'} 
-                        disabled={username === '' || bankName === '' || accountNumber === ''}>회원등록 완료</button>
+                        disabled={username === '' || bankName === '' || accountNumber === ''}>다음</button>
                     </div> : ''
                 }
             </div>
