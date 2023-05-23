@@ -4,6 +4,7 @@ import { GiFlowerPot, GiHandTruck } from 'react-icons/gi';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Carousel from '../../components/Carousel/Carousel';
+import COProfile from '../../api/COProfile';
 
 export default function Home() {
     const slides = ['광고 1번 자리입니다. 광고 1번 자리입니다.', '광고 2번 자리입니다. 광고 2번 자리입니다.', '광고 3번 자리입니다. 광고 3번 자리입니다.'];
@@ -49,10 +50,7 @@ export default function Home() {
                 <Carousel slides={slides} intervalTime={3000}/>
             </div>
             <div className='w-screen p-3'>
-                <div className='flex flex-col items-start'>
-                    <p>파트너</p>
-                    <div>파트너카드</div>
-                </div>
+                <COProfile/>
             </div>
         </main>
     );
