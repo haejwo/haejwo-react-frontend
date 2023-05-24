@@ -1,22 +1,21 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { saveUsername, saveBankName, saveAccountNumber, saveCategory } from '../../app/actions';
+import { saveUsername, saveBankName, saveAccountNumber, saveRole, saveCategory } from '../../app/actions';
 import { FaTruck } from 'react-icons/fa';
 import { GiFlowerPot, GiHandTruck } from 'react-icons/gi';
-import RoleSelect from '../../api/RoleSelect';
 
 export default function User() {
     const [cookies, setCookie] = useCookies(['token']);
     const backURL = process.env.REACT_APP_BACK_BASE_URL;
+    const userInfo = useSelector(state => state.user);
+    // const [userRole, setUserRole] = useState('CU');
+    const handleClick = (role) => { setUserRole(role) };
+    // const [roleCheck, setRoleCheck] = useState(false);
+    const handleCheck = (prev) => setRoleCheck(!prev);
     
-    const [role, setRole] = useState(null);
-    const [check, setCheck] = useState(null);
-    const handleRole = (role) => setRole(role);
-    const handleRoleCheck = (check) => setCheck(check); 
-
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const [username, setUsername] = useState('');
@@ -25,6 +24,21 @@ export default function User() {
     const [category, setCategory] = useState('MOVE');
     const handleToggle = (choice) => { setCategory(choice) };
     const handleChange = (e) => { setUsername(e.target.value); };
+    const roleRes = async (userRole) => {
+        const token = cookies.token;
+        try {
+            const res = await axios.put(`${backURL}accounts/user/`, 
+            {"id": userInfo.id, "email": userInfo.email, "role": userRole},
+            {
+              headers: {
+                'Authorization': `Bearer ${token}`
+              } 
+            });
+            dispatch(saveRole(userRole));
+        } catch (error) {
+        console.log('실패');
+        }
+    };
     
     const CURes = async (username) => {
         const token = cookies.token;
@@ -68,8 +82,27 @@ export default function User() {
 
     return (
         <div className='flex flex-col items-center'>
-            <RoleSelect onRoleSelect={handleRole} onCheck={handleRoleCheck}/>
-                { check ? role === 'CU' ? 
+            <div className='w-full flex flex-col items-center p-4'>
+                <p className='font-bold text-lg my-3'>이용하실 유저 정보를 입력해주세요</p>
+                <div className='w-full flex justify-center my-4'>
+                    <button onClick={() => handleClick('CU')} disabled={roleCheck}
+                        className={ userRole === 'CU' ? 
+                        'w-1/2 font-semibold text-brand border py-2 border-yellow-200 bg-yellow-100' : 
+                        'w-1/2 font-semibold text-zinc-500 py-2 border border-zinc-200' }>고객</button>
+                    <button onClick={() => handleClick('CO')} disabled={roleCheck}
+                        className={ userRole === 'CO' ? 
+                        'w-1/2 font-semibold text-brand border py-2 border-yellow-200 bg-yellow-100' : 
+                        'w-1/2 font-semibold text-zinc-500 py-2 border border-zinc-200' }>사업자</button>
+                </div>
+                <div className='w-full flex flex-col items-center p-4 text-zinc-600 bg-yellow-100 rounded-md'>
+                    <p className='mb-2'>선택하신 유저 정보는 <span className='font-bold text-lg'>{userRole === 'CU' ? '고객' : '사업자'}</span>입니다.</p>
+                    <p className='font-semibold text-red-600'>하단 버튼 클릭 시 유저 정보 변경 불가!</p>
+                </div>
+                <button onClick={() => {roleRes(userRole); handleCheck();}} 
+                    className={!roleCheck ? 'my-4 w-full p-4 py-2 font-semibold border border-zinc-200 text-zinc-500' : 
+                    'my-4 w-full p-4 py-2 font-semibold text-brand border border-yellow-200 bg-yellow-100'} 
+                disabled={roleCheck}>{userRole === 'CU' ? '고객' : '사업자'}(으)로 이용합니다</button>
+                { roleCheck ? userRole === 'CU' ? 
                     <div className='w-full flex justify-center my-4 flex-col'>
                         <p className='font-bold my-3 text-lg'>유저명을 입력해주세요</p>
                         <input type="text" placeholder='유저명을 입력하세요' value={username} onChange={handleChange} 
@@ -118,5 +151,6 @@ export default function User() {
                     </div> : ''
                 }
             </div>
+        </div>
     );
 }

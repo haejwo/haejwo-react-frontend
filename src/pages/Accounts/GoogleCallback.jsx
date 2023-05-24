@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useCookies } from 'react-cookie';
-import { loginUser } from './actions';
+import { loginUser } from '../../app/actions';
 
 export default function GoogleCallback() {
 
