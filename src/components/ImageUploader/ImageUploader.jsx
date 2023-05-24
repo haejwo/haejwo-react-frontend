@@ -33,4 +33,3 @@ export default function ImageUploader({ path, token, imageData }) {
     </div>
   );
 }
-
