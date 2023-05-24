@@ -44,7 +44,7 @@ export default function COUserInfo() {
         }
     };
     return (
-        <div className='w-full flex justify-center my-4 flex-col'>
+        <div className='w-full flex justify-center flex-col'>
             <COInfoForm name={handleName} bank={handleBank} account={handleAccount} COcategory={handleCategory}/>
             <button onClick={() => CORes(username, bankName, accountNumber, category)}
                 className={username === '' || bankName === '' || accountNumber === '' ? 
