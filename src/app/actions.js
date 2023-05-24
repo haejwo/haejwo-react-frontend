@@ -39,3 +39,10 @@ export const saveCategory = (category) => {
     payload: category,
   };
 };
+
+export const saveBusinessFile = () => {
+  return {
+    type: 'SAVE_BusinessFile',
+    payload: true,
+  };
+};

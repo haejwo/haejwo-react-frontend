@@ -9,7 +9,8 @@ const initialState = {
     bankName: null,
     accountNumber: null,
     role: null,
-    category : null,
+    category: null,
+    businessfile: false,
   },
 };
 
@@ -60,7 +61,15 @@ function userReducer(state = initialState, action) {
           ...state.user,
           category: action.payload,
         },
-      };  
+      };
+    case 'SAVE_BusinessFile':
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          businessfile: action.payload,
+        },
+      };    
     default:
       return state;
   }

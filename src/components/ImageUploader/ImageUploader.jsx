@@ -20,7 +20,6 @@ export default function ImageUploader({ path, token, imageData }) {
             } 
           });
           imageData(res.data);
-          console.log(res.data);
       } catch (error) {
       console.log('실패');
       }

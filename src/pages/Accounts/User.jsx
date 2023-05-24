@@ -8,7 +8,7 @@ export default function User() {
     const [check, setCheck] = useState(null);
     const handleRole = (role) => setRole(role);
     const handleRoleCheck = (check) => setCheck(check); 
-    console.log(role, check);
+    
     return (
         <div className='flex flex-col items-center'>
             <RoleSelect onRoleSelect={handleRole} onCheck={handleRoleCheck}/>
