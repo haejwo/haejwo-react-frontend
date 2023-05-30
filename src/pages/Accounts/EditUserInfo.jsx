@@ -27,7 +27,7 @@ export default function EditUserInfo() {
                         <Link to='/profile'><RxCross2 className='text-zinc-400 mt-4 ml-1 text-lg' /></Link>
                     </div>
                     <div className='flex w-full justify-around mt-4'>
-                        <Link className='w-1/2 mr-2 flex flex-col items-center justify-center border border-brand p-4 rounded-md'>
+                        <Link to='/editco' className='w-1/2 mr-2 flex flex-col items-center justify-center border border-brand p-4 rounded-md'>
                             <TbTruckDelivery className='text-3xl mb-1 text-zinc-500'/>사업자 정보 변경
                         </Link>
                         <Link className='w-1/2 flex flex-col items-center justify-center border border-brand p-4 rounded-md'>

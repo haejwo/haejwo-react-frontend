@@ -23,10 +23,7 @@ import KakaoCallback from './pages/Accounts/KakaoCallback';
 import GoogleCallback from './pages/Accounts/GoogleCallback';
 import EditUserInfo from './pages/Accounts/EditUserInfo';
 import BusinessFileUploader from './pages/Accounts/BusinessFileUploader';
-// import { createStore } from 'redux';
-// import rootReducer from './reducers';
-
-// const store = createStore(rootReducer);
+import EditCOInfo from './api/EditCOInfo';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const router = createBrowserRouter([
@@ -50,6 +47,7 @@ const router = createBrowserRouter([
       { path: '/oauth/callback/kakao/', element: <KakaoCallback /> },
       { path: '/oauth/callback/google/', element: <GoogleCallback /> },
       { path: '/businessfileuploader', element: <BusinessFileUploader/> },
+      { path: '/editco', element: <EditCOInfo/> },
     ],
   },
 ]);

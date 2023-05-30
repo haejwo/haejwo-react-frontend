@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useCookies } from 'react-cookie'; 
-import ImageUploader from '../../components/ImageUploader/ImageUploader';
+import ImageUploader from '../../api/ImageUploader';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { saveBusinessFile } from '../../app/actions';
