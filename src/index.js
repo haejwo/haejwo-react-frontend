@@ -10,7 +10,7 @@ import Signup from './pages/Accounts/Signup';
 import User from './pages/Accounts/User';
 import Profile from './pages/Accounts/Profile';
 import Home from './pages/Home/Home';
-import Review from './pages/Review';
+import Review from './components/Review/Review';
 import MoveSelect from './pages/Move/MoveSelect';
 import Less20 from './pages/Move/Less20';
 import More20 from './pages/Move/More20';

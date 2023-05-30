@@ -55,8 +55,13 @@ export default function Home() {
             </div>
             <div className='w-screen p-3'>
                 <div className='flex flex-col items-start'>
-                    <p>0개의 리뷰</p>
-                    <div>리뷰카드</div>
+                    <p className='text-xl font-bold my-3'>1개의 리뷰</p>
+                    <div>
+                        <div className='flex flex-col bg-zinc-100 p-4 rounded-md h-50 overflow-y-scroll'>
+                            <p className='text-brand text-xl mb-2'>★★★★★ <span className='mt-2 text-zinc-400 text-sm font-semibold'>이사이사 파트너님</span></p>
+                            <p>리뷰 예시입니다. 리뷰 예시입니다. 리뷰 예시입니다. 리뷰 예시입니다. 리뷰 예시입니다. 리뷰 예시입니다. 리뷰 예시입니다. 리뷰 예시입니다. 리뷰 예시입니다. 리뷰 예시입니다. 리뷰 예시입니다. 리뷰 예시입니다. 리뷰 예시입니다. 리뷰 예시입니다. 리뷰 예시입니다. 리뷰 예시입니다. 리뷰 예시입니다. 리뷰 예시입니다. 리뷰 예시입니다.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className='w-screen p-3'>
