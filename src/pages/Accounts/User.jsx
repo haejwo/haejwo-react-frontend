@@ -4,7 +4,7 @@ import COUserInfo from '../../api/COUserInfo';
 import CUUserInfo from '../../api/CUUserInfo';
 
 export default function User() {
-    const [role, setRole] = useState(null);
+    const [role, setRole] = useState('CU');
     const [check, setCheck] = useState(null);
     const handleRole = (role) => setRole(role);
     const handleRoleCheck = (check) => setCheck(check); 
