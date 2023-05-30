@@ -25,18 +25,19 @@ export default function KakaoCallback() {
             if (res.data && res.data.user.customer != null) {
               const user = {id: res.data.user.id, email: res.data.user.email, username: res.data.user.customer.username, role: res.data.user.role};
               dispatch(loginUser(user));
-              navigate('/');
+              navigate('/profile');
             } else if (res.data && res.data.user.company != null) {
-              const user = {id: res.data.user.id, email: res.data.user.email, username: res.data.user.company.username, bankName: res.data.user.company.bank.bankName, accountNumber: res.data.user.company.bank.accountNumber, role: res.data.user.role};
+              const user = {id: res.data.user.id, email: res.data.user.email, username: res.data.user.company.username, bankName: res.data.user.company.bank.bankName, accountNumber: res.data.user.company.bank.accountNumber, role: res.data.user.role, category: res.data.user.company.category, businessfile: res.data.user.company.has_business_license};
               dispatch(loginUser(user));
-              navigate('/');
+              navigate('/profile');
             } else if (res.data.user.customer === null || res.data.user.company === null) {
               const user = {id: res.data.user.id, email: res.data.user.email};
               dispatch(loginUser(user));
               navigate('/user');
             } else {
               console.log('로그인실패');
-            }})
+            }
+          })
     }, []);
 
     return (
