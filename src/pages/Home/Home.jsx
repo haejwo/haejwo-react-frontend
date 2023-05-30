@@ -7,7 +7,20 @@ import Carousel from '../../components/Carousel/Carousel';
 import COProfile from '../../api/COProfile';
 
 export default function Home() {
-    const slides = ['광고 1번 자리입니다. 광고 1번 자리입니다.', '광고 2번 자리입니다. 광고 2번 자리입니다.', '광고 3번 자리입니다. 광고 3번 자리입니다.'];
+    const slides = [
+        {
+            text: '광고 1번 자리입니다. 광고 1번 자리입니다.',
+            color: 'bg-green-200'
+        },
+        {
+            text: '광고 2번 자리입니다. 광고 2번 자리입니다.',
+            color: 'bg-yellow-200'
+        },
+        {
+            text: '광고 3번 자리입니다. 광고 3번 자리입니다.',
+            color: 'bg-purple-200'
+        }
+    ]
     const userInfo = useSelector(state => state.user);
     
     return (
