@@ -3,6 +3,11 @@ import Buttons from '../Buttons/Buttons';
 import DaumPopup from '../../api/DaumPopUp';
 
 export default function AddressDetail() {
+    const [address, setAddress] = useState({});
+    const handleAddressChange = (fullAddress, extraAddress) => {
+        setAddress({ "Full Address": fullAddress, "Extra Address": extraAddress });
+    };
+
     const [selectedValues, setSelectedValues] = useState({});
     const handleValueSelect = (title, value) => {
         setSelectedValues({ ...selectedValues, [title]: value });
@@ -19,8 +24,7 @@ export default function AddressDetail() {
     return (
         <div>
             <div>
-                <DaumPopup/>
-                <input type="text" name="" id="" placeholder='상세주소' />
+                <DaumPopup onAddressChange={handleAddressChange} />
             </div>
             <Buttons buttonList={buildings} title='건물 종류' onValueSelect={handleValueSelect}/>
             <Buttons buttonList={rooms} title='방 구조' onValueSelect={handleValueSelect}/>
@@ -29,7 +33,7 @@ export default function AddressDetail() {
             <Buttons buttonList={stairs} title='공동현관 앞 계단 유무' onValueSelect={handleValueSelect}/>
             <Buttons buttonList={lefts} title='엘리베이터 유무' onValueSelect={handleValueSelect}/>
             <Buttons buttonList={parkinglot} title='주차 가능 여부' onValueSelect={handleValueSelect}/>
-            <div onClick={() => {console.log(selectedValues);}}>
+            <div onClick={() => {console.log(selectedValues); console.log(address);}}>
                 정보들
             </div>
         </div>

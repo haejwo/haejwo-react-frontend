@@ -1,37 +1,47 @@
 import React, { useState } from 'react';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 
-export default function DaumPopup() {
-    const CURRENT_URL =
-		'https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';
-    const open = useDaumPostcodePopup(CURRENT_URL);
+export default function DaumPopup({ onAddressChange }) {
+  const CURRENT_URL =
+    'https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';
+  const open = useDaumPostcodePopup(CURRENT_URL);
+  const [fullAddress, setFullAddress] = useState('');
+  const [extraAddress, setExtraAddress] = useState('');
 
-    const handleComplete = (data) => {
-      let fullAddress = data.address;
-      let extraAddress = '';
+  const handleComplete = (data) => {
+    let updatedFullAddress = data.address;
+    let updatedExtraAddress = '';
 
-      if (data.addressType === 'R') {
-        if (data.bname !== '') {
-          extraAddress += data.bname;
-        }
-        if (data.buildingName !== '') {
-          extraAddress += extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName;
-        }
-        fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
+    if (data.addressType === 'R') {
+      if (data.bname !== '') {
+        updatedExtraAddress += data.bname;
       }
+      if (data.buildingName !== '') {
+        updatedExtraAddress += updatedExtraAddress !== ''
+          ? `, ${data.buildingName}`
+          : data.buildingName;
+      }
+      updatedFullAddress += updatedExtraAddress !== ''
+        ? ` (${updatedExtraAddress})`
+        : '';
+    }
 
-      console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
-    };
+    setFullAddress(updatedFullAddress);
+  };
 
-    const handleClick = () => {
-      open({ onComplete: handleComplete });
-    };
+  const handleClick = () => {
+    open({ onComplete: handleComplete });
+  };
 
-    return (
-        <div>
-            <button type='button' onClick={handleClick}>
-              Open
-            </button>
-        </div>
-    )
+  const handleChange = (e) => {
+    setExtraAddress(e.target.value);
+    onAddressChange(fullAddress, extraAddress);
+  }
+  return (
+    <div className="flex flex-col w-screen p-4">
+      <p className='font-bold text-lg mb-2'>주소 입력</p>
+      <input className='w-full border border-zinc-400 p-2 rounded mb-2' type="text" value={fullAddress} onClick={handleClick} placeholder='주소를 입력하세요' readOnly />
+      <input className='w-full border border-zinc-400 p-2 rounded' type="text" value={extraAddress} onChange={handleChange} placeholder='상세 주소를 입력하세요'/>
+    </div>
+  );
 }
