@@ -21,7 +21,7 @@ export default function Home() {
             color: 'bg-purple-200'
         }
     ]
-    const userInfo = useSelector(state => state.user);
+    const userInfo = useSelector(state => state.user.user);
     
     return (
         <main className='flex flex-col items-center'>

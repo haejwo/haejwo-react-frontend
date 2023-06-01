@@ -6,7 +6,7 @@ import { RxCross2 } from 'react-icons/rx';
 import EditCUInfo from '../../api/EditCUInfo';
 
 export default function EditUserInfo() {
-    const userInfo = useSelector(state => state.user);
+    const userInfo = useSelector(state => state.user.user);
     
     return (
         <div className="flex flex-col justify-center p-4">

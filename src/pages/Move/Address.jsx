@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import { HiOutlineMapPin, HiMapPin } from 'react-icons/hi2';
 import AddressDetail from '../../components/AddressDetail/AddressDetail';
+import { useDispatch, useSelector } from 'react-redux';
+import { saveStart, saveEnd } from '../../app/moveactions';
 
 export default function Address() {
+    const dispatch = useDispatch();
+    const infos = useSelector(state => state.move.move);
+    console.log(infos);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const handleClick = () => { setIsModalVisible(true); };
     return (
