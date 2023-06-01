@@ -2,13 +2,20 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { RxCross2 } from 'react-icons/rx';
 import { AiOutlineCheck } from 'react-icons/ai';
+import { useDispatch } from 'react-redux';
+import { saveSize } from '../../app/moveactions';
 
 export default function MoveSelect() {
     const [selectMove, setSelectMove] = useState('');
-  
+    const [size, setSize] = useState('');
+    const dispatch = useDispatch();
+    
     const handleClick = (id) => {
       setSelectMove(id);
+      {id === 'less20' ? setSize('SMALL') : setSize('BIG')};
     }
+    const handleSaveSize = () => { dispatch(saveSize(size)); };
+
     return (
         <div className='flex flex-col items-center p-4'>
             <div className='flex'>
@@ -51,9 +58,9 @@ export default function MoveSelect() {
             </div>
             <div className='w-screen p-7'>
                 {selectMove === 'less20' ? 
-                    <Link to='/less20'><button className='w-full py-2 border border-brand bg-brand rounded-md text-white font-bold'>20평대 미만 이사하기</button></Link>
+                    <Link to='/less20'><button onClick={handleSaveSize} className='w-full py-2 border border-brand bg-brand rounded-md text-white font-bold'>20평대 미만 이사하기</button></Link>
                 : selectMove === 'more20' ?
-                    <Link to='/more20'><button className='w-full py-2 border border-brand bg-brand rounded-md text-white font-bold'>20평대 이상 이사하기</button></Link>
+                    <Link to='/more20'><button onClick={handleSaveSize} className='w-full py-2 border border-brand bg-brand rounded-md text-white font-bold'>20평대 이상 이사하기</button></Link>
                 : ''
                 }
             </div>

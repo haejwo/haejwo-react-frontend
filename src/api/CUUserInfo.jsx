@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { saveUsername } from '../app/actions';
+import { saveUsername } from '../app/useractions';
 import CUInfoForm from '../components/CUInfoForm/CUInfoForm';
 
 export default function CUUserInfo() {

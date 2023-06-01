@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { useSelector, useDispatch } from 'react-redux';
-import { saveRole } from '../app/actions';
+import { saveRole } from '../app/useractions';
 
 export default function RoleSelect({ onRoleSelect, onCheck }) {
     const [cookies, setCookie] = useCookies(['token']);

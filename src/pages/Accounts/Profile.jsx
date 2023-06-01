@@ -2,7 +2,7 @@ import React from 'react';
 import { useCookies } from 'react-cookie';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { loginUser } from '../../app/actions';
+import { loginUser } from '../../app/useractions';
 import { FaUserCircle, FaTruck } from 'react-icons/fa';
 import { GiFlowerPot, GiHandTruck } from 'react-icons/gi';
 
@@ -11,7 +11,7 @@ export default function Profile() {
     const [cookies, setCookie, removeCookie] = useCookies(['token']);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const userInfo = useSelector(state => state.user);
+    const userInfo = useSelector(state => state.user.user);
     console.log(userInfo);    
     
     const logOut = () => {

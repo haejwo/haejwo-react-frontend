@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { AiOutlineCheck } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export default function Less20() {
     const [moveChoice, setMoveChoice] = useState('normal');
@@ -9,6 +10,9 @@ export default function Less20() {
     const handleToggle = (helps) => { setMoveHelp(helps) };
     const [checked, setChecked] = useState(false);
     const handleChange = () => setChecked((prev) => !prev);
+    const moveInfo = useSelector(state => state.move);
+    console.log(moveInfo);
+    
     return (
         <div className='flex flex-col items-center'>
             <div className='w-full flex flex-col items-center p-4'>

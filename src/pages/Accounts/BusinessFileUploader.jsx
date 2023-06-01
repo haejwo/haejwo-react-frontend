@@ -3,7 +3,7 @@ import { useCookies } from 'react-cookie';
 import ImageUploader from '../../api/ImageUploader';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { saveBusinessFile } from '../../app/actions';
+import { saveBusinessFile } from '../../app/useractions';
 
 export default function BusinessFileUploader() {
     const [cookies, setCookies] = useCookies(['token']);

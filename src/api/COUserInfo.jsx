@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { saveUsername, saveBankName, saveAccountNumber, saveCategory } from '../app/actions';
+import { saveUsername, saveBankName, saveAccountNumber, saveCategory } from '../app/useractions';
 import COInfoForm from '../components/COInfoForm/COInfoForm';
 
 export default function COUserInfo() {

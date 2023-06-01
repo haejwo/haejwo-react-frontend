@@ -1,6 +1,3 @@
-import { createStore } from 'redux';
-
-// 초기 상태 정의
 const initialState = {
     move: {
         content: null,
@@ -15,7 +12,6 @@ const initialState = {
     },
 };
 
-// 리듀서 정의
 function moveReducer(state = initialState, action) {
   switch (action.type) {
     case 'SAVE_SIZE_TYPE':
@@ -87,7 +83,4 @@ function moveReducer(state = initialState, action) {
   }
 }
 
-// 스토어 생성
-const movestore = createStore(moveReducer);
-
-export default movestore;
+export default moveReducer;

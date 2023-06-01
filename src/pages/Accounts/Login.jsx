@@ -6,7 +6,7 @@ import axios from "axios";
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useCookies } from 'react-cookie';
-import { loginUser } from '../../app/actions';
+import { loginUser } from '../../app/useractions';
 import { RxCross2 } from 'react-icons/rx';
 import { RiKakaoTalkFill } from 'react-icons/ri';
 import { FcGoogle } from 'react-icons/fc';
