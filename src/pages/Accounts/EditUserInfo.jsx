@@ -30,7 +30,7 @@ export default function EditUserInfo() {
                         <Link to='/editco' className='w-1/2 mr-2 flex flex-col items-center justify-center border border-brand p-4 rounded-md'>
                             <TbTruckDelivery className='text-3xl mb-1 text-zinc-500'/>사업자 정보 변경
                         </Link>
-                        <Link className='w-1/2 flex flex-col items-center justify-center border border-brand p-4 rounded-md'>
+                        <Link to='/businessfileuploader' className='w-1/2 flex flex-col items-center justify-center border border-brand p-4 rounded-md'>
                             <TbLicense className='text-3xl mb-1 text-zinc-500'/>사업자등록증 변경
                         </Link>
                     </div>
