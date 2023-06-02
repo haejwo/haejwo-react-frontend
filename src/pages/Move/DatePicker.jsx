@@ -90,7 +90,6 @@ export default function DatePicker() {
             'my-4 w-screen py-2 font-semibold text-brand border py-2 border-yellow-200 bg-yellow-100'} 
             disabled={!value || !timePick || !checked}>다음</button></Link>
             { value && timePick ? '' : <p className='mb-2 text-red-400 text-center'>날짜와 시간을 선택해주세요!</p> }
-            
         </div>
     );
 }

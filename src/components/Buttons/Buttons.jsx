@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 export default function Buttons({ buttonList, title, onValueSelect }) {
     const [buttonSelect, setButtonSelect] = useState('');
-    const handleClick = (btn) => {setButtonSelect(btn); console.log(btn); onValueSelect(title, btn); };
+    const handleClick = (btn) => {setButtonSelect(btn); onValueSelect(title, btn); };
     return (
         <div className='w-full p-4'>
             <p className='text-lg font-bold mb-3'>{title}</p>

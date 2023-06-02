@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import Buttons from '../Buttons/Buttons';
 import DaumPopup from '../../api/DaumPopUp';
 
-export default function AddressDetail() {
+export default function AddressDetail({ addressInfo, selectedInfo, boxCheck }) {
     const [address, setAddress] = useState({});
     const handleAddressChange = (fullAddress, extraAddress) => {
-        setAddress({ "Full Address": fullAddress, "Extra Address": extraAddress });
+        setAddress({ "FullAddress": fullAddress, "ExtraAddress": extraAddress });
     };
 
     const [selectedValues, setSelectedValues] = useState({});
@@ -23,6 +23,8 @@ export default function AddressDetail() {
 
     const [checked, setChecked] = useState(false);
     const handleChange = () => setChecked((prev) => !prev);
+    
+    const handleClick = () => { addressInfo(address); selectedInfo(selectedValues); boxCheck(checked); }
 
     return (
         <div>
@@ -36,7 +38,7 @@ export default function AddressDetail() {
             <Buttons buttonList={stairs} title='공동현관 앞 계단 유무' onValueSelect={handleValueSelect}/>
             <Buttons buttonList={lefts} title='엘리베이터 유무' onValueSelect={handleValueSelect}/>
             <Buttons buttonList={parkinglot} title='주차 가능 여부' onValueSelect={handleValueSelect}/>
-            <div className='my-3 text-center' onClick={() => {console.log(selectedValues); console.log(address);}}>
+            <div className='my-3 text-center' onClick={handleClick}>
                 <input type="checkbox" id="check" value={checked} onChange={handleChange} />
                 <label htmlFor="check" className='text-lg font-bold ml-2 text-red-600'>추가 사항은 마지막 메모란에 작성해주세요</label>
             </div>
