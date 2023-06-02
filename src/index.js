@@ -24,6 +24,7 @@ import GoogleCallback from './pages/Accounts/GoogleCallback';
 import EditUserInfo from './pages/Accounts/EditUserInfo';
 import BusinessFileUploader from './pages/Accounts/BusinessFileUploader';
 import EditCOInfo from './api/EditCOInfo';
+import Luggage from './pages/Move/Luggage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const router = createBrowserRouter([
@@ -44,6 +45,7 @@ const router = createBrowserRouter([
       { path: '/more20', element: <More20 /> },
       { path: '/datepick', element: <DatePicker /> },
       { path: '/address', element: <Address /> },
+      { path: '/luggage', element: <Luggage/> },
       { path: '/oauth/callback/kakao/', element: <KakaoCallback /> },
       { path: '/oauth/callback/google/', element: <GoogleCallback /> },
       { path: '/businessfileuploader', element: <BusinessFileUploader/> },

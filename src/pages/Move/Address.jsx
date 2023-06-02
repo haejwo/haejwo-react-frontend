@@ -22,7 +22,6 @@ export default function Address() {
     const handleSave = () => {
       setIsModalVisible(false);
       setStartInfos({ ...startInfos, address: startAddress, infos: startSelectedInfos });
-      dispatch(saveStart(startInfos));
     };
 
     const [endInfos, setEndInfos] = useState({});
@@ -35,8 +34,9 @@ export default function Address() {
     const handleEndSave = () => {
       setIsEndModalVisible(false);
       setEndInfos({ ...endInfos, address: endAddress, infos: endSelectedInfos });
-      dispatch(saveEnd(endInfos));
     };
+
+    const handleNext = () => { dispatch(saveStart(startInfos)); dispatch(saveEnd(endInfos)); }
 
     return (
         <div className='w-screen'>
@@ -98,14 +98,14 @@ export default function Address() {
                   <div className='fixed overflow-y-scroll h-full top-0 left-0 bg-white'>
                     <p className='text-xl font-bold text-center my-5'>도착지 정보를 입력하세요</p>
                     <AddressDetail addressInfo={handleEndAddress} selectedInfo={handleEndSelectedInfos} boxCheck={handleEndCheck}/>
-                    <button onClick={handleEndSave} className={!startChecked ? 'my-4 w-screen py-2 font-semibold border border-zinc-200 text-zinc-500' : 
+                    <button onClick={handleEndSave} className={!endChecked ? 'my-4 w-screen py-2 font-semibold border border-zinc-200 text-zinc-500' : 
                         'my-4 w-screen py-2 font-semibold text-brand border py-2 border-yellow-200 bg-yellow-100'} 
                         disabled={!endChecked}>도착지 정보입력</button>
                     { endChecked ? '' : <p className='mb-2 text-red-400 text-center'>체크 사항을 확인해주세요!</p> }
                   </div>
                 }
             </div>
-            <Link to='/address'><button className={!startAddress || !endAddress ? 'my-4 w-screen py-2 font-semibold border border-zinc-200 text-zinc-500' : 
+            <Link to='/luggage'><button onClick={handleNext} className={!startAddress || !endAddress ? 'my-4 w-screen py-2 font-semibold border border-zinc-200 text-zinc-500' : 
             'my-4 w-screen py-2 font-semibold text-brand border border-yellow-200 bg-yellow-100'} 
             disabled={!startAddress || !endAddress}>다음</button></Link>
             { startAddress && endAddress ? '' : <p className='mb-2 text-red-400 text-center'>출발지와 도착지 정보를 입력해주세요!</p> }
