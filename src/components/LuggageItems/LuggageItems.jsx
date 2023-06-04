@@ -16,8 +16,8 @@ export default function LuggageItems({ title, itemList, itemcnt }) {
     };
 
     return (
-        <div>
-            <p className='p-4 text-lg font-bold'>{title}</p>
+        <div className='border-b-8 border-bottom-zinc-400 py-4'>
+            <p className='p-4 text-xl font-bold'>{title}</p>
             <div className='w-screen grid grid-cols-3 gap-0'>
                 {itemList.map((items, idx) => (
                     <ItemBtn key={idx} item={items.item} img={items.icon} count={handleCnt}/>

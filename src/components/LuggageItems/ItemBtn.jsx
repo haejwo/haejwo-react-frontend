@@ -17,7 +17,7 @@ export default function ItemBtn({ item, img, count }) {
     return (
         <div className='w-full px-4 pb-4 relative flex flex-col items-center'>
             <p className='text-center'>{item}</p>
-            <img src={img} alt="" />
+            <img className='w-3/4 my-1' src={img} alt="" />
             <div className='flex justify-around mb-6'>
                 <button onClick={handleMinus} className='p-1 bg-brand opacity-80 absolute bottom-1/5 left-4'><AiOutlineMinus className='text-white' /></button>
                 <p className='font-bold text-xl absolute bottom-1/5'>{cnt}</p>
