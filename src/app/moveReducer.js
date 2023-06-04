@@ -70,12 +70,20 @@ function moveReducer(state = initialState, action) {
           end_info: action.payload,
         },
       };
-      case 'SAVE_LUGGAGE':
+    case 'SAVE_LUGGAGE':
     return {
       ...state,
       move: {
         ...state.move,
         luggage_info: action.payload,
+      },
+    };    
+    case 'SAVE_MEMO':
+    return {
+      ...state,
+      move: {
+        ...state.move,
+        content: action.payload,
       },
     };    
     default:

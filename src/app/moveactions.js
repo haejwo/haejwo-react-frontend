@@ -53,3 +53,10 @@ export const saveLuggage = (luggage) => {
     payload: luggage,
   };
 };
+
+export const saveMemo = (memo) => {
+  return {
+    type: 'SAVE_MEMO',
+    payload: memo,
+  };
+};

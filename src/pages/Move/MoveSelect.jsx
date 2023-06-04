@@ -19,7 +19,7 @@ export default function MoveSelect() {
     return (
         <div className='flex flex-col items-center p-4'>
             <div className='flex'>
-                <p className='font-bold text-xl my-2'>이사규모를 선택해주세요</p>
+                <p className='font-bold text-lg my-2'>이사규모를 선택해주세요</p>
                 <Link to='/'><RxCross2 className='text-zinc-400 mt-2.5 ml-2 text-2xl'/></Link>
             </div>
             <div className='w-screen flex justify-evenly px-6 my-4'>

@@ -20,7 +20,7 @@ export default function Luggage() {
         <div className='flex flex-col items-center p-4'>
             <div className='flex'>
                 <Link to='/address'><AiOutlineDoubleLeft className='text-zinc-400 mt-2.5 mr-2 text-2xl'/></Link>
-                <p className='font-bold text-xl my-2'>짐 정보를 입력해주세요 ( 4 / 6 )</p>
+                <p className='font-bold text-lg my-2'>짐 정보를 입력해주세요 ( 4 / 6 )</p>
                 <Link to='/'><RxCross2 className='text-zinc-400 mt-2.5 ml-2 text-2xl'/></Link>
             </div>
             <div>
@@ -30,11 +30,11 @@ export default function Luggage() {
                 <LuggageItems title='주방가전' itemList={kitchen} itemcnt={handleCnt}/>
                 <LuggageItems title='기타' itemList={etc} itemcnt={handleCnt}/>
             </div>
-            <div className='my-3 text-center'>
+            <div className='my-5 text-center'>
                 <input type="checkbox" id="check" value={checked} onChange={handleChange} />
                 <label htmlFor="check" className='text-lg font-bold ml-2 text-red-600'>항목에 없는 짐은 메모란에 작성해주세요</label>
             </div>
-            <Link to='/luggage'><button onClick={handleSave} className={!checked ? 'my-4 w-screen py-2 font-semibold border border-zinc-200 text-zinc-500' : 
+            <Link to='/memo'><button onClick={handleSave} className={!checked ? 'my-4 w-screen py-2 font-semibold border border-zinc-200 text-zinc-500' : 
             'my-4 w-screen py-2 font-semibold text-brand border border-yellow-200 bg-yellow-100'} 
             disabled={!checked}>다음</button></Link>
         </div>
