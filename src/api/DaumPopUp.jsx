@@ -34,8 +34,9 @@ export default function DaumPopup({ onAddressChange }) {
   };
 
   const handleChange = (e) => {
-    setExtraAddress(e.target.value);
-    onAddressChange(fullAddress, extraAddress);
+    const updateAddress = e.target.value;
+    setExtraAddress(updateAddress);
+    onAddressChange(fullAddress, updateAddress);
   }
   return (
     <div className="flex flex-col w-screen p-4">

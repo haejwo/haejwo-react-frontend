@@ -25,7 +25,7 @@ export default function Address() {
       setIsModalVisible(false);
       setStartInfos({ ...startInfos, address: startAddress, infos: startSelectedInfos });
     };
-
+    
     const [endInfos, setEndInfos] = useState({});
     const [endAddress, setEndAddress] = useState(null);
     const [endSelectedInfos, setEndSelectedInfos] = useState(null);
