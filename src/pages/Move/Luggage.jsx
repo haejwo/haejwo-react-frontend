@@ -7,6 +7,9 @@ import { AiOutlineDoubleLeft } from 'react-icons/ai';
 import LuggageItems from '../../components/LuggageItems/LuggageItems';
 
 export default function Luggage() {
+    const [checked, setChecked] = useState(false);
+    const handleChange = () => setChecked((prev) => !prev);
+
     const [item, setItem] = useState({});
     const handleCnt = (title, cnt) => setItem({...item, [title]: cnt });
     
@@ -27,11 +30,13 @@ export default function Luggage() {
                 <LuggageItems title='주방가전' itemList={kitchen} itemcnt={handleCnt}/>
                 <LuggageItems title='기타' itemList={etc} itemcnt={handleCnt}/>
             </div>
-            <Link to='/luggage'>
-                <button onClick={handleSave} className='my-4 w-screen py-2 font-semibold text-brand border border-yellow-200 bg-yellow-100'>
-                    다음
-                </button>
-            </Link>
+            <div className='my-3 text-center'>
+                <input type="checkbox" id="check" value={checked} onChange={handleChange} />
+                <label htmlFor="check" className='text-lg font-bold ml-2 text-red-600'>항목에 없는 짐은 메모란에 작성해주세요</label>
+            </div>
+            <Link to='/luggage'><button onClick={handleSave} className={!checked ? 'my-4 w-screen py-2 font-semibold border border-zinc-200 text-zinc-500' : 
+            'my-4 w-screen py-2 font-semibold text-brand border border-yellow-200 bg-yellow-100'} 
+            disabled={!checked}>다음</button></Link>
         </div>
     );
 }
