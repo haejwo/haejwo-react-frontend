@@ -1,10 +1,18 @@
 import React, { useState } from 'react';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 
-export default function ItemBtn({ item, img, plus, minus }) {
+export default function ItemBtn({ item, img, count }) {
     const [cnt, setCnt] = useState(0);
-    const handlePlus = () => { setCnt((prev) => prev + 1); plus(); };
-    const handleMinus = () => { setCnt((prev) => ( prev === 0 ? prev : prev - 1)); minus(); };
+    const handlePlus = () => { 
+        const updateCnt = cnt + 1;
+        setCnt(updateCnt); 
+        count(item, updateCnt); 
+    };
+    const handleMinus = () => { 
+        const updateCnt = cnt > 0 ? cnt - 1 : 0;
+        setCnt(updateCnt); 
+        count(item, updateCnt); 
+    };
     
     return (
         <div className='w-full px-4 pb-4 relative flex flex-col items-center'>
@@ -18,4 +26,3 @@ export default function ItemBtn({ item, img, plus, minus }) {
         </div>
     );
 }
-
