@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { HiOutlineMapPin, HiMapPin } from 'react-icons/hi2';
+import { RxCross2 } from 'react-icons/rx';
+import { AiOutlineDoubleLeft } from 'react-icons/ai';
 import AddressDetail from '../../components/AddressDetail/AddressDetail';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -39,11 +41,13 @@ export default function Address() {
     const handleNext = () => { dispatch(saveStart(startInfos)); dispatch(saveEnd(endInfos)); }
 
     return (
-        <div className='w-screen'>
-            <div className='w-full p-4 text-center mb-8'>
-                <p className='font-bold text-lg my-3'>출발지와 도착지를 입력해주세요 ( 3 / 6 )</p>
+        <div className='w-screen flex flex-col items-center p-4'>
+            <div className='flex mb-8 items-center'>
+                <Link to='/datepick'><AiOutlineDoubleLeft className='text-zinc-400 mr-2 text-2xl'/></Link>
+                <p className='font-bold text-lg my-3'>주소지를 입력해주세요 ( 3 / 6 )</p>
+                <Link to='/'><RxCross2 className='text-zinc-400 ml-2 text-2xl'/></Link>
             </div>
-            <div className='w-full p-4'>
+            <div className='w-full mb-4'>
                 <button onClick={handleClick} className={!startAddress ? 'w-full border border-zinc-400 rounded flex flex-col p-3' : 'w-full border-2 border-brand rounded flex flex-col p-3'}>
                   <p className='text-xl font-semibold flex items-center'>출발지 상세정보 <span>{!startAddress ? <HiOutlineMapPin className='text-zinc-400 text-2xl'/> : <HiMapPin className='text-brand text-2xl'/>}</span></p>
                   {startAddress && <p className='flex justify-start py-2 text-lg text-zinc-500 overflow-hidden whitespace-nowrap truncate w-full'>{startAddress.FullAddress}</p>}
@@ -74,7 +78,7 @@ export default function Address() {
                   </div>
                 }
             </div>
-            <div className='w-full my-5 p-4'>
+            <div className='w-full my-5'>
                 <button onClick={handleEndClick} className={!endAddress ? 'w-full border border-zinc-400 rounded flex flex-col p-3' : 'w-full border-2 border-brand rounded flex flex-col p-3'}>
                   <p className='text-xl font-semibold flex items-center'>도착지 상세정보 <span>{!endAddress ? <HiOutlineMapPin className='text-zinc-400 text-2xl'/> : <HiMapPin className='text-brand text-2xl'/>}</span></p>
                   {endAddress && <p className='flex justify-start py-2 text-lg text-zinc-500 overflow-hidden whitespace-nowrap truncate w-full'>{endAddress.FullAddress}</p>}

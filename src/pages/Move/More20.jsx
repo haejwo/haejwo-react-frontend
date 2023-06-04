@@ -3,6 +3,8 @@ import { AiOutlineCheck } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { savePacking, saveSupport } from '../../app/moveactions';
+import { RxCross2 } from 'react-icons/rx';
+import { AiOutlineDoubleLeft } from 'react-icons/ai';
 
 export default function More20() {
     const dispatch = useDispatch();
@@ -16,8 +18,10 @@ export default function More20() {
 
     return (
         <div className='flex flex-col items-center'>
-            <div className='w-full flex flex-col items-center p-4'>
+            <div className='w-full flex items-center p-4'>
+                <Link to='/move'><AiOutlineDoubleLeft className='text-zinc-400 mr-2 text-2xl'/></Link>
                 <p className='font-bold text-lg my-3'>이사 종류를 선택해주세요 ( 1 / 6 )</p>
+                <Link to='/'><RxCross2 className='text-zinc-400 ml-2 text-2xl'/></Link>
             </div>
             <div className='flex flex-col items-center p-4'>
                 <div> 

@@ -1,24 +1,23 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { saveLuggage } from '../../app/moveactions';
 import { Link } from 'react-router-dom';
 import { RxCross2 } from 'react-icons/rx';
+import { AiOutlineDoubleLeft } from 'react-icons/ai';
 import LuggageItems from '../../components/LuggageItems/LuggageItems';
 
 export default function Luggage() {
-    const infos = useSelector(state => state.move.move);
-    console.log(infos);
-    const dispatch = useDispatch();
-
     const [item, setItem] = useState({});
     const handleCnt = (title, cnt) => setItem({...item, [title]: cnt });
     
+    const dispatch = useDispatch();
     const handleSave = () => { dispatch(saveLuggage(item)); }
 
     return (
         <div className='flex flex-col items-center p-4'>
             <div className='flex'>
-                <p className='font-bold text-xl my-2'>짐 정보를 입력해주세요</p>
+                <Link to='/address'><AiOutlineDoubleLeft className='text-zinc-400 mt-2.5 mr-2 text-2xl'/></Link>
+                <p className='font-bold text-xl my-2'>짐 정보를 입력해주세요 ( 4 / 6 )</p>
                 <Link to='/'><RxCross2 className='text-zinc-400 mt-2.5 ml-2 text-2xl'/></Link>
             </div>
             <div>

@@ -4,12 +4,14 @@ import 'react-calendar/dist/Calendar.css';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { BsCheckAll } from 'react-icons/bs';
-import { AiOutlineCalendar, AiOutlineClockCircle } from 'react-icons/ai';
+import { RxCross2 } from 'react-icons/rx';
+import { AiOutlineCalendar, AiOutlineClockCircle, AiOutlineDoubleLeft } from 'react-icons/ai';
 import Modal from '../../components/Modal/Modal';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { saveDate, saveTime } from '../../app/moveactions';
 
 export default function DatePicker() {
+    const movesize = useSelector(state => state.move.move.size_type);
     const dispatch = useDispatch();
     
     const [value, setValue] = useState(new Date());
@@ -42,8 +44,10 @@ export default function DatePicker() {
     
     return (
         <div className='flex flex-col items-center'>
-            <div className='flex flex-col items-center p-4'>
-                <p className='font-bold text-lg my-3'>이사 날짜와 시간을 선택해주세요 ( 2 / 6 )</p>
+            <div className='flex items-center p-4'>
+                <Link to={movesize === 'BIG' ? '/more20' : '/less20'}><AiOutlineDoubleLeft className='text-zinc-400 mr-2 text-2xl'/></Link>
+                <p className='font-bold text-lg my-3'>날짜와 시간을 선택해주세요 ( 2 / 6 )</p>
+                <Link to='/'><RxCross2 className='text-zinc-400 ml-2 text-2xl'/></Link>
             </div>
             <div className='my-3'>
                 <Calendar 
