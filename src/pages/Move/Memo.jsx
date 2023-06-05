@@ -1,22 +1,16 @@
 import React, { useState } from 'react';
 import TextArea from '../../components/InputText/TextArea';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { saveMemo } from '../../app/moveactions';
 import { RxCross2 } from 'react-icons/rx';
-import { AiOutlineDoubleLeft } from 'react-icons/ai';
+import { AiOutlineDoubleLeft, AiOutlineCheckCircle } from 'react-icons/ai';
 
 export default function Memo() {
-    console.log(useSelector(state => state.move.move.content));
-    const [memo, setMemo] = useState({});
-    const handleText = (title, text) => { 
-        const updateText = {...memo, [title]: text};
-        setMemo(updateText); 
-    };
+    const [memo, setMemo] = useState('');
 
     const dispatch = useDispatch();
     const handleSave = () => { dispatch(saveMemo(memo)); }
-
     
     return (
         <div className='w-screen flex flex-col items-center p-4'>
@@ -26,22 +20,16 @@ export default function Memo() {
                 <Link to='/'><RxCross2 className='text-zinc-400 mt-2.5 ml-2 text-2xl'/></Link>
             </div>
             <div className='w-screen border-b-4 border-bottom-zinc-400 mt-6'>
-                <p className='text-xl font-bold px-4'>주소지 관련 추가 사항을 입력하세요</p>
-                <div className='p-4'>
-                    <TextArea title='출발지 추가 사항' placeholder='출발지 관련 추가 사항을 입력해주세요' row='3' handleChange={handleText}/>
-                    <TextArea title='도착지 추가 사항' placeholder='도착지 관련 추가 사항을 입력해주세요' row='3' handleChange={handleText}/>
+                <div className='flex flex-col items-center mt-3'>
+                    <div className='w-4/5 p-4 text-zinc-500 border-2 border-brand rounded'>
+                        <p className='mb-2 text-lg font-semibold text-red-500'>필수 입력 사항 체크리스트</p>
+                        <p className='flex items-center'><AiOutlineCheckCircle className='mr-1'/>주소지 관련 추가 정보</p>
+                        <p className='flex items-center my-1'><AiOutlineCheckCircle className='mr-1'/>항목에 없는 짐 정보</p>
+                        <p className='flex items-center'><AiOutlineCheckCircle className='mr-1'/>기타 요청 사항</p>
+                    </div>
                 </div>
-            </div>
-            <div className='w-screen border-b-4 border-bottom-zinc-400 mt-6'>
-                <p className='text-xl font-bold px-4'>짐 정보 관련 추가 사항을 입력하세요</p>
                 <div className='p-4'>
-                    <TextArea title='짐 정보 추가 사항' placeholder='짐 정보 관련 추가 사항을 입력해주세요' row='6' handleChange={handleText}/>
-                </div>
-            </div>
-            <div className='w-screen border-b-4 border-bottom-zinc-400 mt-6'>
-                <p className='text-xl font-bold px-4'>그 외 요청 사항을 입력하세요</p>
-                <div className='p-4'>
-                    <TextArea title='요청 사항' placeholder='요청 사항을 입력해주세요' row='6' handleChange={handleText}/>
+                    <TextArea title='요청 사항' placeholder='요청 사항을 입력해주세요' row='8' handleChange={(e) => {setMemo(e.target.value);}} value={memo}/>
                 </div>
             </div>            
             <Link to='/memo'>
