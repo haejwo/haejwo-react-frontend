@@ -17,14 +17,14 @@ export default function RoomImage() {
         <div className='w-screen flex flex-col items-center p-4'>
             <div className='flex'>
                 <Link to='/memo'><AiOutlineDoubleLeft className='text-zinc-400 mt-2.5 mr-2 text-2xl'/></Link>
-                <p className='font-bold text-lg my-2'>입력한 정보를 확인해주세요 ( 6 / 6 )</p>
+                <p className='font-bold text-lg my-2'>방 사진을 업로드해주세요 ( 6 / 6 )</p>
                 <Link to='/'><RxCross2 className='text-zinc-400 mt-2.5 ml-2 text-2xl'/></Link>
             </div>
             <div className='w-screen p-4 my-5 border-b-8 border-bottom-zinc-300'>
                 <p className='font-bold mb-4'>정확한 견적을 위해 방 사진을 업로드해주세요</p>
                 <ImagesUpload imageFiles={handleFiles}/>
             </div>
-            <div className='w-screen p-4 border-b-8 border-bottom-zinc-300'>
+            {/* <div className='w-screen p-4 border-b-8 border-bottom-zinc-300'>
                 <button onClick={() => setImgModal((prev) => !prev)} className='w-full my-4 border border-brand p-2 rounded font-semibold text-zinc-400'>이사 정보 확인</button>
                 {imgModal && moveInfos &&
                 <div className='flex flex-col'>
@@ -43,7 +43,7 @@ export default function RoomImage() {
                     {moveInfos.content}
                 </div>
                 }
-            </div>
+            </div> */}
             <MoveInfo imgfile={files}/>
         </div>
     );

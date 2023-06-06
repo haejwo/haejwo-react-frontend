@@ -8,7 +8,7 @@ export default function MoveInfo({ imgfile }) {
     const moveInfos = useSelector(state => state.move.move);
     const [cookies, setCookie] = useCookies(['token']);
     const backURL = process.env.REACT_APP_BACK_BASE_URL;
-
+     
     const moveRes = async () => {
         const token = cookies.token;
         const formData = new FormData();
@@ -20,12 +20,10 @@ export default function MoveInfo({ imgfile }) {
                 formData.append(key, moveInfos[key]);
             }
         }
-        // for (const idx in imgfile) {
-        //     formData.append('image', imgfile[idx]);
-        //     console.log('image', imgfile[idx]);
-        // }
-        // formData.append('image', imgfile[0]);
-
+        for (const idx in imgfile) {
+            formData.append('image', imgfile[idx]);
+        }
+        
         try {
             const res = await axios.post(`${backURL}movequotes/`, 
             formData,
