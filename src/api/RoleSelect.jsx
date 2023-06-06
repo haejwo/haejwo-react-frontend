@@ -16,9 +16,9 @@ export default function RoleSelect({ onRoleSelect, onCheck }) {
     const handleCheck = (prev) => { setRoleCheck(!prev); onCheck(!prev); };
  
     const dispatch = useDispatch();
-    
-    const roleRes = async (userRole) => {
+    const roleRes = async () => {
         const token = cookies.token;
+        
         try {
             const res = await axios.put(`${backURL}accounts/user/`, 
             {"email": userInfo.email, "role": userRole},
@@ -49,7 +49,7 @@ export default function RoleSelect({ onRoleSelect, onCheck }) {
                 <p className='mb-2'>선택하신 유저 정보는 <span className='font-bold text-lg'>{userRole === 'CU' ? '고객' : '사업자'}</span>입니다.</p>
                 <p className='font-semibold text-red-600'>하단 버튼 클릭 시 유저 정보 변경 불가!</p>
             </div>
-            <button onClick={() => {roleRes(userRole); handleCheck();}} 
+            <button onClick={() => {roleRes(); handleCheck();}} 
                 className={!roleCheck ? 'my-4 w-full p-4 py-2 font-semibold border border-zinc-200 text-zinc-500' : 
                 'my-4 w-full p-4 py-2 font-semibold text-brand border border-yellow-200 bg-yellow-100'} 
                 disabled={roleCheck}>{userRole === 'CU' ? '고객' : '사업자'}(으)로 이용합니다

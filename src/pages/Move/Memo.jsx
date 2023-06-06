@@ -32,7 +32,7 @@ export default function Memo() {
                     <TextArea title='요청 사항' placeholder='요청 사항을 입력해주세요' row='8' handleChange={(e) => {setMemo(e.target.value);}} value={memo}/>
                 </div>
             </div>            
-            <Link to='/memo'>
+            <Link to='/roomimg'>
                 <button onClick={handleSave} className='my-4 w-screen py-2 font-semibold text-brand border border-yellow-200 bg-yellow-100'>다음</button>
             </Link>
         </div>

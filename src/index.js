@@ -26,6 +26,7 @@ import BusinessFileUploader from './pages/Accounts/BusinessFileUploader';
 import EditCOInfo from './api/EditCOInfo';
 import Luggage from './pages/Move/Luggage';
 import Memo from './pages/Move/Memo';
+import RoomImage from './pages/Move/RoomImage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const router = createBrowserRouter([
@@ -48,6 +49,7 @@ const router = createBrowserRouter([
       { path: '/address', element: <Address /> },
       { path: '/luggage', element: <Luggage/> },
       { path: '/memo', element: <Memo/> },
+      { path: '/roomimg', element: <RoomImage/> },
       { path: '/oauth/callback/kakao/', element: <KakaoCallback /> },
       { path: '/oauth/callback/google/', element: <GoogleCallback /> },
       { path: '/businessfileuploader', element: <BusinessFileUploader/> },
