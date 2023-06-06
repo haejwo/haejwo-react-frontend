@@ -7,8 +7,7 @@ import { saveRole } from '../app/useractions';
 export default function RoleSelect({ onRoleSelect, onCheck }) {
     const [cookies, setCookie] = useCookies(['token']);
     const backURL = process.env.REACT_APP_BACK_BASE_URL;
-    const userInfo = useSelector(state => state.user);
- 
+    const userInfo = useSelector(state => state.user.user);
     const [userRole, setUserRole] = useState('CU');
     const handleClick = (role) => { setUserRole(role); onRoleSelect(role); };
  

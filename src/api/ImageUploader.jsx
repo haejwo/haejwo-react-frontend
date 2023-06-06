@@ -7,7 +7,6 @@ export default function ImageUploader({ path, token, imageData }) {
   const handleChange = (e) => {
       setFile(e.target.files[0])
   }
-  console.log(file);
   const handleUpload = async () => {
       const formData = new FormData();
       formData.append('image', file);
