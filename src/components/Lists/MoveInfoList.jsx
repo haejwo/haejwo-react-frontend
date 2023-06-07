@@ -19,10 +19,10 @@ export default function MoveInfoList({ lists }) {
     const handleCloseDetail = (idx) => {
         setBtns(prevBtns => ({ ...prevBtns, [idx]: false }));
     };
-
+    
     return (
         <div>
-            {btns === {} && 
+            {!lists && 
                 <div>
                     <p>이사 요청서가 없습니다</p>
                     <p className='flex text-lg font-semibold items-center justify-center my-2 border border-brand p-2'><FaTruck className='text-2xl mr-1 text-brand'/> 이사서비스 바로가기</p>
@@ -111,7 +111,7 @@ export default function MoveInfoList({ lists }) {
                                 <div className='my-1'>
                                     <p className='font-semibold text-zinc-500 mb-2'>서재가구</p>
                                     <div className='grid grid-cols-2 gap-1 border border-zinc-300 bg-yellow-100 p-2 flex justify-between'>
-                                        {detailIdx.luggage_info["서재가구"] && Object.entries(detailIdx.luggage_info["침실/거실가구"]).map(([key, value], idx) => (value === 0 ? '' : 
+                                        {detailIdx.luggage_info["서재가구"] && Object.entries(detailIdx.luggage_info["서재가구"]).map(([key, value], idx) => (value === 0 ? '' : 
                                             <div key={idx} className='flex justify-around border-r-2 border-zinc-200'>
                                                 <p>{key}</p>
                                                 <p className='font-semibold'>{value}개</p>
@@ -124,7 +124,7 @@ export default function MoveInfoList({ lists }) {
                                 <div className='my-1'>
                                     <p className='font-semibold text-zinc-500 mb-2'>생활가전</p>
                                     <div className='grid grid-cols-2 gap-1 border border-zinc-300 bg-yellow-100 p-2 flex justify-between'>
-                                        {detailIdx.luggage_info["생활가전"] && Object.entries(detailIdx.luggage_info["침실/거실가구"]).map(([key, value], idx) => (value === 0 ? '' : 
+                                        {detailIdx.luggage_info["생활가전"] && Object.entries(detailIdx.luggage_info["생활가전"]).map(([key, value], idx) => (value === 0 ? '' : 
                                             <div key={idx} className='flex justify-around border-r-2 border-zinc-200'>
                                                 <p>{key}</p>
                                                 <p className='font-semibold'>{value}개</p>
@@ -137,7 +137,7 @@ export default function MoveInfoList({ lists }) {
                                 <div className='my-1'>
                                     <p className='font-semibold text-zinc-500 mb-2'>주방가전</p>
                                     <div className='grid grid-cols-2 gap-1 border border-zinc-300 bg-yellow-100 p-2 flex justify-between'>
-                                        {detailIdx.luggage_info["주방가전"] && Object.entries(detailIdx.luggage_info["침실/거실가구"]).map(([key, value], idx) => (value === 0 ? '' : 
+                                        {detailIdx.luggage_info["주방가전"] && Object.entries(detailIdx.luggage_info["주방가전"]).map(([key, value], idx) => (value === 0 ? '' : 
                                             <div key={idx} className='flex justify-around border-r-2 border-zinc-200'>
                                                 <p>{key}</p>
                                                 <p className='font-semibold'>{value}개</p>
@@ -150,7 +150,7 @@ export default function MoveInfoList({ lists }) {
                                 <div className='my-1'>
                                     <p className='font-semibold text-zinc-500 mb-2'>기타</p>
                                     <div className='grid grid-cols-2 gap-1 border border-zinc-300 bg-yellow-100 p-2 flex justify-between'>
-                                        {detailIdx.luggage_info["기타"] && Object.entries(detailIdx.luggage_info["침실/거실가구"]).map(([key, value], idx) => (value === 0 ? '' : 
+                                        {detailIdx.luggage_info["기타"] && Object.entries(detailIdx.luggage_info["기타"]).map(([key, value], idx) => (value === 0 ? '' : 
                                             <div key={idx} className='flex justify-around border-r-2 border-zinc-200'>
                                                 <p>{key}</p>
                                                 <p className='font-semibold'>{value}개</p>
@@ -162,7 +162,7 @@ export default function MoveInfoList({ lists }) {
                         </div>
                         <div className='flex flex-col justify-between border border-x-zinc-400 border-b-zinc-400 p-3'>
                             <p className='font-bold mb-2'>요청 사항</p>
-                            <textarea className='border border-zinc-400 rounded-lg p-2 text-zinc-600' cols="6" value={detailIdx.content} readOnly />
+                            <textarea className='border border-zinc-400 rounded-lg p-2 text-zinc-600' rows="5" value={detailIdx.content} readOnly />
                         </div>
                         <div className='flex flex-col justify-between border border-x-zinc-400 border-b-zinc-400 p-3'>
                             <p className='font-bold mb-2'>방 사진</p>
