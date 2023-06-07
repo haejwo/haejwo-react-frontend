@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom';
 import { AiFillHome, AiOutlineHome } from 'react-icons/ai';
 import { TfiMoreAlt, TfiMore } from 'react-icons/tfi';
 import { HiClipboardList, HiOutlineClipboardList } from 'react-icons/hi';
- 
+import { useSelector } from 'react-redux';
+
 export default function Navbar() {
+    const userInfo = useSelector(state => state.user.user);
+    
     const [tabMenu, setTabMenu] = useState('tabHome');
   
     const handleToggle = (id) => {
@@ -18,7 +21,7 @@ export default function Navbar() {
                     <div className='text-2xl'>{tabMenu === 'tabHome' ? <AiFillHome/> : <AiOutlineHome/>}</div>
                     <div>Home</div>
                 </Link>
-                <Link to='/login' className='flex flex-col items-center' onClick={() => handleToggle('tabList')}>   
+                <Link to={userInfo.username ? '/list' : '/login'} className='flex flex-col items-center' onClick={() => handleToggle('tabList')}>   
                     <div className='text-2xl'>{tabMenu === 'tabList' ? <HiClipboardList/> : <HiOutlineClipboardList/>}</div>
                     <div>Lists</div>
                 </Link>

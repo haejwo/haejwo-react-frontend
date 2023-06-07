@@ -9,7 +9,7 @@ import Login from './pages/Accounts/Login';
 import Signup from './pages/Accounts/Signup';
 import User from './pages/Accounts/User';
 import Profile from './pages/Accounts/Profile';
-import Home from './pages/Home/Home';
+import Home from './pages/Navbar/Home';
 import Review from './components/Review/Review';
 import MoveSelect from './pages/Move/MoveSelect';
 import Less20 from './pages/Move/Less20';
@@ -27,6 +27,7 @@ import EditCOInfo from './api/EditCOInfo';
 import Luggage from './pages/Move/Luggage';
 import Memo from './pages/Move/Memo';
 import RoomImage from './pages/Move/RoomImage';
+import List from './pages/Navbar/List';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const router = createBrowserRouter([
@@ -36,6 +37,7 @@ const router = createBrowserRouter([
     errorElement: <NotFound />,
     children: [
       { index: true, element: <Home /> },
+      { path: '/list', element: <List/> },
       { path: '/login', element: <Login /> },
       { path: '/signup', element: <Signup /> },
       { path: '/user', element: <User /> },

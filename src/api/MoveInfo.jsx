@@ -33,7 +33,6 @@ export default function MoveInfo({ imgfile }) {
                     'Content-Type': 'multipart/form-data'
                 } 
             });
-            console.log(res.data);
         } catch (error) {
             console.log(error);
         }
@@ -41,7 +40,7 @@ export default function MoveInfo({ imgfile }) {
 
     return (
         <div>
-            <Link to='/roomimg'>
+            <Link to='/list'>
                 <button onClick={moveRes} className='my-4 w-screen py-2 font-semibold text-brand border border-yellow-200 bg-yellow-100'>이사요청 등록</button>
             </Link>
         </div>
