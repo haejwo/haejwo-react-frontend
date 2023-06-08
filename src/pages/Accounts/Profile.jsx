@@ -3,7 +3,7 @@ import { useCookies } from 'react-cookie';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser } from '../../app/useractions';
-import { FaUserCircle, FaTruck } from 'react-icons/fa';
+import { FaUserCircle, FaTruck, FaInstagram, FaFacebookSquare, FaTwitter } from 'react-icons/fa';
 import { GiFlowerPot, GiHandTruck } from 'react-icons/gi';
 import NoticeBtn from '../../components/Buttons/NoticeBtn';
 
@@ -64,6 +64,14 @@ export default function Profile() {
                     <NoticeBtn icon='service' text='서비스 이용약관'/>
                     <NoticeBtn icon='personal' text='개인정보 처리방침'/>
                 </div>
+            </div>
+            <div className='mt-20 mb-5 flex items-center justify-between'>
+                <div className='text-3xl text-yellow-300'>
+                    <button className='bg-yellow-100 p-3 rounded-full mr-2'><FaInstagram/></button>
+                    <button className='bg-yellow-100 p-3 rounded-full mr-2'><FaFacebookSquare/></button>
+                    <button className='bg-yellow-100 p-3 rounded-full mr-2'><FaTwitter/></button>
+                </div>
+                <p className='text-zinc-300'>1.0.0</p>
             </div>
         </div>
     );
