@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaTruck } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 export default function MoveInfoList({ lists }) {
     const buttons = {}
@@ -23,9 +24,9 @@ export default function MoveInfoList({ lists }) {
     return (
         <div>
             {!lists && 
-                <div>
-                    <p>이사 요청서가 없습니다</p>
-                    <p className='flex text-lg font-semibold items-center justify-center my-2 border border-brand p-2'><FaTruck className='text-2xl mr-1 text-brand'/> 이사서비스 바로가기</p>
+                <div className='mt-4'>
+                    <p className='text-center'>이사 요청서가 없습니다</p>
+                    <Link to='/move'><p className='flex text-lg font-semibold items-center justify-center my-2 border border-brand p-2'><FaTruck className='text-2xl mr-1 text-brand'/> 이사서비스 바로가기</p></Link>
                 </div>
             }
             {lists && <p className='flex text-xl font-bold items-center justify-center my-2'><FaTruck className='text-2xl mr-1 text-brand'/> 이사 요청 목록</p>}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -6,6 +6,7 @@ import { loginUser } from '../../app/useractions';
 import { FaUserCircle, FaTruck, FaInstagram, FaFacebookSquare, FaTwitter } from 'react-icons/fa';
 import { GiFlowerPot, GiHandTruck } from 'react-icons/gi';
 import NoticeBtn from '../../components/Buttons/NoticeBtn';
+import NoticeForm from '../../components/NoticeForm.jsx/NoticeForm';
 
 export default function Profile() {
     
@@ -13,7 +14,7 @@ export default function Profile() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const userInfo = useSelector(state => state.user.user);
-    console.log(userInfo);    
+    // console.log(userInfo);    
     
     const logOut = () => {
         const user = {id: null, email: null, username: null, bankName: null, accountNumber: null, role: null, category: null};
@@ -23,6 +24,19 @@ export default function Profile() {
         navigate('/');
     };
 
+    const [check, setCheck] = useState({
+        coupon: false,
+        friend: false,
+        notice: false,
+        faq: false,
+        one: false,
+        service: false,
+        personal: false
+    });
+    const handleCheck = (icon, click) => {
+        setCheck({...check, [icon]: click});
+    };
+    
     return (
         <div className="flex flex-col justify-center p-4">
             {userInfo.username ? userInfo.role === 'CU' ? 
@@ -50,19 +64,21 @@ export default function Profile() {
             : ''}
             <div className='mt-3'>
                 <div className='border-b-8 border-yellow-100'>
-                    <NoticeBtn icon='coupon' text='내 쿠폰'/>
+                    <NoticeBtn clicked={handleCheck} icon='coupon' text='내 쿠폰'/>
                 </div>
                 <div className='border-b-8 border-yellow-100'>
-                    <NoticeBtn icon='friend' text='친구 초대'/>
+                    <NoticeBtn clicked={handleCheck} icon='friend' text='친구 초대'/>
                 </div>
                 <div className='border-b-8 border-yellow-100'>
-                    <NoticeBtn icon='notice' text='공지사항'/>
-                    <NoticeBtn icon='faq' text='FAQ'/>
-                    <NoticeBtn icon='one' text='1 : 1 문의'/>
+                    <NoticeBtn clicked={handleCheck} icon='notice' text='공지사항'/>
+                    <NoticeBtn clicked={handleCheck} icon='faq' text='FAQ'/>
+                    <NoticeBtn clicked={handleCheck} icon='one' text='1 : 1 문의'/>
                 </div>
                 <div className='border-b-8 border-yellow-100'>
-                    <NoticeBtn icon='service' text='서비스 이용약관'/>
-                    <NoticeBtn icon='personal' text='개인정보 처리방침'/>
+                    <NoticeBtn clicked={handleCheck} icon='service' text='서비스 이용약관'/>
+                    {check.service && <NoticeForm notice='service'/>}
+                    <NoticeBtn clicked={handleCheck} icon='personal' text='개인정보 처리방침'/>
+                    {check.personal && <NoticeForm notice='personal'/>}
                 </div>
             </div>
             <div className='mt-20 mb-5 flex items-center justify-between'>
