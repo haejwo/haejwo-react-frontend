@@ -28,6 +28,9 @@ import Luggage from './pages/Move/Luggage';
 import Memo from './pages/Move/Memo';
 import RoomImage from './pages/Move/RoomImage';
 import List from './pages/Navbar/List';
+import FlowerSelect from './pages/Flowers/FlowerSelect';
+import F_DatePicker from './pages/Flowers/F_DatePicker';
+import F_Address from './pages/Flowers/F_Address';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const router = createBrowserRouter([
@@ -49,13 +52,16 @@ const router = createBrowserRouter([
       { path: '/more20', element: <More20 /> },
       { path: '/datepick', element: <DatePicker /> },
       { path: '/address', element: <Address /> },
-      { path: '/luggage', element: <Luggage/> },
-      { path: '/memo', element: <Memo/> },
-      { path: '/roomimg', element: <RoomImage/> },
+      { path: '/luggage', element: <Luggage /> },
+      { path: '/memo', element: <Memo /> },
+      { path: '/roomimg', element: <RoomImage /> },
+      { path: '/flower', element: <FlowerSelect /> },
+      { path: '/flower/datepick', element: <F_DatePicker /> },
+      { path: '/flower/address', element: <F_Address/> },
       { path: '/oauth/callback/kakao/', element: <KakaoCallback /> },
       { path: '/oauth/callback/google/', element: <GoogleCallback /> },
-      { path: '/businessfileuploader', element: <BusinessFileUploader/> },
-      { path: '/editco', element: <EditCOInfo/> },
+      { path: '/businessfileuploader', element: <BusinessFileUploader /> },
+      { path: '/editco', element: <EditCOInfo /> },
     ],
   },
 ]);
