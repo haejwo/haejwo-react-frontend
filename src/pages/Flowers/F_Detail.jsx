@@ -11,7 +11,7 @@ export default function Memo() {
         <div className='w-screen flex flex-col items-center p-4'>
             <div className='flex'>
                 <Link to='/flower/address'><AiOutlineDoubleLeft className='text-zinc-400 mt-2.5 mr-2 text-2xl'/></Link>
-                <p className='font-bold text-lg my-2'>추가 정보를 입력해주세요 ( 5 / 6 )</p>
+                <p className='font-bold text-lg my-2'>추가 정보를 입력해주세요 ( 4 / 5 )</p>
                 <Link to='/'><RxCross2 className='text-zinc-400 mt-2.5 ml-2 text-2xl'/></Link>
             </div>
             <div className='w-screen border-b-4 border-bottom-zinc-400 mt-6'>

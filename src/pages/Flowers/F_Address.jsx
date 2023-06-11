@@ -27,7 +27,7 @@ export default function F_Address() {
         <div className='w-screen flex flex-col items-center p-4'>
             <div className='flex mb-8 items-center'>
                 <Link to='/flower/datepick'><AiOutlineDoubleLeft className='text-zinc-400 mr-2 text-2xl'/></Link>
-                <p className='font-bold text-lg my-3'>배송지를 입력해주세요 ( 3 / 6 )</p>
+                <p className='font-bold text-lg my-3'>배송지를 입력해주세요 ( 3 / 5 )</p>
                 <Link to='/'><RxCross2 className='text-zinc-400 ml-2 text-2xl'/></Link>
             </div>
             <div className='w-full mb-4'>

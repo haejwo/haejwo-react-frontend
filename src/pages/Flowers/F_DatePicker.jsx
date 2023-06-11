@@ -26,7 +26,7 @@ export default function F_DatePicker() {
         <div className='flex flex-col items-center'>
             <div className='flex items-center p-4'>
                 <Link to='/flower'><AiOutlineDoubleLeft className='text-zinc-400 mr-2 text-2xl'/></Link>
-                <p className='font-bold text-lg my-3'>날짜와 시간을 선택해주세요 ( 2 / 6 )</p>
+                <p className='font-bold text-lg my-3'>날짜와 시간을 선택해주세요 ( 2 / 5 )</p>
                 <Link to='/'><RxCross2 className='text-zinc-400 ml-2 text-2xl'/></Link>
             </div>
             <div className='my-3'>
