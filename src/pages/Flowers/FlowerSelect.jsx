@@ -2,16 +2,20 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { RxCross2 } from 'react-icons/rx';
 import { AiOutlineCheck } from 'react-icons/ai';
+import { useDispatch } from 'react-redux';
+import { saveSize } from '../../app/floweractions';
 
 export default function FlowerSelect() {
     const [selectFlower, setSelectFlower] = useState('');
     const [size, setSize] = useState('');
+    const dispatch = useDispatch();
     
     const handleClick = (id) => {
       setSelectFlower(id);
       {id === 'less100' ? setSize('SMALL') : setSize('BIG')};
     };
-    
+    const handleSaveSize = () => { dispatch(saveSize(size)); };
+
     return (
         <div className='flex flex-col items-center p-4'>
             <div className='flex'>
@@ -49,7 +53,7 @@ export default function FlowerSelect() {
             </div>
             <div className='w-screen'>
             <Link to='datepick'>
-                <button className={!selectFlower ? 'my-4 w-full py-2 font-semibold border border-zinc-200 text-zinc-500' : 
+                <button onClick={handleSaveSize} className={!selectFlower ? 'my-4 w-full py-2 font-semibold border border-zinc-200 text-zinc-500' : 
                     'my-4 w-screen py-2 font-semibold text-brand border py-2 border-yellow-200 bg-yellow-100'} 
                 disabled={!selectFlower}>다음</button>
             </Link>

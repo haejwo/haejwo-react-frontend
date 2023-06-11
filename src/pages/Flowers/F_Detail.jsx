@@ -3,10 +3,15 @@ import TextArea from '../../components/InputText/TextArea';
 import { Link } from 'react-router-dom';
 import { RxCross2 } from 'react-icons/rx';
 import { AiOutlineDoubleLeft, AiOutlineCheckCircle } from 'react-icons/ai';
+import { useDispatch } from 'react-redux';
+import { saveMemo } from '../../app/floweractions';
 
 export default function Memo() {
     const [memo, setMemo] = useState('');
-    
+
+    const dispatch = useDispatch();
+    const handleSave = () => { dispatch(saveMemo(memo)); }
+
     return (
         <div className='w-screen flex flex-col items-center p-4'>
             <div className='flex'>
@@ -28,7 +33,7 @@ export default function Memo() {
                 </div>
             </div>            
             <Link to='/flower/img'>
-                <button className='my-4 w-screen py-2 font-semibold text-brand border border-yellow-200 bg-yellow-100'>다음</button>
+                <button onClick={handleSave} className='my-4 w-screen py-2 font-semibold text-brand border border-yellow-200 bg-yellow-100'>다음</button>
             </Link>
         </div>
     );

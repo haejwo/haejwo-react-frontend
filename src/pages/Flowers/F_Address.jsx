@@ -4,8 +4,12 @@ import { RxCross2 } from 'react-icons/rx';
 import { AiOutlineDoubleLeft } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import AddressInput from '../../components/AddressDetail/AddressInput';
+import { useDispatch } from 'react-redux';
+import { saveStart, saveEnd } from '../../app/floweractions';
 
 export default function F_Address() {
+    const dispatch = useDispatch();
+    
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isEndModalVisible, setIsEndModalVisible] = useState(false); 
     const handleClick = () => { setIsModalVisible(true); };
@@ -22,7 +26,9 @@ export default function F_Address() {
     const handleEndSave = () => setIsEndModalVisible(false);
     const [endChecked, setEndChecked] = useState(false);
     const handleEndCheck = (check) => setEndChecked(!check);
-    
+
+    const handleNext = () => { dispatch(saveStart(startAddress)); dispatch(saveEnd(endAddress)); }
+
     return (
         <div className='w-screen flex flex-col items-center p-4'>
             <div className='flex mb-8 items-center'>
@@ -60,7 +66,7 @@ export default function F_Address() {
                   </div>
                 }
             </div>
-            <Link to='/flower/details'><button className={!startAddress || !endAddress ? 'my-4 w-screen py-2 font-semibold border border-zinc-200 text-zinc-500' : 
+            <Link to='/flower/details'><button onClick={handleNext} className={!startAddress || !endAddress ? 'my-4 w-screen py-2 font-semibold border border-zinc-200 text-zinc-500' : 
             'my-4 w-screen py-2 font-semibold text-brand border border-yellow-200 bg-yellow-100'} 
             disabled={!startAddress || !endAddress}>다음</button></Link>
             { startAddress && endAddress ? '' : <p className='mb-2 text-red-400 text-center'>출발지와 도착지 정보를 입력해주세요!</p> }

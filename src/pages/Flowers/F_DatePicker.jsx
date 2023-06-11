@@ -6,8 +6,11 @@ import { Link } from 'react-router-dom';
 import { BsCheckAll } from 'react-icons/bs';
 import { RxCross2 } from 'react-icons/rx';
 import { AiOutlineDoubleLeft } from 'react-icons/ai';
+import { useDispatch } from 'react-redux';
+import { saveDate, saveTime } from '../../app/floweractions';
 
 export default function F_DatePicker() {
+    const dispatch = useDispatch();
     
     const [value, setValue] = useState(new Date());
     const [timePick, setTimePick] = useState('');
@@ -21,7 +24,11 @@ export default function F_DatePicker() {
     const tileDisabled = ({ date }) => {
         return date < new Date();
     };
-    
+    const handleSave = () => {
+        dispatch(saveDate(moment(value).format("YYYY-MM-DD")));
+        dispatch(saveTime(moment(timePick, 'hh:mm A').format('hh:mm A')));
+    };
+
     return (
         <div className='flex flex-col items-center'>
             <div className='flex items-center p-4'>
@@ -58,7 +65,7 @@ export default function F_DatePicker() {
                         입니다.</p> : ''}
                     </div>
             </div>
-            <Link to='/flower/address'><button className={!value || !timePick ? 'my-4 w-screen py-2 font-semibold border border-zinc-200 text-zinc-500' : 
+            <Link to='/flower/address'><button onClick={handleSave} className={!value || !timePick ? 'my-4 w-screen py-2 font-semibold border border-zinc-200 text-zinc-500' : 
             'my-4 w-screen py-2 font-semibold text-brand border py-2 border-yellow-200 bg-yellow-100'} 
             disabled={!value || !timePick}>다음</button></Link>
             { value && timePick ? '' : <p className='mb-2 text-red-400 text-center'>날짜와 시간을 선택해주세요!</p> }
