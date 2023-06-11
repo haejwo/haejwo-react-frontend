@@ -31,6 +31,8 @@ import List from './pages/Navbar/List';
 import FlowerSelect from './pages/Flowers/FlowerSelect';
 import F_DatePicker from './pages/Flowers/F_DatePicker';
 import F_Address from './pages/Flowers/F_Address';
+import F_Detail from './pages/Flowers/F_Detail';
+import F_Image from './pages/Flowers/F_Image';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const router = createBrowserRouter([
@@ -57,7 +59,9 @@ const router = createBrowserRouter([
       { path: '/roomimg', element: <RoomImage /> },
       { path: '/flower', element: <FlowerSelect /> },
       { path: '/flower/datepick', element: <F_DatePicker /> },
-      { path: '/flower/address', element: <F_Address/> },
+      { path: '/flower/address', element: <F_Address /> },
+      { path: '/flower/details', element: <F_Detail /> },
+      { path: '/flower/img', element: <F_Image /> },
       { path: '/oauth/callback/kakao/', element: <KakaoCallback /> },
       { path: '/oauth/callback/google/', element: <GoogleCallback /> },
       { path: '/businessfileuploader', element: <BusinessFileUploader /> },
