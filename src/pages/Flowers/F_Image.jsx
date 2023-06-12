@@ -3,14 +3,12 @@ import { Link } from 'react-router-dom';
 import { RxCross2 } from 'react-icons/rx';
 import { AiOutlineDoubleLeft } from 'react-icons/ai';
 import ImagesUpload from '../../components/ImagesUpload/ImagesUpload';
-import { useSelector } from 'react-redux';
 
 export default function F_Image() {
     const [files, setFiles] = useState(null);
 
     const handleFiles = (imgFiles) => setFiles(imgFiles);
     
-    console.log(useSelector(state => state.flower));
     return (
         <div className='w-screen flex flex-col items-center p-4'>
             <div className='flex'>

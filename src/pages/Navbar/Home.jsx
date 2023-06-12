@@ -37,7 +37,7 @@ export default function Home() {
                     <div className='mt-14 text-3xl text-brand'><FaTruck/></div>
                 </Link>
                 <div className='w-full flex justify-between'>
-                    <Link to='/flower' className='w-1/2 justify-between flex bg-white border border-zinc-300 rounded-md p-5 mr-2'>
+                    <Link to={userInfo.username ? '/flower' : '/login'} className='w-1/2 justify-between flex bg-white border border-zinc-300 rounded-md p-5 mr-2'>
                         <div className='flex flex-col items-start'>
                             <p className='text-2xl font-bold'>꽃</p>
                             <p className='text-sm text-zinc-400 mb-1 mt-2'>경조사를 위한</p>

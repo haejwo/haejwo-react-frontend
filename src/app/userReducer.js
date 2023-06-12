@@ -8,6 +8,7 @@ const initialState = {
       role: null,
       category: null,
       businessfile: false,
+      image: null,
     },
   };
   
@@ -65,7 +66,15 @@ function userReducer(state = initialState, action) {
           ...state.user,
           businessfile: action.payload,
         },
-      };    
+      };
+    case 'SAVE_Image':
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          image: action.payload,
+        },
+      };      
     default:
       return state;
   }

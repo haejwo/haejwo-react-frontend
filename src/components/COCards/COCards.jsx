@@ -9,13 +9,14 @@ export default function COCards({ data }) {
             <div className='w-full flex my-4 overflow-x-scroll whitespace-nowrap'>
                 {data && data.map((item) => (
                     <div key={item.id} className='flex flex-col justify-center items-center mr-6 w-30'>
+                        {!item.profile_img ?
                         <div className='bg-zinc-100 p-5 text-center rounded-full mb-1'>
-                            {
-                              item.category === 'MOVE' ? <FaTruck className='text-brand text-2xl'/> :
+                              {item.category === 'MOVE' ? <FaTruck className='text-brand text-2xl'/> :
                               item.category === 'FLOWER' ? <GiFlowerPot className='text-brand text-2xl'/> :
-                              <GiHandTruck className='text-brand text-2xl'/>
-                            }
-                        </div>
+                              <GiHandTruck className='text-brand text-2xl'/>}
+                        </div> :
+                        <div className='w-16 h-16'><img src={item.profile_img} className='w-full h-full rounded-full'/></div>
+                        }
                         <div className='font-semibold'>{item.username}</div>
                         { 
                           item.category === 'MOVE' ? <div className='text-sm text-zinc-300'>이사</div> :

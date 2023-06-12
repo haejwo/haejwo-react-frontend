@@ -46,3 +46,10 @@ export const saveBusinessFile = () => {
     payload: true,
   };
 };
+
+export const saveImage = (image) => {
+  return {
+    type: 'SAVE_Image',
+    payload: image,
+  };
+};

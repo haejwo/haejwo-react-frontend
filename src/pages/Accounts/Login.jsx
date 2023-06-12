@@ -50,7 +50,7 @@ export default function Login() {
       dispatch(loginUser(user));
       navigate('/profile');
     } else if (res.data && res.data.user.company != null) {
-      const user = {id: res.data.user.id, email: res.data.user.email, username: res.data.user.company.username, bankName: res.data.user.company.bank.bankName, accountNumber: res.data.user.company.bank.accountNumber, role: res.data.user.role, category: res.data.user.company.category, businessfile: res.data.user.company.has_business_license};
+      const user = {id: res.data.user.id, email: res.data.user.email, username: res.data.user.company.username, bankName: res.data.user.company.bank.bankName, accountNumber: res.data.user.company.bank.accountNumber, role: res.data.user.role, category: res.data.user.company.category, businessfile: res.data.user.company.has_business_license, image: res.data.user.company.profile_img};
       dispatch(loginUser(user));
       navigate('/profile');
     } else if (res.data.user.customer === null || res.data.user.company === null) {

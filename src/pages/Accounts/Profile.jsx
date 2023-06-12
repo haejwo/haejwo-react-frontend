@@ -14,7 +14,7 @@ export default function Profile() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const userInfo = useSelector(state => state.user.user);
-    // console.log(userInfo);    
+    console.log(userInfo);    
     
     const logOut = () => {
         const user = {id: null, email: null, username: null, bankName: null, accountNumber: null, role: null, category: null};
@@ -36,6 +36,7 @@ export default function Profile() {
     const handleCheck = (icon, click) => {
         setCheck({...check, [icon]: click});
     };
+    const [previewURLs, setPreviewURLs] = useState('');
     
     return (
         <div className="flex flex-col justify-center p-4">
@@ -46,8 +47,9 @@ export default function Profile() {
                     <span className='text-lg mt-2'>고객님</span>
                 </div> : 
                 <div className='flex items-center mt-4'>
-                    {userInfo.category === 'MOVE' ? <FaTruck className='text-2xl text-yellow-500'/> : 
-                    userInfo.category === 'FLOWER' ? <GiFlowerPot className='text-2xl text-yellow-500'/> : <GiHandTruck className='text-2xl text-yellow-500'/>} 
+                    {userInfo.image === null ? userInfo.category === 'MOVE' ? <FaTruck className='text-2xl text-yellow-500'/> : 
+                    userInfo.category === 'FLOWER' ? <GiFlowerPot className='text-2xl text-yellow-500'/> : <GiHandTruck className='text-2xl text-yellow-500'/> : 
+                    <div className='w-11 h-11'><img src={userInfo.image} className='w-full h-full rounded-full'/></div>} 
                     <span className='font-bold text-2xl mx-2'>{userInfo.username}</span> 
                     <span className='text-lg mt-2'>파트너님</span>
                 </div> : 
