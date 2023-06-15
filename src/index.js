@@ -33,6 +33,7 @@ import F_DatePicker from './pages/Flowers/F_DatePicker';
 import F_Address from './pages/Flowers/F_Address';
 import F_Detail from './pages/Flowers/F_Detail';
 import F_Image from './pages/Flowers/F_Image';
+import MoveComment from './api/MoveComment';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const router = createBrowserRouter([
@@ -57,6 +58,7 @@ const router = createBrowserRouter([
       { path: '/luggage', element: <Luggage /> },
       { path: '/memo', element: <Memo /> },
       { path: '/roomimg', element: <RoomImage /> },
+      { path: '/comment', element: <MoveComment /> },
       { path: '/flower', element: <FlowerSelect /> },
       { path: '/flower/datepick', element: <F_DatePicker /> },
       { path: '/flower/address', element: <F_Address /> },

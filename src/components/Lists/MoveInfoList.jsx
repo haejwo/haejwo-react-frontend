@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { FaTruck } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import MoveComment from '../../api/MoveComment';
 
 export default function MoveInfoList({ lists }) {
+    const userInfo = useSelector(state => state.user.user);
     const buttons = {}
     if (lists) {
         for (let i = 0; i < lists.length; i++ ) {
@@ -11,7 +14,10 @@ export default function MoveInfoList({ lists }) {
     }
     const [btns, setBtns] = useState(buttons);
     const [idx, setIdx] = useState(null);
+    const [commentBtns, setCommentBtns] = useState(buttons);
+    const [commentPK, setCommentPK] = useState(null);
     const [detailIdx, setDetailIdx] = useState(null);
+    
     const handleOpenDetail = (idx) => {
         setBtns(prevBtns => ({ ...prevBtns, [idx]: true }));
         setIdx(idx);
@@ -19,6 +25,14 @@ export default function MoveInfoList({ lists }) {
     };
     const handleCloseDetail = (idx) => {
         setBtns(prevBtns => ({ ...prevBtns, [idx]: false }));
+    };
+    
+    const handleOpenPK = (idx) => {
+        setCommentBtns(prevBtns => ({ ...prevBtns, [idx]: true }));
+        setCommentPK(idx);
+    };
+    const handleClosePK = (idx) => {
+        setCommentBtns(prevBtns => ({ ...prevBtns, [idx]: false }));
     };
     
     return (
@@ -35,9 +49,17 @@ export default function MoveInfoList({ lists }) {
                     <p className='text-lg text-zinc-600 font-semibold'>이사 요청서 {idx + 1}</p>
                     <p className='py-2 text-zinc-500 overflow-hidden whitespace-nowrap truncate w-full'>출발지 : {list.start_info.address["FullAddress"]}</p>
                     <p className='py-2 text-zinc-500 overflow-hidden whitespace-nowrap truncate w-full'>도착지 : {list.end_info.address["FullAddress"]}</p>
-                    <button onClick={() => handleOpenDetail(idx)} className='w-full text-center text-yellow-500 my-1 font-semibold'>상세보기</button>
+                    <div className='flex'>
+                        <button onClick={() => handleOpenDetail(idx)} className='w-full text-center text-yellow-500 my-1 font-semibold'>상세보기</button>
+                        {userInfo.role === 'CO' ? <button onClick={() => handleOpenPK(idx)} className='w-full text-center text-orange-500 my-1 font-semibold'>견적 보내기</button> : ''}
+                    </div>
                 </div>
             ))}
+            {commentBtns[commentPK] && 
+                <div className='w-full p-4 fixed overflow-y-scroll h-full top-0 left-0 bg-white'>
+                    <MoveComment pk={commentPK + 1} onClose={() => handleClosePK(commentPK)}/>
+                </div>
+            }
             {btns[idx] && 
                 <div className='w-full p-4 fixed overflow-y-scroll h-full top-0 left-0 bg-white'>
                     <p className='text-center p-4 font-bold text-xl'>이사 요청서 {idx + 1}</p>
