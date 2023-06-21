@@ -3,19 +3,29 @@ import { FaTruck } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import MoveComment from '../../api/MoveComment';
+import MovePriceList from '../../api/MovePriceList';
 
 export default function MoveInfoList({ lists }) {
     const userInfo = useSelector(state => state.user.user);
-    const buttons = {}
+    const buttons = {};
     if (lists) {
         for (let i = 0; i < lists.length; i++ ) {
             buttons[i] = false;
         }
-    }
+    };
+
+    const ids = {};
+    if (lists) {
+        for (let i = 0; i < lists.length; i++ ) {
+            ids[lists[i].id] = false;
+        }
+    };
     const [btns, setBtns] = useState(buttons);
     const [idx, setIdx] = useState(null);
     const [commentBtns, setCommentBtns] = useState(buttons);
     const [commentPK, setCommentPK] = useState(null);
+    const [PriceBtns, setPriceBtns] = useState(ids);
+    const [PricePK, setPricePK] = useState(null);
     const [detailIdx, setDetailIdx] = useState(null);
     
     const handleOpenDetail = (idx) => {
@@ -34,7 +44,14 @@ export default function MoveInfoList({ lists }) {
     const handleClosePK = (idx) => {
         setCommentBtns(prevBtns => ({ ...prevBtns, [idx]: false }));
     };
-    
+
+    const handleOpenPrice = (idx) => {
+        setPriceBtns(prevBtns => ({ ...prevBtns, [idx]: true }));
+        setPricePK(idx);
+    };
+    const handleClosePrice = (idx) => {
+        setPriceBtns(prevBtns => ({ ...prevBtns, [idx]: false }));
+    };
     return (
         <div>
             {!lists && 
@@ -46,12 +63,13 @@ export default function MoveInfoList({ lists }) {
             {lists && <p className='flex text-xl font-bold items-center justify-center my-2'><FaTruck className='text-2xl mr-1 text-brand'/> 이사 요청 목록</p>}
             {lists && lists.map((list, idx) => (
                 <div key={idx} className='w-full p-2 border border-brand rounded-lg mb-4'>
-                    <p className='text-lg text-zinc-600 font-semibold'>이사 요청서 {idx + 1}</p>
+                    <p className='text-lg text-zinc-600 font-semibold'>이사 요청서 {userInfo.role === 'CO' ? idx + 1 : list.id}</p>
                     <p className='py-2 text-zinc-500 overflow-hidden whitespace-nowrap truncate w-full'>출발지 : {list.start_info.address["FullAddress"]}</p>
                     <p className='py-2 text-zinc-500 overflow-hidden whitespace-nowrap truncate w-full'>도착지 : {list.end_info.address["FullAddress"]}</p>
                     <div className='flex'>
                         <button onClick={() => handleOpenDetail(idx)} className='w-full text-center text-yellow-500 my-1 font-semibold'>상세보기</button>
-                        {userInfo.role === 'CO' ? <button onClick={() => handleOpenPK(idx)} className='w-full text-center text-orange-500 my-1 font-semibold'>견적 보내기</button> : ''}
+                        {userInfo.role === 'CO' ? <button onClick={() => handleOpenPK(idx)} className='w-full text-center text-orange-500 my-1 font-semibold'>견적 보내기</button> : 
+                            <button onClick={() => handleOpenPrice(list.id)} className='w-full text-center text-orange-500 my-1 font-semibold'>견적 확인</button>}
                     </div>
                 </div>
             ))}
@@ -60,9 +78,14 @@ export default function MoveInfoList({ lists }) {
                     <MoveComment pk={commentPK + 1} onClose={() => handleClosePK(commentPK)}/>
                 </div>
             }
+            {PriceBtns[PricePK] &&
+                <div className='w-full p-4 fixed overflow-y-scroll h-full top-0 left-0 bg-white'>
+                    <MovePriceList pk={PricePK} onClose={() => handleClosePrice(PricePK)}/>
+                </div>
+            }
             {btns[idx] && 
                 <div className='w-full p-4 fixed overflow-y-scroll h-full top-0 left-0 bg-white'>
-                    <p className='text-center p-4 font-bold text-xl'>이사 요청서 {idx + 1}</p>
+                    <p className='text-center p-4 font-bold text-xl'>이사 요청서 {userInfo.role === 'CO' ? idx + 1 : PricePK}</p>
                     <div>
                         <div className='flex justify-around border border-zinc-400 p-3'>
                             {detailIdx.size_type === 'BIG' ? <p>20평대 이상</p> : <p>20평대 미만</p>}
