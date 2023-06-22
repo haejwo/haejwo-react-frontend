@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { saveUsername, saveBankName, saveAccountNumber, saveCategory, saveImage } from '../app/useractions';
 import COInfoForm from '../components/COInfoForm/COInfoForm';
 import ImagesUpload from '../components/ImagesUpload/ImagesUpload';
@@ -60,12 +60,12 @@ export default function COUserInfo() {
                 <p className='text-lg font-bold mb-2'>프로필 이미지 업로드</p>
                 <ImagesUpload imageFiles={handleFiles}/>
             </div>
-            <button onClick={() => CORes(username, bankName, accountNumber, category)}
+            <Link to='/profile' onClick={() => CORes(username, bankName, accountNumber, category)}
                 className={username === '' || bankName === '' || accountNumber === '' ? 
-                    'my-4 w-full p-4 py-2 font-semibold border border-zinc-200 text-zinc-500' : 
-                    'my-4 w-full p-4 py-2 font-semibold text-brand border border-yellow-200 bg-yellow-100'} 
-                disabled={username === '' || bankName === '' || accountNumber === ''}>다음
-            </button>
+                    'my-4 w-full p-4 py-2 font-semibold border border-zinc-200 text-zinc-500 text-center' : 
+                    'my-4 w-full p-4 py-2 font-semibold text-brand border border-yellow-200 bg-yellow-100 text-center'} 
+                disabled={username === '' || bankName === '' || accountNumber === ''}>완료
+            </Link>
         </div>
     );
 }
