@@ -6,7 +6,7 @@ import { RxCross2 } from 'react-icons/rx';
 import MoveMatch from './MoveMatch';
 import MoveDeposit from './MoveDeposit';
 
-export default function MovePriceList({ pk, onClose }) {
+export default function MovePriceList({ pk, onClose, status }) {
     const [cookies, setCookie] = useCookies(['token']);
     const backURL = process.env.REACT_APP_BACK_BASE_URL;
     const [lists, setLists] = useState(null);

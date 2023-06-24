@@ -28,7 +28,7 @@ export default function MoveList() {
     
         Data();
     }, []);
-    console.log(movelist);
+    
     return (
         <div>
             <MoveInfoList lists={movelist}/>
