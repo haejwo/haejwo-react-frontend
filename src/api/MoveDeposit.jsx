@@ -5,11 +5,12 @@ import { useCookies } from 'react-cookie';
 export default function MoveDeposit({ movepk, iscompleted }) {
     const [cookies, setCookie] = useCookies(['token']);
     const backURL = process.env.REACT_APP_BACK_BASE_URL;
-
+    
     const DepositRes = async () => {
         const token = cookies.token;
         try {
-            const res = await axios.post(`${backURL}movequotes/${movepk}/deposit/ `, 
+            const res = await axios.post(`${backURL}movequotes/${movepk}/deposit/`, 
+            null,
             {
               headers: {
                 'Authorization': `Bearer ${token}`

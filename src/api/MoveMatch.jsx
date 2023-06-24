@@ -9,7 +9,8 @@ export default function MoveMatch({ movepk, commentpk, ismatch }) {
     const MatchRes = async () => {
         const token = cookies.token;
         try {
-            const res = await axios.post(`${backURL}movequotes/${movepk}/comments/${commentpk}/matching/ `, 
+            const res = await axios.post(`${backURL}movequotes/${movepk}/comments/${commentpk}/matching/`, 
+            null,
             {
               headers: {
                 'Authorization': `Bearer ${token}`

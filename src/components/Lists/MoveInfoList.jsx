@@ -62,7 +62,7 @@ export default function MoveInfoList({ lists }) {
             }
             {lists && <p className='flex text-xl font-bold items-center justify-center my-2'><FaTruck className='text-2xl mr-1 text-brand'/> 이사 요청 목록</p>}
             {lists && lists.map((list, idx) => (
-                <div key={idx} className='w-full p-2 border border-brand rounded-lg mb-4'>
+                <div key={idx} className={list.status === 'MATCHING' ? 'w-full p-2 border border-zinc-400 rounded-lg mb-4' : 'w-full p-2 border border-brand rounded-lg mb-4'}>
                     <p className='text-lg text-zinc-600 font-semibold'>이사 요청서 {userInfo.role === 'CO' ? idx + 1 : list.id}</p>
                     <p className='py-2 text-zinc-500 overflow-hidden whitespace-nowrap truncate w-full'>출발지 : {list.start_info.address["FullAddress"]}</p>
                     <p className='py-2 text-zinc-500 overflow-hidden whitespace-nowrap truncate w-full'>도착지 : {list.end_info.address["FullAddress"]}</p>
