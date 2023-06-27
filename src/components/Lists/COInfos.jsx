@@ -16,4 +16,3 @@ export default function COInfos({ list, onClose, pk }) {
         </div>
     );
 }
-

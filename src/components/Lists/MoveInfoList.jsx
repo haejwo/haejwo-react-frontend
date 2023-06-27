@@ -9,6 +9,7 @@ import { MdOutlineHandshake } from 'react-icons/md';
 import { HiOutlineBanknotes, HiOutlineTruck } from 'react-icons/hi2';
 import { BsHouseCheck } from 'react-icons/bs';
 import COInfos from './COInfos';
+import COMoveStatus from './COMoveStatus';
 
 export default function MoveInfoList({ lists, movestatus }) {
     const userInfo = useSelector(state => state.user.user);
@@ -65,7 +66,7 @@ export default function MoveInfoList({ lists, movestatus }) {
     const handleClosePrice = (idx) => {
         setPriceBtns(prevBtns => ({ ...prevBtns, [idx]: false }));
     };
-    console.log(lists);
+
     return (
         <div>
             {!lists && 
@@ -77,12 +78,12 @@ export default function MoveInfoList({ lists, movestatus }) {
             {lists && <p className='flex text-xl font-bold items-center justify-center my-2'><FaTruck className='text-2xl mr-1 text-brand'/> 이사 요청 목록</p>}
             {lists && lists.map((list, idx) => (
                 <div key={idx} className={list.status === 'MATCHING' ? 'w-full p-2 border border-zinc-400 rounded-lg mb-4' : 'w-full p-2 border border-brand rounded-lg mb-4'}>
-                    <p className='text-lg text-zinc-600 font-semibold'>이사 요청서 {userInfo.role === 'CO' ? idx + 1 : list.id}</p>
+                    <p className='text-lg text-zinc-600 font-semibold'>이사 요청서 {list.id}</p>
                     <p className='py-2 text-zinc-500 overflow-hidden whitespace-nowrap truncate w-full'>출발지 : {list.start_info.address["FullAddress"]}</p>
                     <p className='py-2 text-zinc-500 overflow-hidden whitespace-nowrap truncate w-full'>도착지 : {list.end_info.address["FullAddress"]}</p>
                     <div className='flex'>
                         <button onClick={() => handleOpenDetail(idx)} className='w-full text-center text-yellow-500 my-1 font-semibold border border-yellow-500 rounded p-2'>상세보기</button>
-                        {userInfo.role === 'CO' ? <button onClick={() => handleOpenPK(idx)} className='w-full text-center text-orange-500 my-1 font-semibold border border-orange-500 rounded p-2 ml-3'>견적 보내기</button> : 
+                        {userInfo.role === 'CO' ? <button onClick={() => handleOpenPK(list.id)} className='w-full text-center text-orange-500 my-1 font-semibold border border-orange-500 rounded p-2 ml-3'>{movestatus === 'matching' ? '견적 보내기' : '진행 상황 설정'}</button> : 
                             <button onClick={() => handleOpenPrice(list.id)} className='w-full text-center text-orange-500 my-1 font-semibold border border-orange-500 rounded p-2 ml-3'>{movestatus === 'matching' ? '견적 확인' : '사업자 확인'}</button>}
                     </div>
                     {movestatus !== 'matching' && list.status !== 'MATCHING' ?
@@ -111,14 +112,13 @@ export default function MoveInfoList({ lists, movestatus }) {
                     }
                 </div>
             ))}
-            {commentBtns[commentPK] && lists[commentPK].status === 'MATCHING' ? 
+            {commentBtns[commentPK] && movestatus === 'matching' ? 
                 <div className='w-full p-4 fixed overflow-y-scroll h-full top-0 left-0 bg-white'>
                     <MoveComment pk={commentPK + 1} onClose={() => handleClosePK(commentPK)}/>
-                </div> : 
-                // <div className='w-full p-4 fixed overflow-y-scroll h-full top-0 left-0 bg-white'>
-                //     <button onClick={() => handleClosePK(commentPK)}>준비중</button>
-                // </div>
-                ''
+                </div> : commentBtns[commentPK] &&
+                <div className='w-full p-4 fixed overflow-y-scroll h-full top-0 left-0 bg-white'>
+                    <COMoveStatus list={lists} onClose={() => handleClosePK(commentPK)} pk={commentPK}/>
+                </div>
             }
             {PriceBtns[PricePK] && movestatus === 'matching' ?
                 <div className='w-full p-4 fixed overflow-y-scroll h-full top-0 left-0 bg-white'>
@@ -126,7 +126,6 @@ export default function MoveInfoList({ lists, movestatus }) {
                 </div> : PriceBtns[PricePK] &&
                 <div className='w-full p-4 fixed overflow-y-scroll h-full top-0 left-0 bg-white'>
                     <COInfos list={lists} onClose={() => handleClosePrice(PricePK)} pk={PricePK}/>
-                    <button onClick={() => handleClosePrice(PricePK)}>사업자 정보</button>
                 </div>
                 
             }
