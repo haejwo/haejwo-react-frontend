@@ -39,7 +39,7 @@ export default function DatePicker() {
 
     const handleSave = () => {
         dispatch(saveDate(moment(value).format("YYYY-MM-DD")));
-        dispatch(saveTime(moment(timePick, 'hh:mm A').format('hh:mm A')));
+        dispatch(saveTime(moment(timePick, 'hh:mm A').format('HH:MM')));
     };
     
     return (
