@@ -4,7 +4,6 @@ import moment from 'moment';
 import { useCookies } from 'react-cookie';
 import { RxCross2 } from 'react-icons/rx';
 import MoveMatch from './MoveMatch';
-import MoveDeposit from './MoveDeposit';
 
 export default function MovePriceList({ pk, onClose, status }) {
     const [cookies, setCookie] = useCookies(['token']);
@@ -21,9 +20,7 @@ export default function MovePriceList({ pk, onClose, status }) {
     const [match, setMatch] = useState(matchDict);
     const handleClick = (id) => setMatch(prev => ({...prev, [id]: 'match'}));
     const hasMatch = Object.values(match).find(value => value === 'match') !== undefined;
-    const [complete, setComplete] = useState(matchDict);
-    const handleCompleted = (id) => setComplete(prev => ({...prev, [id]: 'complete'}));
-    
+
     useEffect(() => {
         const token = cookies.token;
         const Data = async () => {
@@ -42,7 +39,7 @@ export default function MovePriceList({ pk, onClose, status }) {
     
         Data();
       }, []);
-    
+
     return (
         <div className='p-4'>
             <div className='w-full p-2 mb-4 flex justify-center items-center'>
@@ -64,23 +61,24 @@ export default function MovePriceList({ pk, onClose, status }) {
                                     <p className='font-semibold text-xl ml-2'>{item.amount}원</p>
                                 </div>
                             </div>
-                            {!hasMatch ?
+                            {!hasMatch && status === 'MATCHING' ?
                                 <div onClick={() => handleClick(item.id)}>
-                                    <MoveMatch movepk={pk} commentpk={item.id} ismatch={match[item.id]} />
-                                </div> : match[item.id] === 'match' ?
-                                <div onClick={() => handleCompleted(item.id)}>
-                                    <MoveDeposit movepk={pk} iscompleted={complete[item.id]} />
+                                    <MoveMatch movepk={pk} commentpk={item.id} />
                                 </div> : ''
                             }
                         </div>
                         {match[item.id] === 'match' ?
-                            <div className='mt-2'>
-                                <p>은행명 : <span className='font-semibold'>이사은행</span></p>
-                                <p>계좌번호 : <span className='font-semibold'>3093471270418204</span></p>
+                            <div className='mt-2 text-center'>
+                                <p><span className='font-semibold text-red-500'>매칭 탭</span>에서 사업자정보를 확인해주세요!</p>
                             </div> : ''
                         }
                     </div>
                 ))}
+                {status !== 'MATCHING' && 
+                <div className='mt-4 text-center'>
+                    <p><span className='text-red-500 font-semibold text-xl'>매칭 탭</span>에서 사업자정보를 확인해주세요!</p>
+                </div>
+                }
             </div>
         </div>
     );

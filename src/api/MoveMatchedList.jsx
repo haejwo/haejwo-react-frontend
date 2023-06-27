@@ -3,8 +3,8 @@ import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import MoveInfoList from '../components/Lists/MoveInfoList';
 
-export default function MoveList() {
-    const [movelist, setMovelist] = useState(null);
+export default function MoveMatchedList() {
+    const [matchedList, setMatchedList] = useState(null);
     const [cookies, setCookie] = useCookies(['token']);
     const backURL = process.env.REACT_APP_BACK_BASE_URL;
     
@@ -13,14 +13,14 @@ export default function MoveList() {
             const token = cookies.token;
         
             try {
-                const res = await axios.get(`${backURL}movequotes/`,
+                const res = await axios.get(`${backURL}movequotes/get_selected/`,
                 {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                     }
                 } 
                 );
-                setMovelist(res.data);
+                setMatchedList(res.data);
             } catch (error) {
                 console.log(error);
             }
@@ -31,7 +31,7 @@ export default function MoveList() {
     
     return (
         <div>
-            <MoveInfoList lists={movelist} movestatus='matching'/>
+            <MoveInfoList lists={matchedList} movestatus='matched'/>
         </div>
     );
 }
