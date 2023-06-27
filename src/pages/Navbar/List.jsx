@@ -3,6 +3,7 @@ import MoveList from '../../api/MoveList';
 import { Link } from 'react-router-dom';
 import { RxCross2 } from 'react-icons/rx';
 import MoveMatchedList from '../../api/MoveMatchedList';
+import MoveCompletedList from '../../api/MoveCompletedList';
 
 export default function List() {
     const [status, setStatus] = useState('all');
@@ -18,7 +19,7 @@ export default function List() {
                 <button onClick={() => handleClick('all')}
                     className={ status === 'all' ? 
                     'w-1/3 font-semibold text-brand border py-2 border-yellow-200 bg-yellow-100' : 
-                    'w-1/3 font-semibold text-zinc-500 py-2 border border-zinc-200' }>전체</button>
+                    'w-1/3 font-semibold text-zinc-500 py-2 border border-zinc-200' }>요청</button>
                 <button onClick={() => handleClick('matched')}
                     className={ status === 'matched' ? 
                     'w-1/3 font-semibold text-brand border py-2 border-yellow-200 bg-yellow-100' : 
@@ -28,7 +29,7 @@ export default function List() {
                     'w-1/3 font-semibold text-brand border py-2 border-yellow-200 bg-yellow-100' : 
                     'w-1/3 font-semibold text-zinc-500 py-2 border border-zinc-200' }>완료</button>
             </div>
-            {status === 'all' ? <MoveList/> : status === 'matched' ? <MoveMatchedList/> : '완료'}
+            {status === 'all' ? <MoveList/> : status === 'matched' ? <MoveMatchedList/> : <MoveCompletedList/>}
         </div>
     );
 }

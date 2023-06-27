@@ -3,8 +3,8 @@ import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import MoveInfoList from '../components/Lists/MoveInfoList';
 
-export default function MoveList() {
-    const [movelist, setMovelist] = useState(null);
+export default function MoveCompletedList() {
+    const [completedList, setCompletedList] = useState(null);
     const [cookies, setCookie] = useCookies(['token']);
     const backURL = process.env.REACT_APP_BACK_BASE_URL;
     
@@ -13,14 +13,14 @@ export default function MoveList() {
             const token = cookies.token;
         
             try {
-                const res = await axios.get(`${backURL}movequotes/`,
+                const res = await axios.get(`${backURL}movequotes/get_completed/`,
                 {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                     }
                 } 
                 );
-                setMovelist(res.data);
+                setCompletedList(res.data);
             } catch (error) {
                 console.log(error);
             }
@@ -28,16 +28,10 @@ export default function MoveList() {
     
         Data();
     }, []);
-
-    if (movelist === null) {
-        return <MoveInfoList lists={null}/>
-    }
     
-    const matchinglist = movelist.filter(item => item.status === 'MATCHING');
- 
     return (
         <div>
-            <MoveInfoList lists={matchinglist} movestatus='matching'/>
+            <MoveInfoList lists={completedList} movestatus='completed'/>
         </div>
     );
 }

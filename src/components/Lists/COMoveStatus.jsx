@@ -4,7 +4,7 @@ import MoveStatus from '../../api/MoveStatus';
 
 export default function COMoveStatus({ list, onClose, pk }) {
     const data = list.filter(item => item.id === pk)[0];
-    console.log(data);
+    
     return (
         <div className='p-4'>
             <div className='w-full p-2 mb-4 flex justify-center items-center'>
@@ -14,9 +14,9 @@ export default function COMoveStatus({ list, onClose, pk }) {
             {data.status === 'MATCHED' ? 
                 <MoveStatus movepk={data.id} status='deposit'/> :
             data.status === 'DEPOSIT' ?
-            <MoveStatus movepk={data.id} status='preparing'/> :
+                <MoveStatus movepk={data.id} status='preparing'/> :
             data.status === 'PREPARING' ?
-                <div>완료</div> : ''
+                <MoveStatus movepk={data.id} status='completed'/> : ''
             }
         </div>
     );

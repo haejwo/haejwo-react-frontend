@@ -83,7 +83,7 @@ export default function MoveInfoList({ lists, movestatus }) {
                     <p className='py-2 text-zinc-500 overflow-hidden whitespace-nowrap truncate w-full'>도착지 : {list.end_info.address["FullAddress"]}</p>
                     <div className='flex'>
                         <button onClick={() => handleOpenDetail(idx)} className='w-full text-center text-yellow-500 my-1 font-semibold border border-yellow-500 rounded p-2'>상세보기</button>
-                        {userInfo.role === 'CO' ? <button onClick={() => handleOpenPK(list.id)} className='w-full text-center text-orange-500 my-1 font-semibold border border-orange-500 rounded p-2 ml-3'>{movestatus === 'matching' ? '견적 보내기' : '진행 상황 설정'}</button> : 
+                        {userInfo.role === 'CO' ? <button onClick={() => handleOpenPK(list.id)} className={movestatus === 'completed' ? 'hidden' : 'w-full text-center text-orange-500 my-1 font-semibold border border-orange-500 rounded p-2 ml-3'}>{movestatus === 'matching' ? '견적 보내기' : '진행 상황 설정'}</button> : 
                             <button onClick={() => handleOpenPrice(list.id)} className='w-full text-center text-orange-500 my-1 font-semibold border border-orange-500 rounded p-2 ml-3'>{movestatus === 'matching' ? '견적 확인' : '사업자 확인'}</button>}
                     </div>
                     {movestatus !== 'matching' && list.status !== 'MATCHING' ?
