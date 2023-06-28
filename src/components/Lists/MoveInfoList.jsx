@@ -9,6 +9,7 @@ import { MdOutlineHandshake } from 'react-icons/md';
 import { HiOutlineBanknotes, HiOutlineTruck } from 'react-icons/hi2';
 import { BsHouseCheck } from 'react-icons/bs';
 import COMoveStatus from './COMoveStatus';
+import Review from '../Review/Review';
 
 export default function MoveInfoList({ lists, movestatus }) {
     const userInfo = useSelector(state => state.user.user);
@@ -33,19 +34,30 @@ export default function MoveInfoList({ lists, movestatus }) {
         }
     };
 
+    const reviews = {};
+    if (lists) {
+      for (let i = 0; i < lists.length; i++) {
+        const idx = lists[i].id;
+        reviews[idx] = { [idx]: false, COname: '', COId: 0 };
+      }
+    }
+
     const [btns, setBtns] = useState(buttons);
     const [idx, setIdx] = useState(null);
     const [commentBtns, setCommentBtns] = useState(buttons);
     const [commentPK, setCommentPK] = useState(null);
     const [PriceBtns, setPriceBtns] = useState(ids);
     const [PricePK, setPricePK] = useState(null);
+    const [reviewBtns, setReviewBtns] = useState(reviews);
+    const [reviewId, setReviewId] = useState(0);
     const [detailIdx, setDetailIdx] = useState(null);
-    
+
     const handleOpenDetail = (idx) => {
         setBtns(prevBtns => ({ ...prevBtns, [idx]: true }));
         setIdx(idx);
         setDetailIdx(lists[idx]);
     };
+
     const handleCloseDetail = (idx) => {
         setBtns(prevBtns => ({ ...prevBtns, [idx]: false }));
     };
@@ -54,6 +66,7 @@ export default function MoveInfoList({ lists, movestatus }) {
         setCommentBtns(prevBtns => ({ ...prevBtns, [idx]: true }));
         setCommentPK(idx);
     };
+
     const handleClosePK = (idx) => {
         setCommentBtns(prevBtns => ({ ...prevBtns, [idx]: false }));
     };
@@ -62,10 +75,23 @@ export default function MoveInfoList({ lists, movestatus }) {
         setPriceBtns(prevBtns => ({ ...prevBtns, [idx]: true }));
         setPricePK(idx);
     };
+
     const handleClosePrice = (idx) => {
         setPriceBtns(prevBtns => ({ ...prevBtns, [idx]: false }));
     };
 
+    const handleOpenReview = (idx, name, id) => {
+        reviewBtns[idx][idx] = true;
+        reviewBtns[idx]['COname'] = name;
+        reviewBtns[idx]['COId'] = id;
+        setReviewId(idx);
+    };
+
+    const handleCloseReview = (idx) => {
+        reviewBtns[idx][idx] = false;
+        setReviewId(0);
+    };
+    
     return (
         <div>
             {!lists && 
@@ -107,7 +133,9 @@ export default function MoveInfoList({ lists, movestatus }) {
                     ''
                     }
                     {list.status === 'COMPLETED' && userInfo.role === 'CU' ?
-                    <button className='w-full text-center p-2 border border-zinc-400 font-semibold rounded-lg text-zinc-500 mb-3'>리뷰쓰기</button> : ''
+                        <button onClick={() => handleOpenReview(list.id, list.company.company.username, list.company.id)} className='w-full text-center p-2 border border-zinc-400 font-semibold rounded-lg text-zinc-500 mb-3'>
+                            리뷰쓰기
+                        </button> : ''
                     }
                 </div>
             ))}
@@ -128,6 +156,11 @@ export default function MoveInfoList({ lists, movestatus }) {
                 <div className='w-full p-4 fixed overflow-y-scroll h-full top-0 left-0 bg-white'>
                     <MoveForm detailIdx={detailIdx} onClose={() => handleCloseDetail(idx)} role={userInfo.role} idx={idx} PricePK={PricePK} />
                 </div>    
+            }
+            {reviewId !== 0 && reviewBtns[reviewId][reviewId] &&
+                <div className='w-full p-4 fixed overflow-y-scroll h-full top-0 left-0 bg-white'>
+                    <Review COname={reviewBtns[reviewId]['COname']} COid={reviewBtns[reviewId]['COId']} onClose={() => handleCloseReview(reviewId)} movepk={reviewId} />
+                </div>
             }
         </div>
     );
