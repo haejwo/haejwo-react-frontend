@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import MoveInfoList from '../components/Lists/MoveInfoList';
+import { useSelector } from 'react-redux';
 
 export default function MoveList() {
     const [movelist, setMovelist] = useState(null);
     const [cookies, setCookie] = useCookies(['token']);
     const backURL = process.env.REACT_APP_BACK_BASE_URL;
+    const userRole = useSelector(state => state.user.user.role);
     
     useEffect(() => {
         const Data = async () => {
@@ -34,10 +36,10 @@ export default function MoveList() {
     }
     
     const matchinglist = movelist.filter(item => item.status === 'MATCHING');
- 
+    
     return (
         <div>
-            <MoveInfoList lists={matchinglist} movestatus='matching'/>
+            <MoveInfoList lists={userRole === 'CO' ? matchinglist : movelist} movestatus='matching'/>
         </div>
     );
 }

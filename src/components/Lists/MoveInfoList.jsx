@@ -8,7 +8,6 @@ import MoveForm from './MoveForm';
 import { MdOutlineHandshake } from 'react-icons/md';
 import { HiOutlineBanknotes, HiOutlineTruck } from 'react-icons/hi2';
 import { BsHouseCheck } from 'react-icons/bs';
-import COInfos from './COInfos';
 import COMoveStatus from './COMoveStatus';
 
 export default function MoveInfoList({ lists, movestatus }) {
@@ -75,18 +74,18 @@ export default function MoveInfoList({ lists, movestatus }) {
                     <Link to='/move'><p className='flex text-lg font-semibold items-center justify-center my-2 border border-brand p-2'><FaTruck className='text-2xl mr-1 text-brand'/> 이사서비스 바로가기</p></Link>
                 </div>
             }
-            {lists && <p className='flex text-xl font-bold items-center justify-center my-2'><FaTruck className='text-2xl mr-1 text-brand'/> 이사 요청 목록</p>}
+            {lists && <p className='flex text-xl font-bold items-center justify-center my-2'><FaTruck className='text-2xl mr-1 text-brand'/> {userInfo.role === 'CU' || movestatus === 'matching' ? '이사 요청 목록' : movestatus === 'matched' ? '이사 매칭 목록' : '이사 완료 목록'}</p>}
             {lists && lists.map((list, idx) => (
-                <div key={idx} className={list.status === 'MATCHING' ? 'w-full p-2 border border-zinc-400 rounded-lg mb-4' : 'w-full p-2 border border-brand rounded-lg mb-4'}>
-                    <p className='text-lg text-zinc-600 font-semibold'>이사 요청서 {list.id}</p>
+                <div key={idx} className={list.status === 'MATCHING' ? 'w-full p-2 border border-zinc-400 rounded-lg mb-4' : list.status === 'COMPLETED' ? 'w-full p-2 border-2 border-orange-400 rounded-lg mb-4' : 'w-full p-2 border border-brand rounded-lg mb-4'}>
+                    <p className='text-lg text-zinc-600 font-semibold'>이사 요청서 {list.id} {list.status === 'COMPLETED' && <span className='fontbold text-orange-500'>완료</span>}</p>
                     <p className='py-2 text-zinc-500 overflow-hidden whitespace-nowrap truncate w-full'>출발지 : {list.start_info.address["FullAddress"]}</p>
                     <p className='py-2 text-zinc-500 overflow-hidden whitespace-nowrap truncate w-full'>도착지 : {list.end_info.address["FullAddress"]}</p>
                     <div className='flex'>
                         <button onClick={() => handleOpenDetail(idx)} className='w-full text-center text-yellow-500 my-1 font-semibold border border-yellow-500 rounded p-2'>상세보기</button>
                         {userInfo.role === 'CO' ? <button onClick={() => handleOpenPK(list.id)} className={movestatus === 'completed' ? 'hidden' : 'w-full text-center text-orange-500 my-1 font-semibold border border-orange-500 rounded p-2 ml-3'}>{movestatus === 'matching' ? '견적 보내기' : '진행 상황 설정'}</button> : 
-                            <button onClick={() => handleOpenPrice(list.id)} className='w-full text-center text-orange-500 my-1 font-semibold border border-orange-500 rounded p-2 ml-3'>{movestatus === 'matching' ? '견적 확인' : '사업자 확인'}</button>}
+                            <button onClick={() => handleOpenPrice(list.id)} className='w-full text-center text-orange-500 my-1 font-semibold border border-orange-500 rounded p-2 ml-3'>견적 확인</button>}
                     </div>
-                    {movestatus !== 'matching' && list.status !== 'MATCHING' ?
+                    {movestatus !== 'matching' || userInfo.role === 'CU' && list.status !== 'MATCHING' ?
                     <div className='flex justify-around my-3 p-2 border border-zinc-300 rounded-lg'>
                         <div className='flex flex-col items-center'>
                             <MdOutlineHandshake className='text-3xl text-brand'/>
@@ -120,14 +119,10 @@ export default function MoveInfoList({ lists, movestatus }) {
                     <COMoveStatus list={lists} onClose={() => handleClosePK(commentPK)} pk={commentPK}/>
                 </div>
             }
-            {PriceBtns[PricePK] && movestatus === 'matching' ?
+            {PriceBtns[PricePK] &&
                 <div className='w-full p-4 fixed overflow-y-scroll h-full top-0 left-0 bg-white'>
                     <MovePriceList pk={PricePK} onClose={() => handleClosePrice(PricePK)} status={statusDict[PricePK]}/>
-                </div> : PriceBtns[PricePK] &&
-                <div className='w-full p-4 fixed overflow-y-scroll h-full top-0 left-0 bg-white'>
-                    <COInfos list={lists} onClose={() => handleClosePrice(PricePK)} pk={PricePK}/>
                 </div>
-                
             }
             {btns[idx] && 
                 <div className='w-full p-4 fixed overflow-y-scroll h-full top-0 left-0 bg-white'>

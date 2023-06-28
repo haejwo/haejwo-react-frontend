@@ -4,10 +4,12 @@ import { Link } from 'react-router-dom';
 import { RxCross2 } from 'react-icons/rx';
 import MoveMatchedList from '../../api/MoveMatchedList';
 import MoveCompletedList from '../../api/MoveCompletedList';
+import { useSelector } from 'react-redux';
 
 export default function List() {
     const [status, setStatus] = useState('all');
     const handleClick = (value) => setStatus(value);
+    const userInfo = useSelector(state => state.user.user);
 
     return (
         <div className='w-screen p-4'>
@@ -15,6 +17,7 @@ export default function List() {
                 <p className='font-bold text-xl my-2'>요청 목록</p>
                 <Link to='/'><RxCross2 className='text-zinc-400 mt-2.5 ml-2 text-2xl'/></Link>
             </div>
+            {userInfo.role === 'CO' &&
             <div className='w-full flex justify-center my-4'>
                 <button onClick={() => handleClick('all')}
                     className={ status === 'all' ? 
@@ -28,7 +31,7 @@ export default function List() {
                     className={ status === 'completed' ? 
                     'w-1/3 font-semibold text-brand border py-2 border-yellow-200 bg-yellow-100' : 
                     'w-1/3 font-semibold text-zinc-500 py-2 border border-zinc-200' }>완료</button>
-            </div>
+            </div>}
             {status === 'all' ? <MoveList/> : status === 'matched' ? <MoveMatchedList/> : <MoveCompletedList/>}
         </div>
     );
