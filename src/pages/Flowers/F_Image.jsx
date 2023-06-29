@@ -11,13 +11,13 @@ export default function F_Image() {
     
     return (
         <div className='w-screen flex flex-col items-center p-4'>
-            <div className='flex'>
-                <Link to='/memo'><AiOutlineDoubleLeft className='text-zinc-400 mt-2.5 mr-2 text-2xl'/></Link>
-                <p className='font-semibold text-lg my-2'>꽃/식물 사진을 업로드해주세요 ( 5 / 5 )</p>
-                <Link to='/'><RxCross2 className='text-zinc-400 mt-2.5 ml-2 text-2xl'/></Link>
+            <div className='flex items-center mt-4'>
+                <Link to='/memo'><AiOutlineDoubleLeft className='text-zinc-400 mr-2 text-2xl'/></Link>
+                <p className='font-semibold text-lg'>사진을 업로드해주세요 ( 5 / 5 )</p>
+                <Link to='/'><RxCross2 className='text-zinc-400 ml-2 text-2xl'/></Link>
             </div>
             <div className='w-screen p-4 my-5 border-b-8 border-bottom-zinc-300'>
-                <p className='font-bold mb-4'>정확한 견적을 위해 꽃/식물 사진을 업로드해주세요</p>
+                <p className='font-bold mb-4'>정확한 견적을 위해 사진을 업로드해주세요</p>
                 <ImagesUpload imageFiles={handleFiles}/>
             </div>
             <Link to='/'>

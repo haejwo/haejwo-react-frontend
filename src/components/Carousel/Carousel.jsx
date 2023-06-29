@@ -14,10 +14,10 @@ export default function Carousel({ slides, intervalTime }) {
     }, [slides.length, intervalTime]);
 
     return (
-        <div className='w-100 h-10 flex items-center my-3'>
+        <div className='flex items-center'>
             {slides.map((slide, idx) => (
-                <div key={idx} className={`w-100 h-100 ease-in-out bg-brand w-full py-6 text-lg font-semibold text-zinc-600 text-center rounded-md ${slide.color} ${idx === currentSlide ? 'translate-x-0' : 'hidden'}`}>
-                    {slide.text}
+                <div key={idx} className={`w-100 ease-in-out ${idx === currentSlide ? 'translate-x-0' : 'hidden'}`}>
+                    <img className='w-full h-full object-cover rounded-lg' src={slide.img} />
                 </div>
             ))}
         </div>
