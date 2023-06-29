@@ -37,13 +37,16 @@ export default function F_DatePicker() {
                 <Link to='/'><RxCross2 className='text-zinc-400 ml-2 text-2xl'/></Link>
             </div>
             <div className='my-3'>
-                <Calendar 
-                    onChange={setValue} 
-                    value={value}
-                    minDate={minDate}
-                    maxDate={maxDate}
-                    tileDisabled={tileDisabled}
-                     />
+                <div className='border-2 border-yellow-200'>
+                    <Calendar 
+                        className='custom-calendar'
+                        onChange={setValue} value={value}
+                        minDate={minDate} maxDate={maxDate}
+                        tileDisabled={tileDisabled}
+                        next2Label={null} prev2Label={null}
+                        formatDay={(locale, date) => moment(date).format("DD")}
+                        />
+                </div>
                 <div className='my-3'>
                     <p className='text-md text-zinc-400 flex'><BsCheckAll className='text-lg mt-1 mr-1'/>예약일은 30일 이내까지 선택할 수 있습니다.</p>
                 </div>

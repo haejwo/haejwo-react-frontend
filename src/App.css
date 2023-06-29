@@ -1,0 +1,91 @@
+/* Home.jsx CSS */
+.scrollbar-none {
+    scrollbar-width: none;
+}
+  
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* DatePicker.jsx F_DatePicker.jsx CSS */
+.custom-calendar .react-calendar__navigation,
+.custom-calendar .react-calendar__viewContainer {
+    margin: 0.5rem;
+}
+.custom-calendar .react-calendar__tile--now {
+    font-weight: bold;
+    border: 2px solid #3f3f46;
+}
+
+.custom-calendar .react-calendar__navigation__label {
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: 'S-CoreDream-3Light';
+    color: #3f3f46;
+}
+.custom-calendar .react-calendar__month-view__weekdays {
+    height: 40px;
+}
+
+.custom-calendar .react-calendar__month-view__weekdays abbr {
+    text-decoration: none;
+    color: #3f3f46;
+    font-family: 'S-CoreDream-3Light';
+    font-size: 1.2rem;
+}
+
+.custom-calendar .react-calendar__navigation button.react-calendar__navigation__arrow {
+    background: white;
+} 
+
+.custom-calendar .react-calendar__navigation .react-calendar__navigation__prev-button {
+    font-size: 2rem;
+    color: #3f3f46;
+}
+
+.custom-calendar .react-calendar__navigation .react-calendar__navigation__next-button {
+    font-size: 2rem;
+    color: #3f3f46;
+}
+
+.custom-calendar .react-calendar__navigation .react-calendar__navigation__prev-button:enabled:hover,
+.react-calendar__navigation__prev-button:enabled:focus,
+.custom-calendar .react-calendar__navigation .react-calendar__navigation__next-button:enabled:hover,
+.react-calendar__navigation__next-button:enabled:focus
+ {
+    background: white;
+}
+
+
+.custom-calendar .react-calendar__tile:disabled {
+    background: #eab308;
+    opacity: 0.4;
+    color: white;
+}
+
+.custom-calendar .react-calendar__month-view__days__day {
+    color: #3f3f46;
+}
+
+.custom-calendar .react-calendar__month-view__days__day--weekend {
+    color: #facc15;
+}
+
+.custom-calendar .react-calendar__tile {
+    font-family: 'S-CoreDream-3Light';
+    font-size: 1.2rem;
+    height: 40px;
+}
+
+.custom-calendar .react-calendar__tile--active {
+    color: #86868a;
+    background: #fde047;
+    font-weight: bold;
+}
+
+.custom-calendar .react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+    color: #86868a;
+    background: #fde047;
+    font-weight: bold;
+}

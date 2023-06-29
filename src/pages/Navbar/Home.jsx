@@ -25,9 +25,9 @@ export default function Home() {
     
     return (
         <main className='flex flex-col items-center'>
-            <div className='w-screen p-3 bg-zinc-100'>
-                <div className='font-logo text-3xl text-brand'>해줘</div>
-                <p className='font-bold text-zinc-700 my-2'>원하시는 서비스를 선택해주세요</p>
+            <div className='w-screen bg-zinc-100 py-6 px-3'>
+                <div className='font-logo text-4xl text-brand'>해줘</div>
+                <p className='font-bold text-zinc-600 my-2'>원하시는 서비스를 선택해주세요</p>
                 <Link to={userInfo.username ? '/move' : '/login'} className='flex w-full justify-between bg-white border border-zinc-300 rounded-md p-5 my-2'>
                     <div className='flex flex-col items-start'>
                         <p className='text-2xl font-bold'>이사</p>
