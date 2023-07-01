@@ -4,8 +4,11 @@ import ImageUploader from '../../api/ImageUploader';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { saveBusinessFile } from '../../app/useractions';
+import { useSelector } from 'react-redux';
+import { RxCross2 } from 'react-icons/rx';
 
 export default function BusinessFileUploader() {
+    const userInfo = useSelector(state => state.user.user);
     const [cookies, setCookies] = useCookies(['token']);
     const token = cookies.token;
     const dispatch = useDispatch();
@@ -20,6 +23,12 @@ export default function BusinessFileUploader() {
     };
     return (
         <div className="flex flex-col justify-center items-center p-4">
+            {userInfo.username &&
+            <div className='flex justify-center items-center'>
+                <p className='font-bold text-lg my-3'>사업자등록증 변경</p>
+                <Link to='/profile'><RxCross2 className='text-zinc-400 ml-1 text-lg' /></Link>
+            </div>
+            }
             <div>
                 <p className='font-bold my-3 text-lg text-center mb-8'>사업자등록증을 업로드해주세요</p>
                 <ImageUploader path={path} token={token} imageData={imageData}/>

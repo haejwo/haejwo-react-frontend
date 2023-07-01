@@ -6,6 +6,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { saveUsername, saveBankName, saveAccountNumber, saveCategory, saveImage } from '../app/useractions';
 import COInfoForm from '../components/COInfoForm/COInfoForm';
 import ImagesUpload from '../components/ImagesUpload/ImagesUpload';
+import { RxCross2 } from 'react-icons/rx';
 
 export default function COUserInfo() {
     const [cookies, setCookie] = useCookies(['token']);
@@ -55,6 +56,10 @@ export default function COUserInfo() {
     };
     return (
         <div className='w-full flex justify-center flex-col'>
+            <div className='flex justify-center items-center mt-4'>
+                <p className='font-bold text-lg my-3'>사업자 정보 변경</p>
+                <Link to='/profile'><RxCross2 className='text-zinc-400 ml-1 text-lg' /></Link>
+            </div>
             <COInfoForm name={handleName} bank={handleBank} account={handleAccount} COcategory={handleCategory}/>
             <div className='p-4'>
                 <p className='text-lg font-bold mb-2'>프로필 이미지 업로드</p>

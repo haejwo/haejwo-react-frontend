@@ -14,7 +14,7 @@ export default function Carousel({ slides, intervalTime }) {
     }, [slides.length, intervalTime]);
 
     return (
-        <div className='flex items-center'>
+        <div className='flex items-center justify-center'>
             {slides.map((slide, idx) => (
                 <div key={idx} className={`w-100 ease-in-out ${idx === currentSlide ? 'translate-x-0' : 'hidden'}`}>
                     <img className='w-full h-full object-cover rounded-lg' src={slide.img} />

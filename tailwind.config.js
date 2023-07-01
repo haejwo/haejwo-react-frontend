@@ -8,7 +8,8 @@ module.exports = {
         'brand' : '#FFD400',
       },
       fontFamily: {
-        logo: ['GangwonEduPowerExtraBoldA', "sans-serif"], 
+        logo: ['GangwonEduPowerExtraBoldA', "sans-serif"],
+        notice: ['S-CoreDream-3Light', 'sans-serif'],
       },
   },
   plugins: [],

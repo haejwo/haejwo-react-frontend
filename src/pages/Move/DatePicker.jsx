@@ -86,11 +86,13 @@ export default function DatePicker() {
                 <label htmlFor="check" className='text-lg font-bold'> 정확한 날짜와 시간은 조정될 수 있습니다.</label>
                 { checked ? '' : <p className='my-2 text-center text-red-400'>필수 체크 사항을 확인해주세요!</p> }
                 <Modal isOpen={isModalOpen} onClose={closeModal}>
-                    <h1 className='font-bold text-2xl mb-4'>요청하신 날짜와 시간입니다</h1>
-                    <p className='text-lg mb-1 flex items-center'><AiOutlineCalendar className='mr-1'/>이사 날짜</p>
-                    <p className='text-xl font-bold mb-3 ml-5'>{moment(value).format("YYYY년 MM월 DD일")}</p>
-                    <p className='text-lg mb-1 flex items-center'><AiOutlineClockCircle className='mr-1'/>이사 시간</p>
-                    <p className='text-xl font-bold mb-3 ml-5'>{moment(timePick, 'hh:mm A').format('A hh시 mm분 ').replace("AM", "오전").replace("PM", "오후")}</p>
+                    <div className='font-notice px-8'>
+                        <h1 className='font-bold text-2xl mb-4'>이사요청 날짜와 시간</h1>
+                        <p className='text-lg mb-1 flex items-center text-zinc-600'><AiOutlineCalendar className='mr-1 text-xl'/>이사 날짜</p>
+                        <p className='text-xl font-bold mb-3 ml-5 text-yellow-600'>{moment(value).format("YYYY년 MM월 DD일")}</p>
+                        <p className='text-lg mb-1 flex items-center text-zinc-600'><AiOutlineClockCircle className='mr-1 text-xl'/>이사 시간</p>
+                        <p className='text-xl font-bold mb-3 ml-5 text-yellow-600'>{moment(timePick, 'hh:mm A').format('A hh시 mm분 ').replace("AM", "오전").replace("PM", "오후")}</p>
+                    </div>
                 </Modal>
             </div>
             <Link to='/address'><button onClick={handleSave} className={!value || !timePick || !checked ? 'my-4 w-screen py-2 font-semibold border border-zinc-200 text-zinc-500' : 
