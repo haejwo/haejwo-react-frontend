@@ -108,8 +108,11 @@ export default function MoveInfoList({ lists, movestatus }) {
                     <p className='py-2 text-zinc-500 overflow-hidden whitespace-nowrap truncate w-full'>도착지 : {list.end_info.address["FullAddress"]}</p>
                     <div className='flex'>
                         <button onClick={() => handleOpenDetail(idx)} className='w-full text-center text-yellow-500 my-1 font-semibold border border-yellow-500 rounded p-2'>상세보기</button>
-                        {userInfo.role === 'CO' ? <button onClick={() => handleOpenPK(list.id)} className={movestatus === 'completed' ? 'hidden' : 'w-full text-center text-orange-500 my-1 font-semibold border border-orange-500 rounded p-2 ml-3'}>{movestatus === 'matching' ? '견적 보내기' : '진행 상황 설정'}</button> : 
-                            <button onClick={() => handleOpenPrice(list.id)} className='w-full text-center text-orange-500 my-1 font-semibold border border-orange-500 rounded p-2 ml-3'>견적 확인</button>}
+                        {userInfo.role === 'CO' ? 
+                            <button onClick={() => handleOpenPK(list.id)} className={movestatus === 'completed' ? 'hidden' : 'w-full text-center text-orange-500 my-1 font-semibold border border-orange-500 rounded p-2 ml-3'}>{movestatus === 'matching' ? '견적 보내기' : '진행 상황 설정'}</button> : 
+                            list.status !== 'COMPLETED' ? 
+                            <button onClick={() => handleOpenPrice(list.id)} className='w-full text-center text-orange-500 my-1 font-semibold border border-orange-500 rounded p-2 ml-3'>견적 확인</button> : 
+                            <button onClick={() => handleOpenReview(list.id, list.company.company.username, list.company.id)} className='w-full text-center text-zinc-500 my-1 font-semibold border border-zinc-500 rounded p-2 ml-3'>리뷰 작성</button>}
                     </div>
                     {movestatus !== 'matching' || userInfo.role === 'CU' && list.status !== 'MATCHING' ?
                     <div className='flex justify-around my-3 p-2 border border-zinc-300 rounded-lg'>
@@ -131,11 +134,6 @@ export default function MoveInfoList({ lists, movestatus }) {
                         </div>
                     </div> :
                     ''
-                    }
-                    {list.status === 'COMPLETED' && userInfo.role === 'CU' ?
-                        <button onClick={() => handleOpenReview(list.id, list.company.company.username, list.company.id)} className='w-full text-center p-2 border border-zinc-400 font-semibold rounded-lg text-zinc-500 mb-3'>
-                            리뷰쓰기
-                        </button> : ''
                     }
                 </div>
             ))}
