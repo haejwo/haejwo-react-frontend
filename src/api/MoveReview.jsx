@@ -10,7 +10,7 @@ export default function MoveReview({ COid, movepk, star, memo }) {
         const token = cookies.token;
         try {
             const res = await axios.post(`${backURL}accounts/${COid}/reviews/`, 
-            { "article" : movepk, "rating" : star, "comment" : memo},
+            { "article" : movepk, "rating" : star, "comment" : memo, "author" : COid, "company" : COid},
             {
               headers: {
                 'Authorization': `Bearer ${token}`

@@ -5,7 +5,7 @@ import { GiFlowerPot, GiHandTruck } from 'react-icons/gi';
 export default function COCards({ data }) {
     return (
         <div className='flex flex-col items-start'>
-            <p className='text-xl font-bold mt-3'>파트너</p>
+            <p className='text-xl font-bold mt-3 flex items-center'><FaTruck className='mr-2'/> 파트너</p>
             <div className='w-full flex my-4 overflow-x-auto whitespace-nowrap scrollbar-none'>
                 {data && data.map((item) => (
                     <div key={item.id} className='flex flex-col justify-center items-center mr-6 w-30'>

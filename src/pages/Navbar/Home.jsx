@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaTruck } from 'react-icons/fa';
 import { GiFlowerPot, GiHandTruck } from 'react-icons/gi';
 import { Link } from 'react-router-dom';
@@ -8,6 +8,7 @@ import COProfile from '../../api/COProfile';
 import 광고1 from '../../assets/광고1.png';
 import 광고2 from '../../assets/광고2.png';
 import 광고3 from '../../assets/광고3.png';
+import MoveReviewList from '../../api/MoveReviewList';
 
 export default function Home() {
     const slides = [
@@ -22,6 +23,8 @@ export default function Home() {
         }
     ]
     const userInfo = useSelector(state => state.user.user);
+    const [COdata, setCOdata] = useState(null);
+    const handleData = (data) => setCOdata(data);
     
     return (
         <main className='flex flex-col items-center'>
@@ -54,12 +57,8 @@ export default function Home() {
             </div>
             <div className='w-screen p-3'>
                 <div className='flex flex-col items-start'>
-                    <p className='text-xl font-bold my-3'>1개의 리뷰</p>
                     <div>
-                        <div className='flex flex-col bg-zinc-100 p-4 rounded-md h-50 overflow-y-scroll'>
-                            <p className='text-brand text-xl mb-2'>★★★★★ <span className='mt-2 text-zinc-400 text-sm font-semibold'>이사이사 파트너님</span></p>
-                            <p>리뷰 예시입니다. 리뷰 예시입니다. 리뷰 예시입니다. 리뷰 예시입니다. 리뷰 예시입니다. 리뷰 예시입니다. 리뷰 예시입니다. 리뷰 예시입니다. 리뷰 예시입니다. 리뷰 예시입니다. 리뷰 예시입니다. 리뷰 예시입니다. 리뷰 예시입니다. 리뷰 예시입니다. 리뷰 예시입니다. 리뷰 예시입니다. 리뷰 예시입니다. 리뷰 예시입니다. 리뷰 예시입니다.</p>
-                        </div>
+                        <MoveReviewList COdata={COdata}/>
                     </div>
                 </div>
             </div>
@@ -67,7 +66,7 @@ export default function Home() {
                 <Carousel slides={slides} intervalTime={3000}/>
             </div>
             <div className='w-screen p-3'>
-                <COProfile/>
+                <COProfile COlist={handleData}/>
             </div>
         </main>
     );
