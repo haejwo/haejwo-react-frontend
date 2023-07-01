@@ -68,19 +68,16 @@ export default function MovePriceList({ pk, onClose, status }) {
                             }
                         </div>
                         {match[item.id] === 'match' &&
-                            <div className='mt-2'>
-                                <p>은행명 : <span className='font-semibold text-lg'>해줘은행</span></p>
-                                <p>계좌번호 : <span className='font-semibold text-lg'>374093480182</span></p>
+                            <div key={idx} className='my-2 border-t-2 border-top-zinc-200'>
+                                <p className='mt-2 font-bold text-yellow-500'>해당 계좌로 견적가격을 입금해주세요</p>
+                                <p className='mb-2 font-bold text-yellow-500'>문의사항은 업체 연락처를 이용해주세요</p>
+                                <p>연락처 : <span className='font-semibold text-lg'>{item.author.email}</span></p>
+                                <p>은행명 : <span className='font-semibold text-lg'>{item.author.company.bank.bankName}</span></p>
+                                <p>계좌번호 : <span className='font-semibold text-lg'>{item.author.company.bank.accountNumber}</span></p>
                             </div>
                         }
                     </div>
                 ))}
-                {status === 'MATCHED' &&
-                    <div className='mt-2'>
-                        <p>은행명 : <span className='font-semibold text-lg'>해줘은행</span></p>
-                        <p>계좌번호 : <span className='font-semibold text-lg'>374093480182</span></p>
-                    </div>
-                }
             </div>
         </div>
     );

@@ -1,11 +1,12 @@
 import React from 'react';
 import { FaTruck } from 'react-icons/fa';
 import { GiFlowerPot, GiHandTruck } from 'react-icons/gi';
+import { HiOutlineTruck } from 'react-icons/hi';
 
 export default function COCards({ data }) {
     return (
         <div className='flex flex-col items-start'>
-            <p className='text-xl font-bold mt-3 flex items-center'><FaTruck className='mr-2'/> 파트너</p>
+            <p className='text-xl font-bold mt-3 flex items-center text-zinc-600'><HiOutlineTruck className='mr-2 text-2xl'/> 파트너</p>
             <div className='w-full flex my-4 overflow-x-auto whitespace-nowrap scrollbar-none'>
                 {data && data.map((item) => (
                     <div key={item.id} className='flex flex-col justify-center items-center mr-6 w-30'>
