@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default function MoveForm({ detailIdx, onClose, role, idx, PricePK }) {
+export default function MoveForm({ detailIdx, onClose }) {
     return (
         <div>
-            <p className='text-center p-4 font-bold text-xl'>이사 요청서 {role === 'CO' ? idx + 1 : PricePK}</p>
+            <p className='text-center p-4 font-bold text-xl'>이사 요청서 {detailIdx.id}</p>
             <div>
                 <div className='flex justify-around border border-zinc-400 p-3'>
                     {detailIdx.size_type === 'BIG' ? <p>20평대 이상</p> : <p>20평대 미만</p>}

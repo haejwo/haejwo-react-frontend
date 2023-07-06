@@ -94,8 +94,8 @@ export default function MoveInfoList({ lists, movestatus }) {
     
     return (
         <div>
-            {!lists && 
-                <div className='mt-4'>
+            {userInfo.role === 'CU' && !lists.length && 
+                <div className='my-4'>
                     <p className='text-center'>이사 요청서가 없습니다</p>
                     <Link to='/move'><p className='flex text-lg font-semibold items-center justify-center my-2 border border-brand p-2'><FaTruck className='text-2xl mr-1 text-brand'/> 이사서비스 바로가기</p></Link>
                 </div>
@@ -139,7 +139,7 @@ export default function MoveInfoList({ lists, movestatus }) {
             ))}
             {commentBtns[commentPK] && movestatus === 'matching' ? 
                 <div className='w-full p-4 fixed overflow-y-scroll h-full top-0 left-0 bg-white'>
-                    <MoveComment pk={commentPK + 1} onClose={() => handleClosePK(commentPK)}/>
+                    <MoveComment pk={commentPK} onClose={() => handleClosePK(commentPK)}/>
                 </div> : commentBtns[commentPK] &&
                 <div className='w-full p-4 fixed overflow-y-scroll h-full top-0 left-0 bg-white'>
                     <COMoveStatus list={lists} onClose={() => handleClosePK(commentPK)} pk={commentPK}/>
@@ -152,7 +152,7 @@ export default function MoveInfoList({ lists, movestatus }) {
             }
             {btns[idx] && 
                 <div className='w-full p-4 fixed overflow-y-scroll h-full top-0 left-0 bg-white'>
-                    <MoveForm detailIdx={detailIdx} onClose={() => handleCloseDetail(idx)} role={userInfo.role} idx={idx} PricePK={PricePK} />
+                    <MoveForm detailIdx={detailIdx} onClose={() => handleCloseDetail(idx)} />
                 </div>    
             }
             {reviewId !== 0 && reviewBtns[reviewId][reviewId] &&

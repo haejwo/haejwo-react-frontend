@@ -19,11 +19,11 @@ export default function BusinessFileUploader() {
     const [data, setData] = useState(null);
     const imageData = (datas) => { 
         setData(datas);
-        dispatch(saveBusinessFile(true));
     };
+
     return (
         <div className="flex flex-col justify-center items-center p-4">
-            {userInfo.username &&
+            {userInfo.businessfile &&
             <div className='flex justify-center items-center'>
                 <p className='font-bold text-lg my-3'>사업자등록증 변경</p>
                 <Link to='/profile'><RxCross2 className='text-zinc-400 ml-1 text-lg' /></Link>
@@ -42,7 +42,7 @@ export default function BusinessFileUploader() {
                 </div>
             }
             { data &&
-                <Link to='/profile' className={'my-3 w-full text-center p-4 py-2 font-semibold text-brand border border-yellow-200 bg-yellow-100'}>사업자등록 완료</Link>
+                <Link to='/profile' className={'my-3 w-full text-center p-4 py-2 font-semibold text-brand border border-yellow-200 bg-yellow-100'} onClick={() => dispatch(saveBusinessFile(true))}>사업자등록 완료</Link>
             }
         </div>
     );
