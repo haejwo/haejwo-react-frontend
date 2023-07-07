@@ -94,7 +94,7 @@ export default function MoveInfoList({ lists, movestatus }) {
     
     return (
         <div>
-            {userInfo.role === 'CU' && !lists.length && 
+            {userInfo.role === 'CU' && !lists && 
                 <div className='my-4'>
                     <p className='text-center'>이사 요청서가 없습니다</p>
                     <Link to='/move'><p className='flex text-lg font-semibold items-center justify-center my-2 border border-brand p-2'><FaTruck className='text-2xl mr-1 text-brand'/> 이사서비스 바로가기</p></Link>

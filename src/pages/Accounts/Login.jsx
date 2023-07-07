@@ -81,7 +81,7 @@ export default function Login() {
         <Link to='/'><RxCross2 className='text-zinc-400 mt-1.5 ml-2' /></Link>
       </div>
       <form onSubmit={handleSubmit(loginRes)}
-        className='w-screen flex flex-col item-center m-4 p-4'>
+        className='w-screen flex flex-col item-center m-4 p-4 border-b-4 border-bottom-zinc-200'>
         <p className='font-bold mt-3'>이메일</p>
         <input
           name="email"
@@ -102,16 +102,16 @@ export default function Login() {
           type="submit"
           disabled={errors && !getValues()}
           value="로그인하기"
-          className='p-2 m-1 mt-7 bg-brand text-white text-semibold rounded-md' />
+          className='p-2 m-1 my-7 bg-brand text-white text-semibold rounded-md' />
       </form>
       <h2 className="font-bold text-lg my-3">간편로그인</h2>
-      <div className="w-screen flex flex-col items-center p-4">
+      <div className="w-screen flex flex-col items-center p-4 border-b-4 border-bottom-zinc-200">
         <Link to={KAKAO_AUTH_URL} className="w-full p-2 bg-kakao flex rounded my-2 justify-center items-center"><RiKakaoTalkFill className='text-2xl mx-1' />카카오톡으로 로그인</Link>
-        <Link to={GOOGLE_AUTH_URL} className="w-full p-2 flex rounded my-2 border boreder-zinc-400 justify-center items-center"><FcGoogle className='text-2xl mx-1' />구글로 로그인</Link>
+        <Link to={GOOGLE_AUTH_URL} className="w-full p-2 flex rounded my-2 border border-zinc-400 justify-center items-center mb-5"><FcGoogle className='text-2xl mx-1' />구글로 로그인</Link>
       </div>
       <h2 className="mt-7 font-bold text-lg">회원이 아니신가요?</h2>
       <Link to='/signup' className="w-screen p-4">
-        <button className="w-full p-2 flex rounded my-2 border boreder-zinc-400 justify-center items-center font-bold">이메일로 회원가입</button>
+        <button className="w-full p-2 flex rounded my-2 border border-zinc-400 justify-center items-center font-bold">이메일로 회원가입</button>
       </Link>
     </div>
   );
