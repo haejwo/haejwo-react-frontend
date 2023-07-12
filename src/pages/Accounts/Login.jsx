@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -10,6 +10,7 @@ import { loginUser } from '../../app/useractions';
 import { RxCross2 } from 'react-icons/rx';
 import { RiKakaoTalkFill } from 'react-icons/ri';
 import { FcGoogle } from 'react-icons/fc';
+import Modal from '../../components/Modal/Modal';
 
 export default function Login() {
   const formSchema = yup.object({
@@ -32,34 +33,43 @@ export default function Login() {
     resolver: yupResolver(formSchema),
   });
 
+  const [isLogin, setIsLogin] = useState(false);
+  const handlelogin = () => setIsLogin(true);
+
   const navigate = useNavigate()
   const dispatch = useDispatch();
   const [cookies, setCookie] = useCookies(['token']);
 
   let backURL = process.env.REACT_APP_BACK_BASE_URL;
   const loginRes = async (data) => {
-    const res = await axios({
-      method: "post",
-      url: `${backURL}accounts/login/`,
-      data: data,
-    });
-    setCookie('token', res.data.access_token);
-    
-    if (res.data && res.data.user.customer != null) {
-      const user = {id: res.data.user.id, email: res.data.user.email, username: res.data.user.customer.username, role: res.data.user.role};
-      dispatch(loginUser(user));
-      navigate('/profile');
-    } else if (res.data && res.data.user.company != null) {
-      const user = {id: res.data.user.id, email: res.data.user.email, username: res.data.user.company.username, bankName: res.data.user.company.bank.bankName, accountNumber: res.data.user.company.bank.accountNumber, role: res.data.user.role, category: res.data.user.company.category, businessfile: res.data.user.company.has_business_license, image: res.data.user.company.profile_img};
-      dispatch(loginUser(user));
-      navigate('/profile');
-    } else if (res.data.user.customer === null || res.data.user.company === null) {
-      const user = {id: res.data.user.id, email: res.data.user.email};
-      dispatch(loginUser(user));
-      navigate('/user');
-    } else {
-      console.log('로그인실패');
-    }
+    try {
+        const res = await axios({
+          method: "post",
+          url: `${backURL}accounts/login/`,
+          data: data,
+        });
+        setCookie('token', res.data.access_token);
+
+        if (res.data && res.data.user.customer != null) {
+          const user = {id: res.data.user.id, email: res.data.user.email, username: res.data.user.customer.username, role: res.data.user.role};
+          dispatch(loginUser(user));
+          navigate('/profile');
+        } else if (res.data && res.data.user.company != null) {
+          const user = {id: res.data.user.id, email: res.data.user.email, username: res.data.user.company.username, bankName: res.data.user.company.bank.bankName, accountNumber: res.data.user.company.bank.accountNumber, role: res.data.user.role, category: res.data.user.company.category, businessfile: res.data.user.company.has_business_license, image: res.data.user.company.profile_img};
+          dispatch(loginUser(user));
+          navigate('/profile');
+        } else if (res.data.user.customer === null || res.data.user.company === null) {
+          const user = {id: res.data.user.id, email: res.data.user.email};
+          dispatch(loginUser(user));
+          navigate('/user');
+        } else {
+          console.log('로그인실패');
+        }
+    } catch (error) {
+        if (error.response.status === 400) {
+            handlelogin();
+        }
+      }
   }
 
   // kakao login
@@ -80,6 +90,11 @@ export default function Login() {
         <h1 className='font-bold text-lg'>로그인</h1>
         <Link to='/'><RxCross2 className='text-zinc-400 mt-1.5 ml-2' /></Link>
       </div>
+      <Modal isOpen={isLogin} onClose={() => setIsLogin(false)}>
+        <div className='py-[5rem] text-center'>
+          <p className="text-xl font-bold text-red-500">이메일 / 비밀번호를 확인해주세요</p>
+        </div>
+      </Modal>
       <form onSubmit={handleSubmit(loginRes)}
         className='w-screen flex flex-col item-center m-4 p-4 border-b-4 border-bottom-zinc-200'>
         <p className='font-bold mt-3'>이메일</p>

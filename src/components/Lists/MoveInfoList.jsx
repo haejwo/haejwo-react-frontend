@@ -112,7 +112,7 @@ export default function MoveInfoList({ lists, movestatus }) {
                             <button onClick={() => handleOpenPK(list.id)} className={movestatus === 'completed' ? 'hidden' : 'w-full text-center text-orange-500 my-1 font-semibold border border-orange-500 rounded p-2 ml-3'}>{movestatus === 'matching' ? '견적 보내기' : '진행 상황 설정'}</button> : 
                             list.status !== 'COMPLETED' ? 
                             <button onClick={() => handleOpenPrice(list.id)} className='w-full text-center text-orange-500 my-1 font-semibold border border-orange-500 rounded p-2 ml-3'>견적 확인</button> : 
-                            <button onClick={() => handleOpenReview(list.id, list.company.company.username, list.company.company.id)} className='w-full text-center text-zinc-500 my-1 font-semibold border border-zinc-500 rounded p-2 ml-3'>리뷰 작성</button>}
+                            !list.has_review && <button onClick={() => handleOpenReview(list.id, list.company.company.username, list.company.company.id)} className='w-full text-center text-zinc-500 my-1 font-semibold border border-zinc-500 rounded p-2 ml-3'>리뷰 작성</button>}
                     </div>
                     {movestatus !== 'matching' || userInfo.role === 'CU' && list.status !== 'MATCHING' ?
                     <div className='flex justify-around my-3 p-2 border border-zinc-300 rounded-lg'>

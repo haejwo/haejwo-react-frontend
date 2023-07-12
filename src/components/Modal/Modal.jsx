@@ -10,7 +10,7 @@ export default function Modal({ isOpen, onClose, children }) {
             <div className="bg-[rgb(250,248,242,0.9)] p-9 rounded-md w-90">
                 {children}
             </div>
-            <button onClick={onClose} className='text-zinc-500 text-lg mt-3'>확인</button>
+            <button onClick={onClose} className='text-zinc-500 text-lg mt-3 font-bold'>확인</button>
         </div>
     );
 }

@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import axios from "axios";
 import { Link, useNavigate } from 'react-router-dom';
 import { RxCross2 } from 'react-icons/rx';
+import Modal from '../../components/Modal/Modal';
 
 export default function Signup() {
     const formSchema = yup.object({
@@ -35,26 +36,40 @@ export default function Signup() {
       mode: 'onChange',
       resolver: yupResolver(formSchema),
     });
-    
+
+    const [isUsed, setIsUsed] = useState(false);
+    const handleUsed = () => setIsUsed(true);
+
     const navigate = useNavigate()
     let backURL = process.env.REACT_APP_BACK_BASE_URL;
     const registerRes = async (data) => {
-      const res = await axios({
-                      method: "post",
-                      url: `${backURL}accounts/signup/`,
-                      data: data
-                  });
-              console.log(res)
-      // 성공하면 로그인 페이지로 실패하면 에러메시지
-      res.data ? navigate('/login') : alert('error')
-    }
+        try {
+            const res = 
+                await axios({
+                    method: "post",
+                    url: `${backURL}accounts/signup/`,
+                    data: data
+                });
+            navigate('/login')
+      } catch (error) {
+            if (error.response.status === 400) {
+              handleUsed();
+            }
+        }
+    };
     
     return (
       <div className="flex flex-col justify-center items-center p-4">
         <div className='flex bg-fixed my-2'>
           <h1 className='font-bold text-lg'>이메일로 회원가입</h1>
           <Link to='/login'><RxCross2 className='text-zinc-400 mt-1.5 ml-2'/></Link>
-        </div>
+        </div> 
+        <Modal isOpen={isUsed} onClose={() => setIsUsed(false)}>
+          <div className='py-[4rem] text-center'>
+            <p className='text-xl font-bold text-red-500 mb-2'>이미 사용 중인 이메일입니다.</p>
+            <p className='text-xl'>다른 이메일 계정을 사용해주세요.</p>
+          </div>
+        </Modal>
         <form onSubmit={handleSubmit(registerRes)}
           className='w-screen flex flex-col item-center m-4 p-4'>
           <p className='font-bold mt-3'>이메일</p>
